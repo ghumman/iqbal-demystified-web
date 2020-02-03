@@ -12,8 +12,8 @@ import {
 } from 'react-router-dom'
 
 // this index.js sets TabView1 and TabView2 to / and sets the addressess for all other pages in this web application
-import TabView1 from './TabView1';
-import TabView2 from './TabView2';
+import TopPortionMainPage from './pages/TopSectionMainPage/TopSectionMainPage';
+import BottomSectionMainPage from './pages/BottomSectionMainPage/BottomSectionMainPage';
 
 // for 3 tiers of heirarcy
 import ListPoemPage from './ListPoemPage'
@@ -40,8 +40,8 @@ const routing = (
 	  <Router>
 	    <div>
 	      {/* Inside JSX use this format to give comments*/}
-	      <Route exact path="/" component={TabView1} />
-	      <Route exact path="/" component={TabView2} />
+	      <Route exact path="/" component={TopPortionMainPage} />
+	      <Route exact path="/" component={BottomSectionMainPage} />
 
 	      <Route path="/ListPoemPage" component={ListPoemPage} />
 	      <Route path="/PoemPage" component={PoemPage} />

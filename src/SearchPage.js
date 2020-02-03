@@ -2,7 +2,7 @@ import React from 'react'
 import StaticContentService from './StaticContentServiceYaml'
 
 // for formatting
-import './TabView1.css';
+import './pages/TopSectionMainPage/TopSectionMainPage.css';
 
 // import Button from 'react-bootstrap/Button';
 // import ButtonToolbar from 'react-bootstrap/ButtonToolbar';

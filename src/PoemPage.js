@@ -2,7 +2,7 @@ import React from 'react'
 import StaticContentService from './StaticContentServiceYaml'
 
 // for formatting
-import './TabView1.css';
+import './pages/TopSectionMainPage/TopSectionMainPage.css';
 
 import Divider from '@material-ui/core/Divider';
 

@@ -3,7 +3,7 @@ import StaticContentService from './StaticContentServiceYaml'
 // import Tabs from './Tabs'
 
 // for formatting
-import './TabView1.css';
+import './pages/TopSectionMainPage/TopSectionMainPage.css';
 
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'

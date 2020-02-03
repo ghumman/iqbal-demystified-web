@@ -5,7 +5,7 @@ import RegisterPage from './RegisterPage'
 import ForgotPasswordPage from './ForgotPasswordPage'
 
 // for formatting
-import './TabView1.css';
+import './pages/TopSectionMainPage/TopSectionMainPage.css';
 
 var $ = require('jquery')
 window.jQuery = $

@@ -16,30 +16,30 @@ import urduFont from './poem_page.css'
 
 
 // logo is used to display main allama iqbal picture
-import logo from './assets/allam_iqbal_pic.jpg'
+import logo from './../../assets/allam_iqbal_pic.jpg'
 
 // following are books in first tab - Urdu
-import urduBook1 from './assets/android_app_assets/book_bal_ae_jabreel_urdu_2.jpg';
-import urduBook2 from './assets/android_app_assets/book_bang_ae_dara_urdu_1.jpg';
-import urduBook3 from './assets/android_app_assets/book_armaghan_ae_hijaz_urdu_4.jpg';
-import urduBook4 from './assets/android_app_assets/book_zarb_ae_kaleem_urdu_3.jpg';
+import urduBook1 from './../../assets/android_app_assets/book_bal_ae_jabreel_urdu_2.jpg';
+import urduBook2 from './../../assets/android_app_assets/book_bang_ae_dara_urdu_1.jpg';
+import urduBook3 from './../../assets/android_app_assets/book_armaghan_ae_hijaz_urdu_4.jpg';
+import urduBook4 from './../../assets/android_app_assets/book_zarb_ae_kaleem_urdu_3.jpg';
 
 // following are books in second tab - Farsi 1
-import farsi1Book1 from './assets/android_app_assets/book_rumuz_ae_bekhudi_persian_6.jpg';
-import farsi1Book2 from './assets/android_app_assets/book_asrar_ae_khudi_persian_5.jpg';
-import farsi1Book3 from './assets/android_app_assets/book_payam_ae_hijaz_persian_7.jpg';
-import farsi1Book4 from './assets/android_app_assets/book_zabur_ae_ajam_persian_8.jpg';
+import farsi1Book1 from './../../assets/android_app_assets/book_rumuz_ae_bekhudi_persian_6.jpg';
+import farsi1Book2 from './../../assets/android_app_assets/book_asrar_ae_khudi_persian_5.jpg';
+import farsi1Book3 from './../../assets/android_app_assets/book_payam_ae_hijaz_persian_7.jpg';
+import farsi1Book4 from './../../assets/android_app_assets/book_zabur_ae_ajam_persian_8.jpg';
 
 // following are books in second tab - Farsi 2
-import farsi2Book1 from './assets/android_app_assets/book_javed_nama_persian_9.jpg';
-import farsi2Book2 from './assets/android_app_assets/book_pas_cheh_bayad_kard_persian_10.jpg';
-import farsi2Book3 from './assets/android_app_assets/book_armaghan_ae_hijaz_persian_11.jpg';
+import farsi2Book1 from './../../assets/android_app_assets/book_javed_nama_persian_9.jpg';
+import farsi2Book2 from './../../assets/android_app_assets/book_pas_cheh_bayad_kard_persian_10.jpg';
+import farsi2Book3 from './../../assets/android_app_assets/book_armaghan_ae_hijaz_persian_11.jpg';
 
 // for formatting
-import './TabView1.css';
+import './TopSectionMainPage.css';
 
 // to go to ListPoemPage when a book logo is pressed
-import ListPoemPage from './ListPoemPage';
+import ListPoemPage from '../../ListPoemPage';
 
 class TabView1 extends React.Component {
 	state = {
