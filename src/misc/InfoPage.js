@@ -2,7 +2,7 @@ import React from 'react'
 import StaticContentService from '../StaticContentServiceYaml'
 
 // for formatting
-import './../pages/TopSectionMainPage/TopSectionMainPage.css';
+import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 
 import PoemPage from '../poetry/PoemPage';

@@ -12,8 +12,8 @@ import {
 } from 'react-router-dom'
 
 // this index.js sets TabView1 and TabView2 to / and sets the addressess for all other pages in this web application
-import TopPortionMainPage from './pages/TopSectionMainPage/TopSectionMainPage';
-import BottomSectionMainPage from './pages/BottomSectionMainPage/BottomSectionMainPage';
+import TopPortionMainPage from './main_page/TopSectionMainPage/TopSectionMainPage';
+import BottomSectionMainPage from './main_page/BottomSectionMainPage/BottomSectionMainPage';
 
 // for 3 tiers of heirarcy
 import ListPoemPage from './poetry/ListPoemPage'

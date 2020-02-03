@@ -3,7 +3,7 @@ import React from 'react'
 import SigninPage from './SigninPage'
 
 // for formatting
-import './../pages/TopSectionMainPage/TopSectionMainPage.css';
+import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 var $ = require('jquery')
 window.jQuery = $
