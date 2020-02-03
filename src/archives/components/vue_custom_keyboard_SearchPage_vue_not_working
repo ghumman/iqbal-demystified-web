@@ -1,0 +1,15 @@
+<template>
+  <VueCustomKeyboard></VueCustomKeyboard>
+</template>
+ 
+<script>
+  import VueCustomKeyboard from 'vue-custom-keyboard'
+  // import 'vue-custom-keyboard/dist/vue-custom-keyboard.min.css'
+ 
+  export default {
+    name: 'componentWithKeyboard',
+    components: {
+        VueCustomKeyboard
+    }
+  }
+</script>

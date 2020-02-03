@@ -1,0 +1,67 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import './index.css';
+
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+
+// import {Router, Route, IndexRoute, hashHistory} from "react-router"; 
+
+// import App from './App';
+// import TabView0 from './TabView0';
+import TabView1 from './TabView1';
+import test from './test';
+import TabView2 from './TabView2';
+import Users from './users'
+import Contact from './contact'
+import ListPoemPage from './ListPoemPage'
+
+import * as serviceWorker from './serviceWorker';
+
+/*
+const routing = (
+	  <Router>
+	    <div>
+	      <ul>
+	        <li>
+	          <Link to="/contact">Contact</Link>
+	        </li>
+		
+	        <li>
+	          <Link to="/">Home</Link>
+	        </li>
+		
+	        <li>
+	          <Link to="/users">Users</Link>
+	        </li>
+	      </ul>
+	
+	<Route exact path="/" component={TabView0} />
+	      <Route exact path="/" component={TabView1} />
+	      <Route path="/users" component={Users} />
+	      <Route path="/" component={TabView2} />
+	    </div>
+	  </Router>
+)
+*/
+
+const app = document.getElementById('root');
+
+// ReactDOM.render(routing, document.getElementById('root'))
+ReactDOM.render(
+	<Router >
+		<div>
+	      <Route exact path="/" component={test} ></Route>
+	{/*<Route exact path="/" component={TabView1} ></Route>
+	<Route exact path="/" component={TabView2} ></Route>*/}
+	      <Route path="ListPoemPage" component={ListPoemPage} ></Route>
+	      <Route exact path="Contact" component={Contact} ></Route>
+		</div>
+	</Router>,
+app);
+// ReactDOM.render(<App />, document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
