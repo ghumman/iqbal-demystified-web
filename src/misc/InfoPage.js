@@ -1,11 +1,11 @@
 import React from 'react'
-import StaticContentService from './StaticContentServiceYaml'
+import StaticContentService from '../StaticContentServiceYaml'
 
 // for formatting
-import './pages/TopSectionMainPage/TopSectionMainPage.css';
+import './../pages/TopSectionMainPage/TopSectionMainPage.css';
 
 
-import PoemPage from './PoemPage';
+import PoemPage from '../poetry/PoemPage';
 
 var  YAML = require('yaml');
 

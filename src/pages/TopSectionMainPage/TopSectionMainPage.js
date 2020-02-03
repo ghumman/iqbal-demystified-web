@@ -39,7 +39,7 @@ import farsi2Book3 from './../../assets/android_app_assets/book_armaghan_ae_hija
 import './TopSectionMainPage.css';
 
 // to go to ListPoemPage when a book logo is pressed
-import ListPoemPage from '../../ListPoemPage';
+import ListPoemPage from '../../poetry/ListPoemPage';
 
 class TabView1 extends React.Component {
 	state = {

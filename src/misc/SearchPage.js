@@ -1,14 +1,14 @@
 import React from 'react'
-import StaticContentService from './StaticContentServiceYaml'
+import StaticContentService from '../StaticContentServiceYaml'
 
 // for formatting
-import './pages/TopSectionMainPage/TopSectionMainPage.css';
+import './../pages/TopSectionMainPage/TopSectionMainPage.css';
 
 // import Button from 'react-bootstrap/Button';
 // import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 
 
-import PoemPage from './PoemPage';
+import PoemPage from '../poetry/PoemPage';
 
 var  YAML = require('yaml');
 

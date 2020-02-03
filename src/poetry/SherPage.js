@@ -1,9 +1,9 @@
 import React from 'react'
-import StaticContentService from './StaticContentServiceYaml'
+import StaticContentService from '../StaticContentServiceYaml'
 // import Tabs from './Tabs';
 
 // for formatting
-import './pages/TopSectionMainPage/TopSectionMainPage.css';
+import './../pages/TopSectionMainPage/TopSectionMainPage.css';
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -181,7 +181,7 @@ async send_word_message(){
 	     success: (data) => {    // success funciton starts
 	        var sherArray = sherName.split("_");
 
-          const yamlFile = require('!raw-loader!./assets/poems/' + sherArray[0] + '/' + sherArray[0] + '_' + sherArray[1] + '.yaml');
+          const yamlFile = require('!raw-loader!./../assets/poems/' + sherArray[0] + '/' + sherArray[0] + '_' + sherArray[1] + '.yaml');
 
           console.log("After calling yamlFiles");
           console.log("Value of yamlFile");

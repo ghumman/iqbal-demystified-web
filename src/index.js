@@ -16,21 +16,21 @@ import TopPortionMainPage from './pages/TopSectionMainPage/TopSectionMainPage';
 import BottomSectionMainPage from './pages/BottomSectionMainPage/BottomSectionMainPage';
 
 // for 3 tiers of heirarcy
-import ListPoemPage from './ListPoemPage'
-import PoemPage from './PoemPage'
-import SherPage from './SherPage'
+import ListPoemPage from './poetry/ListPoemPage'
+import PoemPage from './poetry/PoemPage'
+import SherPage from './poetry/SherPage'
 
 // for User account interaction
-import RegisterPage from './RegisterPage'
-import SigninPage from './SigninPage'
-import ForgotPasswordPage from './ForgotPasswordPage'
-import ProfilePage from './ProfilePage'
-import ChangePasswordPage from './ChangePasswordPage'
+import RegisterPage from './account/RegisterPage'
+import SigninPage from './account/SigninPage'
+import ForgotPasswordPage from './account/ForgotPasswordPage'
+import ProfilePage from './account/ProfilePage'
+import ChangePasswordPage from './account/ChangePasswordPage'
 
 // following are present in TabView2, apart from other pages
-import InfoPage from './InfoPage'
-import CommentPage from './CommentPage'
-import SearchPage from './SearchPage'
+import InfoPage from './misc/InfoPage'
+import CommentPage from './misc/CommentPage'
+import SearchPage from './misc/SearchPage'
 
 // for some default use
 import * as serviceWorker from './serviceWorker';
