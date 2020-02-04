@@ -1,10 +1,10 @@
-let component = require("./keyboard.vue");
+let component = require('./keyboard.vue');
 
 module.exports = {
 	component,
-	layouts: require("./layouts"),
+	layouts: require('./layouts'),
 
 	install(Vue) {
-		Vue.component("VueTouchKeyboard", component);
+		Vue.component('VueTouchKeyboard', component);
 	}
 };

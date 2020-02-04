@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.1.1",
+    "babel-eslint": "^10.0.3",
     "bootstrap": "^4.3.1",
     "history": "^4.9.0",
     "jquery": "^3.4.1",
+    "prop-types": "^15.7.2",
     "raw-loader": "^2.0.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
@@ -21,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js --ext .jsx --ext .css --ext .scss",
+    "lint-fix": "eslint . --ext .js --ext .jsx --ext .css --ext .scss --fix"
   },
   "eslintConfig": {
     "extends": "react-app"

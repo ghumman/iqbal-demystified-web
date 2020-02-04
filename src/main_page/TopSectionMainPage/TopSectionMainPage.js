@@ -1,22 +1,14 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 
-import ReactDOM from 'react-dom'
-
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
-
-
-
-import urduFont from './poem_page.css'
-
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 // logo is used to display main allama iqbal picture
-import logo from './../../assets/allam_iqbal_pic.jpg'
+import logo from './../../assets/allam_iqbal_pic.jpg';
 
 // following are books in first tab - Urdu
 import urduBook1 from './../../assets/android_app_assets/book_bal_ae_jabreel_urdu_2.jpg';
@@ -38,216 +30,149 @@ import farsi2Book3 from './../../assets/android_app_assets/book_armaghan_ae_hija
 // for formatting
 import './TopSectionMainPage.css';
 
+import PropTypes from 'prop-types';
+
 // to go to ListPoemPage when a book logo is pressed
 import ListPoemPage from '../../poetry/ListPoemPage';
 
-class TabView1 extends React.Component {
+
+
+class TopSectionMainPage extends React.Component {
+
+	static propTypes = {
+		location: PropTypes.object.isRequired,
+		history: PropTypes.object.isRequired
+	}
+
 	state = {
 		textvalue: 'Change me',
-    id: "1",
+		id: '1',
 
-    username: "",
-    password: "",
-    signinConfirmation: "",
+		username: '',
+		password: '',
+		signinConfirmation: '',
 
-    signinVar: "",
+		signinVar: '',
 
 		key: 'home'
-  }
+	}
 
-  signMeIn = () => {
+	signMeIn = () => {
 
-	  if (this.state.username == "") {
-	  	this.props.history.push({
-		    pathname: '/RegisterPage',
-		    state: { profileSigninConfirmation : this.state.signinConfirmation, profileUsername : this.state.username, profilePassword: this.state.password}
-	  	})
-	  }
-  }
+		if (this.state.username === '') {
+			this.props.history.push({
+				pathname: '/RegisterPage',
+				state: { profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
+			});
+		}
+	}
 
-  onSubmit = (bookNumber) => {
-	  this.props.history.push({
-		    pathname: '/ListPoemPage',
-		    state: { detailBook: bookNumber, profileSigninConfirmation : this.state.signinConfirmation, profileUsername : this.state.username, profilePassword: this.state.password }
-	  })
+	onSubmit = (bookNumber) => {
+		this.props.history.push({
+			pathname: '/ListPoemPage',
+			state: { detailBook: bookNumber, profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
+		});
 	}
 
 	// componentDidMount is used when you want to display this.state.xxxx and want to make sure that new value is displayed
 	componentDidUpdate(prevProps, prevState) {
-		  console.log("this.state.username")
-		  console.log(this.state.username)
-
-		  console.log("this.state.password")
-		  console.log(this.state.password)
-
-		  console.log("this.state.profileSigninConfirmation")
-		  console.log(this.state.signinConfirmation)
-
-		  console.log("this.state.signinVar")
-		  console.log(this.state.signinVar)
 	}
 
 	// componentDidMount is called when after render function
 	componentDidMount() {
-		window.scrollTo(0, 0)
-	// retrive the data
+		window.scrollTo(0, 0);
+		// retrive the data
 		try {
-	  		this.setState({signinConfirmation: this.props.location.state.profileSigninConfirmation});
-	  		this.setState({username: this.props.location.state.profileUsername});
-				this.setState({password: this.props.location.state.profilePassword});
-				if (this.props.location.state.profileSigninConfirmation != 'done') {
-					console.log("Profile Signin Confirmation message is not done ")
-					console.log("Something went wrong setting signinVar to Sign in again")
-					this.setState({signinVar: "Sign In"})
-				}
-				else {
-					console.log("You're signed in and profileSigninConfirmation message is done");
-				}
+			this.setState({ signinConfirmation: this.props.location.state.profileSigninConfirmation });
+			this.setState({ username: this.props.location.state.profileUsername });
+			this.setState({ password: this.props.location.state.profilePassword });
+			if (this.props.location.state.profileSigninConfirmation !== 'done') {
+				this.setState({ signinVar: 'Sign In' });
 			}
-			catch (e) {
-				console.log("Inside catch")
-				console.log("Not signed in or just started the app");
-				this.setState({signinConfirmation: 'not signed in'});
-				this.setState({username: ''});
+			else {
+				// TODO
 			}
+		}
+		catch (e) {
+			this.setState({ signinConfirmation: 'not signed in' });
+			this.setState({ username: '' });
+		}
 	}
 
 	render() {
 		// decides when if logged in or not and display either sign in or first character of username
-		let signinTag
-		var signinMessageLocal = ""
-		if (this.state.signinConfirmation  === "done") {
-			signinMessageLocal = this.state.username.charAt(0).toUpperCase()
-		  signinTag = <button type="button" class="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>
+		let signinTag;
+		var signinMessageLocal = '';
+		if (this.state.signinConfirmation === 'done') {
+			signinMessageLocal = this.state.username.charAt(0).toUpperCase();
+			signinTag = <button type="button" className="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>;
 		}
 		else {
-			signinMessageLocal = "Sign In"
-		  signinTag = <button type="button" class="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>
+			signinMessageLocal = 'Sign In';
+			signinTag = <button type="button" className="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>;
 		}
 
 
 
-	  return (
+		return (
 
 
 
 			<div>
-		  	{/*
-				<p class="myLine1">My awesome font</p>;
-				<p class="myLine1">My awesome font</p>;
-			*/}
-<h3 class="text-right">{signinTag}</h3>
-{/*<h3 class="text-center" style={{fontFamily: 'Sans Sarif'}}>Allama Iqbal</h3>*/}
-<h3 class="text-center app-title">Allama Iqbal</h3>
-<img src={logo}  class="rounded mx-auto d-block" alt="Allama Iqbal Image" />
-{/*</div>
+				<h3 className="text-right">{signinTag}</h3>
+				<h3 className="text-center app-title">Allama Iqbal</h3>
+				<img src={logo} className="rounded mx-auto d-block" alt="Allama Iqbal" />
 
-	    <div className="App">*/}
+				<div className="tabTitle">
+					<Tabs
+						id="controlled-tab-example"
+						activeKey={this.state.key}
+						onSelect={key => this.setState({ key })}
+						class="nav-tabs"
+					>
+						<Tab eventKey="home" title="ﺍﺭﺩﻭ">
+							<Container>
+								<Row>
+									<Col><img src={urduBook1} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_002')} /></Col>
+									<Col><img src={urduBook2} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_001')} /></Col>
+								</Row>
+								<Row>
+									<Col><img src={urduBook3} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_004')} /></Col>
+									<Col><img src={urduBook4} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_003')} /></Col>
 
-{/*
-			<nav>
-		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-		    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" onClick={() => this.tabClicked("urdu")} role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
-		    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" onClick={() => this.tabClicked("farsi1")} role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-		    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" onClick={() => this.tabClicked("farsi2")} role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
-		  </div>
-		</nav>
-		<div class="tab-content" id="nav-tabContent">
-		  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-			<img src={urduBook1} className="App-logo" alt="logo"  onClick={() => this.onSubmit("List_002")}/>
-			<img src={urduBook2} className="App-logo" alt="logo"  onClick={() => this.onSubmit("List_001")}/>
-			<img src={urduBook3} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_004")}/>
-			<img src={urduBook4} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_003")}/>
-			</div>
-		  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">2</div>
-		  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">3</div>
-		</div>
+								</Row>
+							</Container>
 
-		*/}
+						</Tab>
 
-
-		{/*<div style={{fontFamily: 'Jameel Noori Nastaleeq'}}>*/}
-		<div class="tabTitle">
-		<Tabs
-			id="controlled-tab-example"
-			activeKey={this.state.key}
-			onSelect={key => this.setState({ key })}
-			class="nav-tabs"
-		>
-			<Tab eventKey="home"  title="ﺍﺭﺩﻭ">
-			<Container>
-  <Row>
-    <Col><img src={urduBook1}  class="rounded mx-auto d-block imgSizing" alt="logo"  onClick={() => this.onSubmit("List_002")} /></Col>
-    <Col><img src={urduBook2} class="rounded mx-auto d-block imgSizing" alt="logo"  onClick={() => this.onSubmit("List_001")} /></Col>
-  </Row>
-  <Row>
-    <Col><img src={urduBook3} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_004")} /></Col>
-    <Col><img src={urduBook4} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_003")}/></Col>
-
-  </Row>
-</Container>
-
-			</Tab>
-
-			<Tab eventKey="profile"  title="(فارسی (۱">
-			<Container>
-  <Row>
-     <Col><img src={farsi1Book1} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_006")}/></Col>
-     <Col><img src={farsi1Book2} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_005")}/></Col>
-  </Row>
-  <Row>
-     <Col><img src={farsi1Book3} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_007")}/></Col>
-     <Col><img src={farsi1Book4} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_008")}/></Col>
-  </Row>
-			</Container>
-			</Tab>
-			<Tab eventKey="contact"  title="(فارسی (۲">
-			<Container>
-  <Row>
-  <Col><img src={farsi2Book1} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_009")}/></Col>
-  <Col><img src={farsi2Book2} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_010")}/></Col>
-  </Row>
-  <Row>
-  <Col><img src={farsi2Book3} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_011")}/></Col>
-  </Row>
-			</Container>
-			</Tab>
-		</Tabs>
-		</div>
-
-
-			{/*
-			  <header className="App-header">
-				  {signinTag}
-
-					<p>Allama Iqbal</p>
-					<img src={logo} className="App-logo" alt="logo" />
-					*/}{/*
-					<Tabs>
-						<div label="ﺍﺭﺩﻭ">
-				  		<img src={urduBook1} className="App-logo" alt="logo"  onClick={() => this.onSubmit("List_002")}/>
-				  		<img src={urduBook2} className="App-logo" alt="logo"  onClick={() => this.onSubmit("List_001")}/>
-				  		<img src={urduBook3} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_004")}/>
-				  		<img src={urduBook4} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_003")}/> </div>
-					  <div label="(ﻑﺍﺮﺳی  (۱">
-				  		<img src={farsi1Book1} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_006")}/>
-				  		<img src={farsi1Book2} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_005")}/>
-				  		<img src={farsi1Book3} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_007")}/>
-				  		<img src={farsi1Book4} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_008")}/>
-					  </div>
-					  <div label="(ﻑﺍﺮﺳی  (۲">
-				  		<img src={farsi2Book1} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_009")}/>
-				  		<img src={farsi2Book2} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_010")}/>
-				  		<img src={farsi2Book3} className="App-logo" alt="logo" onClick={() => this.onSubmit("List_011")}/>
-					  </div>
+						<Tab eventKey="profile" title="(فارسی (۱">
+							<Container>
+								<Row>
+									<Col><img src={farsi1Book1} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_006')} /></Col>
+									<Col><img src={farsi1Book2} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_005')} /></Col>
+								</Row>
+								<Row>
+									<Col><img src={farsi1Book3} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_007')} /></Col>
+									<Col><img src={farsi1Book4} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_008')} /></Col>
+								</Row>
+							</Container>
+						</Tab>
+						<Tab eventKey="contact" title="(فارسی (۲">
+							<Container>
+								<Row>
+									<Col><img src={farsi2Book1} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_009')} /></Col>
+									<Col><img src={farsi2Book2} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_010')} /></Col>
+								</Row>
+								<Row>
+									<Col><img src={farsi2Book3} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_011')} /></Col>
+								</Row>
+							</Container>
+						</Tab>
 					</Tabs>
-					*/}
-
-				{/*</header>*/}
-	    </div>
-	  )
+				</div>
+			</div>
+		);
 	}
 }
 
-
-export default TabView1;
+export default TopSectionMainPage;

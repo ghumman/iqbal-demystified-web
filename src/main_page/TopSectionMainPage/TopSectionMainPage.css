@@ -47,8 +47,6 @@
 }
 
 .app-title {
-    /*font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;*/
-    /*font-family: 'Jameel Noori Nastaleeq';*/
     font-family: "Times New Roman", Times, serif;
     color: blue;
     padding: 30px;
@@ -138,33 +136,3 @@
 	line-height: 1.33;
 	border-radius: 35px;
 }
-
-.px-2 {
-	  padding-left: ($spacer * 2) !important;
-	    padding-right: ($spacer * 2) !important;
-    }
-
-
-/*
-* {
-    font-size: 50px;
-    font-family: "Jameel Noori Nastaleeq";
-}
-
-.myLine1 {
-  font-family: 'Jameel Noori Nastaleeqsafdsd';font-size: 22px;
-}
-
-.myLine2 {
-font-family: "Times New Roman", Times, serif;
-}
-
-
-@font-face {
-   font-family: 'Jameel Noori Nastaleeq';
-   font-style: normal;
-   font-weight: 400;
-   src: url('./assets/fonts/Pak Nastaleeq (Beta Release).ttf')  format('truetype')
-}
-
-*/
