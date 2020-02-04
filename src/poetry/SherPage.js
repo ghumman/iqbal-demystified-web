@@ -1,5 +1,4 @@
 import React from 'react';
-import StaticContentService from '../misc/StaticContentServiceYaml';
 // import Tabs from './Tabs';
 
 // for formatting
@@ -10,35 +9,40 @@ import Tabs from 'react-bootstrap/Tabs';
 
 import Divider from '@material-ui/core/Divider';
 
-var  YAML = require('yaml');
+import PropTypes from 'prop-types';
 
-var $ = require('jquery');
+import $ from 'jquery';
+import YAML from 'yaml';
 window.jQuery = $;
 
 class SherPage extends React.Component {
 
+	static propTypes = {
+		location: PropTypes.object.isRequired,
+		history: PropTypes.object.isRequired
+	}
 
 	constructor(props) {
 		super(props);
 		this.state = {
-	    username: '',
-	    password: '',
-	    signinConfirmation: '',
+			username: '',
+			password: '',
+			signinConfirmation: '',
 
-    	listId: 'List_001',
-    	    sherId: '',
-	    sherText: [],
-	    wordText: [],
-	    poemText: [],
-	    sherObjects: [],
-	    sherGeneralDiscussionServerResponse: [],
-	    sherDiscussionDetail: [],
-	    wordDiscussionDetail: [],
-	    mySelectedWord: '',
-	    mySelectedId: '-99',
-	    
-	    userMessageSher: '',
-	    userMessageWord: '',
+			listId: 'List_001',
+			sherId: '',
+			sherText: [],
+			wordText: [],
+			poemText: [],
+			sherObjects: [],
+			sherGeneralDiscussionServerResponse: [],
+			sherDiscussionDetail: [],
+			wordDiscussionDetail: [],
+			mySelectedWord: '',
+			mySelectedId: '-99',
+
+			userMessageSher: '',
+			userMessageWord: '',
 
 			key: 'home'
 		};
@@ -50,11 +54,11 @@ class SherPage extends React.Component {
 	}
 
 	handleUserMessageSher(event) {
-		this.setState({userMessageSher: event.target.value});
+		this.setState({ userMessageSher: event.target.value });
 	}
 
 	handleUserMessageWord(event) {
-		this.setState({userMessageWord: event.target.value});
+		this.setState({ userMessageWord: event.target.value });
 	}
 
 
@@ -68,84 +72,76 @@ class SherPage extends React.Component {
 		event.preventDefault();
 	}
 
-	async send_sher_message(){
-		console.log('Inside send_sher_message');
+	async send_sher_message() {
 
 		// do not try pushing comment if message is empty
-		if (this.state.userMessageSher.trim() !== ''){
-	
+		if (this.state.userMessageSher.trim() !== '') {
+
 			// if user is not signed in, ask user to sign in
 			if ((this.state.username.trim() !== '') && (this.state.password.trim() !== '')) {
-	
-				try{
+
+				try {
 					// var element = this;
 					$.ajax({
 						url: 'https://icanmakemyownapp.com/iqbal/v3/post-comment.php',
-                	type: 'POST',
-                 	dataType: 'text',
-		 	data: {sher: this.state.sherId, discussion_type: 'general', username: this.state.username, password: this.state.password, comment_text: this.state.userMessageSher},
-                 	success: (data) => {	// success funciton starts
-							console.log('data');
-							console.log(data);
-							this.getSherGeneralDiscussion(this.state.sherId);	
-	
+						type: 'POST',
+						dataType: 'text',
+						data: { sher: this.state.sherId, discussion_type: 'general', username: this.state.username, password: this.state.password, comment_text: this.state.userMessageSher },
+						success: () => {	// success funciton starts
+							this.getSherGeneralDiscussion(this.state.sherId);
 
-                 	}	// success function ends
+
+						}	// success function ends
 					});	// ajax call ends
-				}catch(err){
+				} catch (err) {
 					alert('inside catch err');
 					alert(err);
 					// this.message = err;
 				}
 			}	// if not logged in empty
-			else{
+			else {
 
 				alert('Please login first to add comments.');
 			}
 		}	// if message is empty ends
-	
+
 		else {
 			alert('Comments can not be empty');
 		}
 	}
 
-	async send_word_message(){
+	async send_word_message() {
 
 		// do not try pushing comment if message is empty
-		if (this.state.userMessageWord.trim() !== ''){
-	
+		if (this.state.userMessageWord.trim() !== '') {
+
 			// if user is not signed in, ask user to sign in
 			if ((this.state.username.trim() !== '') && (this.state.password.trim() !== '')) {
-	
-				try{
+
+				try {
 					$.ajax({
 						url: 'https://icanmakemyownapp.com/iqbal/v3/post-comment.php',
-                	type: 'POST',
-                 	dataType: 'text',
-		 	data: {sher: this.state.sherId, discussion_type: 'word-meanings', username: this.state.username, password: this.state.password, comment_text: this.state.userMessageWord, word_position: this.state.mySelectedId+1},
-                 	success: (data) => {	// success funciton starts
-
-							console.log('data');
-							console.log(data);
+						type: 'POST',
+						dataType: 'text',
+						data: { sher: this.state.sherId, discussion_type: 'word-meanings', username: this.state.username, password: this.state.password, comment_text: this.state.userMessageWord, word_position: this.state.mySelectedId + 1 },
+						success: () => {	// success funciton starts
 							this.getSherWordDiscussion(this.state.sherId);
-	
-                 	}	// success function ends
+
+						}	// success function ends
 					});	// ajax call ends
-				}catch(err){
+				} catch (err) {
 					alert('inside catch err');
 					alert(err);
 					// this.message = err;
 				}
 
-				console.log('messageSher sent to send sher message function');
-
 			}	// if not logged in empty
-			else{
+			else {
 
 				alert('Please login first to add comments.');
 			}
 		}	// if message is empty ends
-	
+
 		else {
 			alert('Comments can not be empty');
 		}
@@ -154,581 +150,475 @@ class SherPage extends React.Component {
 
 
 	onSubmit = (sherNumber) => {
-	  this.props.history.push({
-		    pathname: '/SherPage',
-		    state: { detailSher: sherNumber,  profileSigninConfirmation : this.state.signinConfirmation, profileUsername : this.state.username, profilePassword: this.state.password  }
-	  });
+		this.props.history.push({
+			pathname: '/SherPage',
+			state: { detailSher: sherNumber, profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
+		});
 	}
 
 	async getSherGeneralDiscussion(sherName) {
-		try{
-	     $.ajax({
+		try {
+			$.ajax({
 				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
-	     type: 'POST',
-	     dataType: 'text',
-	     data: {sher: sherName, discussion_type: 'general'},
-	     success: (data) => {    // success funciton starts
-	        var sherArray = sherName.split('_');
+				type: 'POST',
+				dataType: 'text',
+				data: { sher: sherName, discussion_type: 'general' },
+				success: (data) => {    // success funciton starts
+					var sherArray = sherName.split('_');
 
+					// eslint-disable-next-line no-undef
 					const yamlFile = require('!raw-loader!./../assets/poems/' + sherArray[0] + '/' + sherArray[0] + '_' + sherArray[1] + '.yaml');
 
-					console.log('After calling yamlFiles');
-					console.log('Value of yamlFile');
-					console.log(yamlFile);
 
 					var sherIndex = sherArray[2] - 1;
 					var yamlObject = YAML.parse(yamlFile.default);
 
-					console.log('this is the sher text');
-					console.log(yamlObject.sher[sherIndex].sherContent[0].text);
-
 					var sherTextTemp = yamlObject.sher[sherIndex].sherContent[0].text;
 
 					var sherTextLocal = sherTextTemp.split('|');
-					this.setState({sherText : sherTextLocal});
+					this.setState({ sherText: sherTextLocal });
 
-					console.log('this.state.sherText');
-					console.log(this.state.sherText);
+					var wordTextLocal = this.state.sherText[0].split(' ').concat(this.state.sherText[1].split(' '));
+					var ii;
+					for (ii = 0; ii < wordTextLocal.length; ii++) {
 
-	        var wordTextLocal = this.state.sherText[0].split(' ').concat(this.state.sherText[1].split(' '));
-	        var ii;
-					console.log('Original array: ');
-					for (ii=0; ii<wordTextLocal.length;ii++)
-						console.log(wordTextLocal[ii]);
-					for (ii=0; ii<wordTextLocal.length; ii++){
-
-						if (wordTextLocal[ii] === '' || wordTextLocal[ii] === ' ' || wordTextLocal[ii] === '،'){
-							wordTextLocal.splice(ii,1);
+						if (wordTextLocal[ii] === '' || wordTextLocal[ii] === ' ' || wordTextLocal[ii] === '،') {
+							wordTextLocal.splice(ii, 1);
 							ii--;
-              	 console.log('inside if Value of wordTextLocal[ii]');
-              	 console.log(ii);
-              	 console.log(wordTextLocal[ii]);
-          	}
-            	else {
-            		console.log('inside else before replace Value of wordTextLocal[ii]');
-							console.log(ii);
-              	console.log(wordTextLocal[ii]);
+						}
+						else {
 
-			          wordTextLocal[ii] = wordTextLocal[ii].replace(/[|&!;$%@"<>()+,]/g, '');
-              	console.log('inside else Value of wordTextLocal[ii]');
-          			console.log(ii);
-          			console.log(wordTextLocal[ii]);
+							wordTextLocal[ii] = wordTextLocal[ii].replace(/[|&!;$%@"<>()+,]/g, '');
 
-            	}  // else ends
+						}  // else ends
 
 					} // for wordTextLocal.... ends
-					console.log('wordTextLocal.length');
-					console.log(wordTextLocal.length);
-					for (ii=0; ii<wordTextLocal.length;ii++)
-          	console.log(wordTextLocal[ii]);
-
-	        if (wordTextLocal[6] === '')
-						console.log('Empty string');
-					else if (wordTextLocal[6] === ' ')
-						console.log('Space string');
-					else {
-						console.log('Neither empty nor space: ');
-		        console.log(wordTextLocal[6]);
-	        }
-
-      	  // make wordTextLocal equal to this.state.wordText
-      	  this.setState({wordText: wordTextLocal});
 
 
-      	  var poemTextLocal = yamlObject.heading[0].text;
-      	  var sherGeneralDiscussionServerResponseLocal = data;
+					// make wordTextLocal equal to this.state.wordText
+					this.setState({ wordText: wordTextLocal });
 
-      	  console.log('poemTextLocal: ');
-      	  console.log(poemTextLocal);
 
-      	  console.log('sherGeneralDiscussionServerResponseLocal');
-      	  console.log(sherGeneralDiscussionServerResponseLocal);
+					var poemTextLocal = yamlObject.heading[0].text;
+					var sherGeneralDiscussionServerResponseLocal = data;
 
-      	  this.setState({poemText: poemTextLocal});
-      	  this.setState({sherGeneralDiscussionServerResponse : sherGeneralDiscussionServerResponseLocal});
+					this.setState({ poemText: poemTextLocal });
+					this.setState({ sherGeneralDiscussionServerResponse: sherGeneralDiscussionServerResponseLocal });
 
 					this.getSherDiscussion(sherGeneralDiscussionServerResponseLocal);
-      	}       // success function ends
+				}       // success function ends
 			});     // ajax call ends
 
-		}catch(err){
-    	alert('inside catch err');
-    	alert(err);
-    	this.message = err;
+		} catch (err) {
+			alert('inside catch err');
+			alert(err);
+			this.message = err;
 		}
 	} // async getSherGeneralDiscussion ends
 
 
 	getSherDiscussion(sherGeneralDiscussionServerResponse) {
-		var response = StaticContentService.getSherDiscussion(sherGeneralDiscussionServerResponse);
+		var response = sherGeneralDiscussionServerResponse;
 
 		var sherDiscussionDetailLocal = JSON.parse(response);
 
-		console.log('Value of sherDiscussionDetailLocal:');
-		console.log(sherDiscussionDetailLocal);
-		console.log('Value of sherDiscussionDetailLocal.length:');
-		console.log(sherDiscussionDetailLocal.length);
-
-		for (var i=0; i<sherDiscussionDetailLocal.length; i++){
-
-    	console.log('Value of sherDiscussionDetailLocal[i].data:');
-			console.log(sherDiscussionDetailLocal[i].text);
-			console.log(decodeURI(sherDiscussionDetailLocal[i].text));
+		for (var i = 0; i < sherDiscussionDetailLocal.length; i++) {
 
 			sherDiscussionDetailLocal[i].text = decodeURI(sherDiscussionDetailLocal[i].text);
 
-			console.log('Value of sherDiscussionDetailLocal[i].data:');
-			console.log(sherDiscussionDetailLocal[i].text);
-
 		}
-		this.setState({sherDiscussionDetail : sherDiscussionDetailLocal });
- 	}
+		this.setState({ sherDiscussionDetail: sherDiscussionDetailLocal });
+	}
 
 
-	async getSherWordDiscussion( sherName ) {
-		try{
+	async getSherWordDiscussion(sherName) {
+		try {
 			$.ajax({
 				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
-			  type: 'POST',
-			  dataType: 'text',
-			 	data: {sher: sherName, discussion_type: 'word-meanings'},
-			  success: (data) => {    // success funciton starts
+				type: 'POST',
+				dataType: 'text',
+				data: { sher: sherName, discussion_type: 'word-meanings' },
+				success: (data) => {    // success funciton starts
 
-				  var sherWordDiscussionServerResponse = data;
-				  console.log('sherWordDiscussionServerResponse');
-				  console.log(sherWordDiscussionServerResponse);
+					var sherWordDiscussionServerResponse = data;
 
-				  this.getWordDiscussion(sherWordDiscussionServerResponse);
+					this.getWordDiscussion(sherWordDiscussionServerResponse);
 
-		  	}       // success function ends
-		 	});     // ajax call ends
+				}       // success function ends
+			});     // ajax call ends
 		}  // try ends
-		catch(err){
+		catch (err) {
 			alert('inside catch err');
-     	alert(err);
+			alert(err);
 			// this.message = err;
-  	}  // catch ends
+		}  // catch ends
 	}
 
 	getWordDiscussion(sherWordDiscussionServerResponse) {
 		var wordDiscussionDetailLocal = JSON.parse(sherWordDiscussionServerResponse);
-		console.log('wordDiscussionDetailLocal');
-		console.log(wordDiscussionDetailLocal);
 
-		for (var i=0; i<wordDiscussionDetailLocal.length; i++){
+		for (var i = 0; i < wordDiscussionDetailLocal.length; i++) {
 
-    	wordDiscussionDetailLocal[i].text = decodeURI(wordDiscussionDetailLocal[i].text);
+			wordDiscussionDetailLocal[i].text = decodeURI(wordDiscussionDetailLocal[i].text);
 
 		}
-   	this.setState({wordDiscussionDetail : wordDiscussionDetailLocal});
+		this.setState({ wordDiscussionDetail: wordDiscussionDetailLocal });
 
 	}
 
 	componentDidMount() {
-	  window.scrollTo(0, 0);
+		window.scrollTo(0, 0);
 		// retrive the data
-   	try {
-			this.setState({signinConfirmation: this.props.location.state.profileSigninConfirmation});
-			this.setState({username: this.props.location.state.profileUsername});
-			this.setState({password: this.props.location.state.profilePassword});
-			this.setState({sherId: this.props.location.state.detailSher});
+		try {
+			this.setState({ signinConfirmation: this.props.location.state.profileSigninConfirmation });
+			this.setState({ username: this.props.location.state.profileUsername });
+			this.setState({ password: this.props.location.state.profilePassword });
+			this.setState({ sherId: this.props.location.state.detailSher });
 
 			let sherName = this.props.location.state.detailSher;
-  		console.log('In poempage.js inside componentdidmount');
-  		console.log('sherName: ');
-  		console.log(sherName);
 			this.getSherGeneralDiscussion(sherName);
 			this.getSherWordDiscussion(sherName);
 		}  // try ends
-	  catch (e) {
-			console.log('Inside catch');
-	  } // catch ends
+		catch (e) {
+			// TODO 
+		} // catch ends
 	} // componentDidMount ends
 
-  signMeIn = () => {
+	signMeIn = () => {
 
-	  if (this.state.username === '') {
-	  	this.props.history.push({
-		    pathname: '/RegisterPage',
-		    state: { profileSigninConfirmation : this.state.signinConfirmation, profileUsername : this.state.username, profilePassword: this.state.password}
-	  	});
-	  }
-  }
+		if (this.state.username === '') {
+			this.props.history.push({
+				pathname: '/RegisterPage',
+				state: { profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
+			});
+		}
+	}
 
-  ///////////////////////////////////////////////////////////
-  //	Vote Like Word
-  ///////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////
+	//	Vote Like Word
+	///////////////////////////////////////////////////////////
 
-  vote_like_word(comment_general_id) {
-
-  	console.log('Value of comment_general_id');
-  	console.log(comment_general_id);
-
-  	if (this.state.username !== ''){
-  		try{
-  			// var element = this;
-  			$.ajax({
-  				url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
-                	type: 'POST',
-                 	dataType: 'text',
-		 	data: {sher: this.state.sherId, discussion_type: 'word-meanings', comment_id:comment_general_id, username: this.state.username, password: this.state.password, is_like:1, is_cancel:0},
-                 	success: (data) => {	// success funciton starts
-  					console.log('data');
-  					console.log(data);
-  					if (data === 'vote registered')
-  						this.getSherWordDiscussion(this.state.sherId);	
-  					else if (data === 'vote already registered') {
-  						alert('Vote is already registerd. Unregister vote first and then you can revote');
-  						// this.toggle_word(idx);
-  					}
-	
-
-                 	}	// success function ends
-  			});	// ajax call ends
-  		}catch(err){
-  			alert('inside catch err');
-  			alert(err);
-  			// this.message = err;
-  		}
-  	}	// if username not empty ends
-  	else{
-  		alert('You are you not logged in. Please Login to give your feedback.');
-  	}
-
-  	console.log('messageSher sent to send sher message function');
-  	// console.log(this.messageSher);
-  }
-
-  ///////////////////////////////////////////////////////////
-  //	Vote Dislike Word
-  ///////////////////////////////////////////////////////////
-
-  vote_dislike_word(comment_general_id){
+	vote_like_word(comment_general_id) {
 
 
-  	console.log('Value of comment_general_id');
-  	console.log(comment_general_id);
+		if (this.state.username !== '') {
+			try {
+				// var element = this;
+				$.ajax({
+					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					type: 'POST',
+					dataType: 'text',
+					data: { sher: this.state.sherId, discussion_type: 'word-meanings', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 1, is_cancel: 0 },
+					success: (data) => {	// success funciton starts
+						if (data === 'vote registered')
+							this.getSherWordDiscussion(this.state.sherId);
+						else if (data === 'vote already registered') {
+							alert('Vote is already registerd. Unregister vote first and then you can revote');
+							// this.toggle_word(idx);
+						}
 
 
-  	if (this.state.username !== ''){
-  		try{
-  			// var element = this;
-  			$.ajax({
-  				url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
-                	type: 'POST',
-                 	dataType: 'text',
-		 	data: {sher: this.state.sherId, discussion_type: 'word-meanings', comment_id:comment_general_id, username: this.state.username, password: this.state.password, is_like:0, is_cancel:0},
-                 	success: (data) => {	// success funciton starts
-  					console.log('data');
-  					console.log(data);
-  					if (data === 'vote registered')
-  						this.getSherWordDiscussion(this.state.sherId);	
-  					else if (data === 'vote already registered'){
-  						alert('Vote is already registerd. Unregister vote first and then you can revote');
-  						// this.toggle_word(idx);
-					
+					}	// success function ends
+				});	// ajax call ends
+			} catch (err) {
+				alert('inside catch err');
+				alert(err);
+				// this.message = err;
+			}
+		}	// if username not empty ends
+		else {
+			alert('You are you not logged in. Please Login to give your feedback.');
+		}
+	}
 
-  					}
-	
+	///////////////////////////////////////////////////////////
+	//	Vote Dislike Word
+	///////////////////////////////////////////////////////////
 
-                 	}	// success function ends
-  			});	// ajax call ends
-  		}catch(err){
-  			alert('inside catch err');
-  			alert(err);
-  			this.message = err;
-  		}
-  	}	// if username not empty ends
-  	else{
-  		alert('You are you not logged in. Please Login to give your feedback.');
-  	}
-
-  	console.log('messageSher sent to send sher message function');
-  }
-
-  ///////////////////////////////////////////////////////////
-  //	Vote Unregister Word
-  ///////////////////////////////////////////////////////////
-
-  vote_unregister_word(comment_general_id) {
-
-  	console.log('Value of comment_general_id');
-  	console.log(comment_general_id);
-
-  	if (this.state.username !== ''){
-  		try{
-  			// var element = this;
-  			$.ajax({
-  				url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
-                	type: 'POST',
-                 	dataType: 'text',
-		 	data: {sher: this.state.sherId, discussion_type: 'word-meanings', comment_id:comment_general_id, username: this.state.username, password: this.state.password, is_like:0, is_cancel:1},
-                 	success: (data) => {	// success funciton starts
-  					console.log('data');
-  					console.log(data);
-  					if (data === 'vote removed'){
-  						// this.toggle_word(idx);
-  						this.getSherWordDiscussion(this.state.sherId);	
-  						alert('Your vote is removed');
-  					}
-  					else if (data === 'invalid is_cancel value') {
-  						alert('You have not liked or disliked it yet.');
-  					}
-	
-
-                 	}	// success function ends
-  			});	// ajax call ends
-  		}catch(err){
-  			alert('inside catch err');
-  			alert(err);
-  			// this.message = err;
-  		}
-  	}	// if username not empty ends
-  	else{
-  		alert('You are you not logged in. Please Login to give your feedback.');
-  	}
-
-  	console.log('messageSher sent to send sher message function');
-  }
+	vote_dislike_word(comment_general_id) {
 
 
-  ///////////////////////////////////////////////////////////
-  //	Vote Like General
-  ///////////////////////////////////////////////////////////
-	
-  vote_like(comment_general_id) {
+		if (this.state.username !== '') {
+			try {
+				// var element = this;
+				$.ajax({
+					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					type: 'POST',
+					dataType: 'text',
+					data: { sher: this.state.sherId, discussion_type: 'word-meanings', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 0 },
+					success: (data) => {	// success funciton starts
+						if (data === 'vote registered')
+							this.getSherWordDiscussion(this.state.sherId);
+						else if (data === 'vote already registered') {
+							alert('Vote is already registerd. Unregister vote first and then you can revote');
+							// this.toggle_word(idx);
 
 
-  	console.log('Value of comment_general_id');
-  	console.log(comment_general_id);
-
-  	if (this.state.username !== ''){
-  		try{
-  			// var element = this;
-  			$.ajax({
-  				url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
-  				type: 'POST',
-  				dataType: 'text',
-  				data: {sher: this.state.sherId, discussion_type: 'general', comment_id:comment_general_id, username: this.state.username, password: this.state.password, is_like:1, is_cancel:0},
-  				success: (data) => {	// success funciton starts
-  					console.log('data');
-  					console.log(data);
-  					if (data === 'vote registered')
-  						this.getSherGeneralDiscussion(this.state.sherId);	
-  					else if (data === 'vote already registered') {
-  						alert('Vote is already registerd. Unregister vote first and then you can revote');
-  					}
-	
-
-  				}	// success function ends
-  			});	// ajax call ends
-  		}catch(err){
-  			alert('inside catch err');
-  			alert(err);
-  			// this.message = err;
-  		}
-  	}	// if username not empty ends
-  	else{
-  		alert('You are you not logged in. Please Login to give your feedback.');
-  	}
-
-  	console.log('messageSher sent to send sher message function');
-  }
-
-	
-  ///////////////////////////////////////////////////////////
-  //	Vote Dislike General
-  ///////////////////////////////////////////////////////////
-		
-  vote_dislike(comment_general_id){
-
-  	console.log('Value of comment_general_id');
-  	console.log(comment_general_id);
-
-  	if (this.state.username !== ''){
-  		try{
-  			$.ajax({
-  				url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
-                	type: 'POST',
-                 	dataType: 'text',
-		 	data: {sher: this.state.sherId, discussion_type: 'general', comment_id:comment_general_id, username: this.state.username, password: this.state.password, is_like:0, is_cancel:0},
-                 	success: (data) => {	// success funciton starts
-  					console.log('data');
-  					console.log(data);
-  					if (data === 'vote registered')
-  						this.getSherGeneralDiscussion(this.state.sherId);	
-  					else if (data === 'vote already registered'){
-  						alert('Vote is already registerd. Unregister vote first and then you can revote');
-					
-
-  					}
-	
-
-                 	}	// success function ends
-  			});	// ajax call ends
-  		}catch(err){
-  			alert('inside catch err');
-  			alert(err);
-  		}
-  	}	// if username not empty ends
-  	else{
-  		alert('You are you not logged in. Please Login to give your feedback.');
-  	}
-
-  	console.log('messageSher sent to send sher message function');
-  }
-
-  ///////////////////////////////////////////////////////////
-  //	Vote Unregister General
-  ///////////////////////////////////////////////////////////
-		
-
-  vote_unregister(comment_general_id) {
-
-  	console.log('Value of comment_general_id');
-  	console.log(comment_general_id);
-
-  	if (this.state.username !== ''){
-  		try{
-  			// var element = this;
-  			$.ajax({
-  				url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
-                	type: 'POST',
-                 	dataType: 'text',
-		 	data: {sher: this.state.sherId, discussion_type: 'general', comment_id:comment_general_id, username: this.state.username, password: this.state.password, is_like:0, is_cancel:1},
-                 	success: (data) => {	// success funciton starts
-  					console.log('data');
-  					console.log(data);
-  					if (data === 'vote removed'){
-  						// this.toggle(idx);
-  						this.getSherGeneralDiscussion(this.state.sherId);	
-  						alert('Your vote is removed');
-  					}
-  					else if (data === 'invalid is_cancel value') {
-  						alert('You have not liked or disliked it yet.');
-  					}
-	
-
-                 	}	// success function ends
-  			});	// ajax call ends
-  		}catch(err){
-  			alert('inside catch err');
-  			alert(err);
-  			// this.message = err;
-  		}
-  	}	// if username not empty ends
-  	else{
-  		alert('You are you not logged in. Please Login to give your feedback.');
-  	}
-
-  	console.log('messageSher sent to send sher message function');
-  }
-
-  selectedWord(wordText, wordId) {
-  	this.setState({mySelectedWord: wordText});
-  	this.setState({mySelectedId: wordId});
-  	console.log('Value of mySelectedWord');
-  	console.log(this.state.mySelectedWord);
-  	console.log('Value of mySelectedId');
-  	console.log(this.state.mySelectedId);
-  }
-
-  render() {
-  	var item4 = this.state.sherText.map( (item, index) =>
-  		<p key={item.index}> {item}</p>
-  	);
-
-  	var item5 = this.state.wordText.map( (item, index) =>
-  		<span key={item.index}><button type="button" className="btn btn-primary"onClick={() => this.selectedWord(item, index)}> {item} </button>  </span>
-  		/*<span key={item.index}> {item}: {index}</span>*/
-  	);
-
-  	var item6 = this.state.sherDiscussionDetail.map( (item, index) =>
-  		<div key={item.id}> <div  className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br/> <p>{item.text}<br/><br/> <button type="button" className="btn btn-primary px-2"onClick={() => this.vote_like(item.id)}> LIKE </button> <span className="px-2">SCORE: {item.score}</span><button type="button" className="btn btn-primary"onClick={() => this.vote_dislike(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary"onClick={() => this.vote_unregister(item.id)} >UNREGISTER</button></p><Divider/></div>
-
-  	);
+						}
 
 
-  	var item7 = this.state.wordDiscussionDetail.map( (item, index) =>
-  	{
-  		if ((item.wordposition-1) === this.state.mySelectedId)
-  			return (
-  				<div key={item.id}> <div  className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br/> <p>{item.text}<br/><br/> <button type="button" className="btn btn-primary"onClick={() => this.vote_like_word(item.id)}> LIKE </button><span className="px-2"> SCORE: {item.score}</span><button type="button" className="btn btn-primary"onClick={() => this.vote_dislike_word(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary"onClick={() => this.vote_unregister_word(item.id)} >UNREGISTER</button></p><Divider/></div>
-  			);
-  		return null;
-  	}
-  	);
+					}	// success function ends
+				});	// ajax call ends
+			} catch (err) {
+				alert('inside catch err');
+				alert(err);
+				this.message = err;
+			}
+		}	// if username not empty ends
+		else {
+			alert('You are you not logged in. Please Login to give your feedback.');
+		}
+	}
 
-  	let signinTag;
-  	var signinMessageLocal = '';
-  	if (this.state.signinConfirmation  === 'done') {
-  		signinMessageLocal = this.state.username.charAt(0).toUpperCase();
-	  signinTag = <button type="button" className="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>;
-  	}
-  	else {
-  		signinMessageLocal = 'Sign In';
-	  signinTag = <button type="button" className="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>;
-  	}
+	///////////////////////////////////////////////////////////
+	//	Vote Unregister Word
+	///////////////////////////////////////////////////////////
 
-  	return (
-  		<div>
-  			<div className="text-right">
-			   {signinTag}
-  			</div>
-  			<div className="tabTitle">
-				 {this.state.poemText}
-  			</div>
-  			<div className="sherPageText">
-  				<Tabs
-  					id="controlled-tab-example"
-  					activeKey={this.state.key}
-  					onSelect={key => this.setState({ key })}
-  					class="nav-tabs"
-  				>
-	  		<Tab class= "sherPageText" eventKey="home"  title="DISCUSSION">
-			       {item4}
-			       {item6}
+	vote_unregister_word(comment_general_id) {
+
+		if (this.state.username !== '') {
+			try {
+				// var element = this;
+				$.ajax({
+					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					type: 'POST',
+					dataType: 'text',
+					data: { sher: this.state.sherId, discussion_type: 'word-meanings', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 1 },
+					success: (data) => {	// success funciton starts
+						if (data === 'vote removed') {
+							// this.toggle_word(idx);
+							this.getSherWordDiscussion(this.state.sherId);
+							alert('Your vote is removed');
+						}
+						else if (data === 'invalid is_cancel value') {
+							alert('You have not liked or disliked it yet.');
+						}
 
 
-  						<form onSubmit={this.handleSubmitSher}>
+					}	// success function ends
+				});	// ajax call ends
+			} catch (err) {
+				alert('inside catch err');
+				alert(err);
+				// this.message = err;
+			}
+		}	// if username not empty ends
+		else {
+			alert('You are you not logged in. Please Login to give your feedback.');
+		}
+	}
 
-  							<label>
-				    		Comments:
-				  	</label>
-	   			 	<p></p>
 
-				    	<textarea  type="text" rows="5" value={this.state.userMessageSher} onChange={this.handleUserMessageSher} ></textarea>
+	///////////////////////////////////////////////////////////
+	//	Vote Like General
+	///////////////////////////////////////////////////////////
 
-				  	<p></p>
+	vote_like(comment_general_id) {
+
+		if (this.state.username !== '') {
+			try {
+				// var element = this;
+				$.ajax({
+					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					type: 'POST',
+					dataType: 'text',
+					data: { sher: this.state.sherId, discussion_type: 'general', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 1, is_cancel: 0 },
+					success: (data) => {	// success funciton starts
+						if (data === 'vote registered')
+							this.getSherGeneralDiscussion(this.state.sherId);
+						else if (data === 'vote already registered') {
+							alert('Vote is already registerd. Unregister vote first and then you can revote');
+						}
 
 
-				  	<input type="submit" value="SUBMIT" />
-  						</form>
-  					</Tab>
+					}	// success function ends
+				});	// ajax call ends
+			} catch (err) {
+				alert('inside catch err');
+				alert(err);
+				// this.message = err;
+			}
+		}	// if username not empty ends
+		else {
+			alert('You are you not logged in. Please Login to give your feedback.');
+		}
+	}
 
-  					<Tab class="sherPageText" eventKey="profile"  title="WORD MEANING">
-			       {item5}
-	    			<p></p>
 
-	    			Selected Word: {this.state.mySelectedWord}
-	    			<p></p>
-			       {item7}
-  						<form onSubmit={this.handleSubmitWord}>
-  							<label>
-				    		Comments:
-				  	</label>
-	   			 	<p></p>
-				    	<textarea  type="text" rows="5" value={this.state.userMessageWord} onChange={this.handleUserMessageWord} ></textarea>
-				  	<p></p>
+	///////////////////////////////////////////////////////////
+	//	Vote Dislike General
+	///////////////////////////////////////////////////////////
 
-				  	<input type="submit" value="SUBMIT" />
-  						</form>
-  					</Tab>
-  				</Tabs>
-	 </div>
-  		</div>
-  	); // return ends
-  }  // render function ends
+	vote_dislike(comment_general_id) {
+
+		if (this.state.username !== '') {
+			try {
+				$.ajax({
+					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					type: 'POST',
+					dataType: 'text',
+					data: { sher: this.state.sherId, discussion_type: 'general', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 0 },
+					success: (data) => {	// success funciton starts
+						if (data === 'vote registered')
+							this.getSherGeneralDiscussion(this.state.sherId);
+						else if (data === 'vote already registered') {
+							alert('Vote is already registerd. Unregister vote first and then you can revote');
+
+
+						}
+
+
+					}	// success function ends
+				});	// ajax call ends
+			} catch (err) {
+				alert('inside catch err');
+				alert(err);
+			}
+		}	// if username not empty ends
+		else {
+			alert('You are you not logged in. Please Login to give your feedback.');
+		}
+	}
+
+	///////////////////////////////////////////////////////////
+	//	Vote Unregister General
+	///////////////////////////////////////////////////////////
+
+
+	vote_unregister(comment_general_id) {
+
+		if (this.state.username !== '') {
+			try {
+				// var element = this;
+				$.ajax({
+					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					type: 'POST',
+					dataType: 'text',
+					data: { sher: this.state.sherId, discussion_type: 'general', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 1 },
+					success: (data) => {	// success funciton starts
+						if (data === 'vote removed') {
+							// this.toggle(idx);
+							this.getSherGeneralDiscussion(this.state.sherId);
+							alert('Your vote is removed');
+						}
+						else if (data === 'invalid is_cancel value') {
+							alert('You have not liked or disliked it yet.');
+						}
+
+
+					}	// success function ends
+				});	// ajax call ends
+			} catch (err) {
+				alert('inside catch err');
+				alert(err);
+				// this.message = err;
+			}
+		}	// if username not empty ends
+		else {
+			alert('You are you not logged in. Please Login to give your feedback.');
+		}
+	}
+
+	selectedWord(wordText, wordId) {
+		this.setState({ mySelectedWord: wordText });
+		this.setState({ mySelectedId: wordId });
+	}
+
+	render() {
+		var item4 = this.state.sherText.map((item) =>
+			<p key={item.index}> {item}</p>
+		);
+
+		var item5 = this.state.wordText.map((item) =>
+			<span key={item.index}><button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item)}> {item} </button>  </span>
+			/*<span key={item.index}> {item}: {index}</span>*/
+		);
+
+		var item6 = this.state.sherDiscussionDetail.map((item) =>
+			<div key={item.id}> <div className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br /> <p>{item.text}<br /><br /> <button type="button" className="btn btn-primary px-2" onClick={() => this.vote_like(item.id)}> LIKE </button> <span className="px-2">SCORE: {item.score}</span><button type="button" className="btn btn-primary" onClick={() => this.vote_dislike(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary" onClick={() => this.vote_unregister(item.id)} >UNREGISTER</button></p><Divider /></div>
+
+		);
+
+
+		var item7 = this.state.wordDiscussionDetail.map((item) => {
+			if ((item.wordposition - 1) === this.state.mySelectedId)
+				return (
+					<div key={item.id}> <div className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br /> <p>{item.text}<br /><br /> <button type="button" className="btn btn-primary" onClick={() => this.vote_like_word(item.id)}> LIKE </button><span className="px-2"> SCORE: {item.score}</span><button type="button" className="btn btn-primary" onClick={() => this.vote_dislike_word(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary" onClick={() => this.vote_unregister_word(item.id)} >UNREGISTER</button></p><Divider /></div>
+				);
+			return null;
+		}
+		);
+
+		let signinTag;
+		var signinMessageLocal = '';
+		if (this.state.signinConfirmation === 'done') {
+			signinMessageLocal = this.state.username.charAt(0).toUpperCase();
+			signinTag = <button type="button" className="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>;
+		}
+		else {
+			signinMessageLocal = 'Sign In';
+			signinTag = <button type="button" className="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>;
+		}
+
+		return (
+			<div>
+				<div className="text-right">
+					{signinTag}
+				</div>
+				<div className="tabTitle">
+					{this.state.poemText}
+				</div>
+				<div className="sherPageText">
+					<Tabs
+						id="controlled-tab-example"
+						activeKey={this.state.key}
+						onSelect={key => this.setState({ key })}
+						class="nav-tabs"
+					>
+						<Tab class="sherPageText" eventKey="home" title="DISCUSSION">
+							{item4}
+							{item6}
+
+
+							<form onSubmit={this.handleSubmitSher}>
+
+								<label>
+									Comments:
+								</label>
+								<p></p>
+
+								<textarea type="text" rows="5" value={this.state.userMessageSher} onChange={this.handleUserMessageSher} ></textarea>
+
+								<p></p>
+
+
+								<input type="submit" value="SUBMIT" />
+							</form>
+						</Tab>
+
+						<Tab class="sherPageText" eventKey="profile" title="WORD MEANING">
+							{item5}
+							<p></p>
+
+							Selected Word: {this.state.mySelectedWord}
+							<p></p>
+							{item7}
+							<form onSubmit={this.handleSubmitWord}>
+								<label>
+									Comments:
+								</label>
+								<p></p>
+								<textarea type="text" rows="5" value={this.state.userMessageWord} onChange={this.handleUserMessageWord} ></textarea>
+								<p></p>
+
+								<input type="submit" value="SUBMIT" />
+							</form>
+						</Tab>
+					</Tabs>
+				</div>
+			</div>
+		); // return ends
+	}  // render function ends
 } // class ends
 
 export default SherPage;
