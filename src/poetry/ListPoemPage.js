@@ -6,6 +6,7 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 import Divider from '@material-ui/core/Divider';
 
+// eslint-disable-next-line no-unused-vars
 import PoemPage from './PoemPage';
 
 var  YAML = require('yaml');
@@ -38,7 +39,7 @@ class ListPoemPage extends React.Component {
 
 	  console.log("Value of poemNumber: ");
 	  console.log(poemNumber);
-	  if (poemNumber != 0)
+	  if (poemNumber !== 0)
 	  {
 		  this.props.history.push({
 			    pathname: '/PoemPage',
@@ -98,10 +99,10 @@ class ListPoemPage extends React.Component {
     	catch(e) {
     		if (yamlObject.sections[i].poems[0].poemName[0]) {
 	    		console.log(" poems[0].poemName[0] exists" );
-		    	for (var j=0; j<yamlObject.sections[i].poems.length; j++){
+		    	for (var jj=0; jj<yamlObject.sections[i].poems.length; jj++){
 		    		for (var k=0; k<yamlObject.sections[i].poems[j].poemName.length; k++)
-							this.state.poemText.push({"text" : yamlObject.sections[i].poems[j].poemName[k].text, "id" : yamlObject.sections[i].poems[j].id})
-						this.setState({poemObject: yamlObject.sections[i].poems[j]})
+							this.state.poemText.push({"text" : yamlObject.sections[i].poems[jj].poemName[k].text, "id" : yamlObject.sections[i].poems[jj].id})
+						this.setState({poemObject: yamlObject.sections[i].poems[jj]})
 					}
 				}	// if yamlObject.... ends
 			}	// catch ends
@@ -117,9 +118,8 @@ class ListPoemPage extends React.Component {
 
 
     try {
-		  this.state.bookName = yamlObject.sections[0].sectionName.map((item, key) =>
-		  	<li key={item.text}>{item.text}</li>
-		  )
+			this.setState({bookName: yamlObject.sections[0].sectionName.map((item, key) =>
+				<li key={item.text}>{item.text}</li>)});
     }
     catch(e) {
 	    console.log("caught error");
@@ -133,10 +133,8 @@ class ListPoemPage extends React.Component {
     this.setState({bookSections: yamlObject.sections});
 
     console.log("bookNameUrdu: ");
-    // console.log(this.state.bookNameUrdu + "");
     console.log(yamlObject.name[0].text);
     console.log("bookNameEnglish: ");
-    // console.log(this.state.bookNameEnglish + "");
     console.log(yamlObject.name[1].text);
 
     console.log("yamlObject.sections[1].poems[0].poemName[0].text: ");
@@ -161,7 +159,7 @@ class ListPoemPage extends React.Component {
 	}
 
   signMeIn = () => {
-	  if (this.state.username == "") {
+	  if (this.state.username === "") {
 	  	this.props.history.push({
 		    pathname: '/RegisterPage',
 		    state: { profileSigninConfirmation : this.state.signinConfirmation, profileUsername : this.state.username, profilePassword: this.state.password}
@@ -174,13 +172,6 @@ class ListPoemPage extends React.Component {
 		var item3 = this.state.poemText.map( (item) =>
 			<p key={item.index} onClick={() => this.onSubmit(item.id)}> {item.text}<Divider/></p>
 		);
-		/*
-		var item3 = this.state.poemText.map( (item) =>
-			<li key={item.index} onClick={() => this.onSubmit(item.id)}> {item.text}: {item.id}</li>
-		);
-		*/
-
-		var aVar = this.state.bookSections.length;
 		console.log("hello world");
 		console.log(this.state.bookSections);
 		var stationsArr = []
@@ -224,6 +215,4 @@ class ListPoemPage extends React.Component {
 			)
 		}
 }
-
-		      // return <h1>I got following message : {this.props.location.state.detail}</h1>
 export default ListPoemPage

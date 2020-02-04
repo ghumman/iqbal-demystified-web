@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import RegisterPage from './RegisterPage'
@@ -14,12 +15,12 @@ class Signin extends React.Component {
 
 	constructor(props) {
 		super(props)
-		this.state ={
+		this.state = {
 
 			errorMessage: '',
 			username: '',
 			password: '',
-		  signinConfirmation: ""
+			signinConfirmation: ""
 
 		}
 
@@ -30,55 +31,55 @@ class Signin extends React.Component {
 	}
 
 	login() {
-		if(this.state.username != "" && this.state.password != "") {
+		if (this.state.username !== "" && this.state.password !== "") {
 			this.try_login(this.state.username, this.state.password);
 		} else {
-			       	alert("A username and password must be present");
-			       	this.setState({errorMessage : "A username and password must be present"});
+			alert("A username and password must be present");
+			this.setState({ errorMessage: "A username and password must be present" });
 		}       // else if user or password are empty ends
 	}      // function login ends
 
-	async try_login (inputUsername, inputPassword) {
-  	try{
-	    $.ajax({
-	      url: 'https://www.icanmakemyownapp.com/iqbal/v3/login.php',
-	      type: 'POST',
-	      dataType: 'text',
-	      data: {username: inputUsername, password: inputPassword},
+	async try_login(inputUsername, inputPassword) {
+		try {
+			$.ajax({
+				url: 'https://www.icanmakemyownapp.com/iqbal/v3/login.php',
+				type: 'POST',
+				dataType: 'text',
+				data: { username: inputUsername, password: inputPassword },
 
-	      success: (data, status, username, message) => {
-	        console.log("data");
-	        console.log(data);
-	        if (data == "done")     {
-	      		console.log("Successfully Logged in");
-						this.setState({errorMessage : "Successfully Logged in"});
-						this.setState({signinConfirmation: data})
+				success: (data, status, username, message) => {
+					console.log("data");
+					console.log(data);
+					if (data === "done") {
+						console.log("Successfully Logged in");
+						this.setState({ errorMessage: "Successfully Logged in" });
+						this.setState({ signinConfirmation: data })
 
 						this.props.history.push({
-						pathname: '/',
-						state: { profileUsername: this.state.username, profilePassword: this.state.password, profileSigninConfirmation: this.state.signinConfirmation }
+							pathname: '/',
+							state: { profileUsername: this.state.username, profilePassword: this.state.password, profileSigninConfirmation: this.state.signinConfirmation }
 						})
-	        }
-	        else {
-						this.setState({errorMessage : data});
-	        }
-	      }	// success function ends
+					}
+					else {
+						this.setState({ errorMessage: data });
+					}
+				}	// success function ends
 			})	// ajax call ends
 
 		}	// try ends
-		catch(err){
-			this.setState({errorMessage : "API call not successful"});
-	    alert("inside catch err");
-	    alert(err);
-    }	// catch ends
+		catch (err) {
+			this.setState({ errorMessage: "API call not successful" });
+			alert("inside catch err");
+			alert(err);
+		}	// catch ends
 	}	// async try_login ends
 
 	handleChangeUsername(event) {
-		this.setState({username: event.target.value})
+		this.setState({ username: event.target.value })
 	}
 
 	handleChangePassword(event) {
-		this.setState({password: event.target.value})
+		this.setState({ password: event.target.value })
 	}
 
 	// handleSubmit
@@ -108,19 +109,19 @@ class Signin extends React.Component {
 				<h1>Sign In</h1>
 				<form onSubmit={this.handleSubmit}>
 
-				  <label>
-				    Username:
+					<label>
+						Username:
 				    <input type="text" value={this.state.username} onChange={this.handleChangeUsername} />
-				  </label>
-				  <p></p>
+					</label>
+					<p></p>
 
-				  <label>
-				    Password:
+					<label>
+						Password:
 				    <input type="password" value={this.state.password} onChange={this.handleChangePassword} />
-				  </label>
-				  <p></p>
+					</label>
+					<p></p>
 
-				  <input type="submit" value="SIGN IN" />
+					<input type="submit" value="SIGN IN" />
 				</form>
 
 				<p onClick={() => this.onSubmitForgot()}>

@@ -1,21 +1,10 @@
-
-/*@font-face {*/
-/*font-family: 'nastaleeq';*/
-/*!*src: url('webfont.eot'); !* IE9 Compat Modes *!*!*/
-/*src: url('vendor/fonts/nastaleeq.ttf') format('truetype'); !* Safari, Android, iOS *!*/
-/*}*/
-
 @font-face {
     font-family: 'NotoNastaliqUrdu';
-    /*src: url('webfont.eot'); !* IE9 Compat Modes *!*/
-    /*src: url('https://rekhtacdn.azureedge.net/content/3.5/fonts/NotoNastaliqUrdu-Regular.ttf')  format('truetype'); !* Safari, Android, iOS *!*/
     src: url('./../../assets/fonts/NotoNastaliqUrdu-Regular.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
 
 @font-face {
     font-family: 'nastaleeq';
-    /*src: url('webfont.eot'); !* IE9 Compat Modes *!*/
-    /*src: url('https://rekhtacdn.azureedge.net/content/3.5/fonts/NotoNastaliqUrdu-Regular.ttf')  format('truetype'); !* Safari, Android, iOS *!*/
     src: url('./../../assets/fonts/nastaleeq.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
 
@@ -32,7 +21,6 @@
 
 @font-face {
     font-family: 'urdu_test';
-    /*src: url('webfont.eot'); !* IE9 Compat Modes *!*/
     src: url('./../../assets/fonts/asunaskh.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
 
@@ -186,9 +174,6 @@ header.masthead h1{
 .overlay .test-link:after{
     opacity: 0;
     position: absolute;
-    /*width: 100%; height: 100%;*/
-    /*cursor: pointer;*/
-    /*background: rgba(255,255,255,0.6) url("http://wptf.com/wp-content/uploads/2014/05/play-button.png") no-repeat scroll center center / 50px 50px;*/
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -272,7 +257,6 @@ p.urdu_text{
 
 .card-details
 {
-    /*border-top: 0.5px solid #325D88;*/
     margin-top: 1rem;
     padding-top:1rem;
     display: flex;

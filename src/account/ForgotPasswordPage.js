@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import SigninPage from './SigninPage'
@@ -37,7 +38,7 @@ class ForgotPassword extends React.Component {
 	// handleSubmit
 	handleSubmit(event) {
 
-  	if(this.state.email.trim() != "") {
+  	if(this.state.email.trim() !== "") {
 			try{
 				$.ajax({
 					url: 'https://www.icanmakemyownapp.com/iqbal/v3/forgot-password.php',
@@ -47,7 +48,7 @@ class ForgotPassword extends React.Component {
          	success: (data) => {	// success funciton starts
 						console.log("data");
 						console.log(data);
-						if (data.trim() == "email sent")	{
+						if (data.trim() === "email sent")	{
 							// $("#statusMessage").text("Email sent.");
 							console.log(data);
 							alert("Email sent with the new password. Please check your email.");
@@ -59,7 +60,7 @@ class ForgotPassword extends React.Component {
 							})	// this.props.history.push ends
 
 						}	// if data.trim == email sent ends
-						else if (data.trim() == "email not found"){
+						else if (data.trim() === "email not found"){
 							alert("Could not found email in our system, please double check email address or create a new account.");
 							this.setState({errorMessage : "Could not found email in our system, please double check email address or create a new account."});
 						}	// elese if ends

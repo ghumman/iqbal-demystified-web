@@ -5,9 +5,6 @@ import StaticContentService from '../misc/StaticContentServiceYaml'
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 
@@ -75,10 +72,10 @@ async send_sher_message(){
 	console.log("Inside send_sher_message");
 
 	// do not try pushing comment if message is empty
-	if (this.state.userMessageSher.trim() != ""){
+	if (this.state.userMessageSher.trim() !== ""){
 	
 	// if user is not signed in, ask user to sign in
-	if ((this.state.username.trim() != "") && (this.state.password.trim() != "")) {
+	if ((this.state.username.trim() !== "") && (this.state.password.trim() !== "")) {
 	
 	try{
 		// var element = this;
@@ -100,10 +97,6 @@ async send_sher_message(){
 		alert(err);
 		// this.message = err;
 	}
-	
-
-	// console.log("messageSher sent to send sher message function");
-	// console.log(this.messageSher);
 	}	// if not logged in empty
 	else{
 
@@ -116,18 +109,15 @@ async send_sher_message(){
 	}
 }
 
-// send_word_message(messageWord){
 async send_word_message(){
-	// console.log("messageWord sent to send word message function");
-	// console.log(this.messageWord);
+
 	// do not try pushing comment if message is empty
-	if (this.state.userMessageWord.trim() != ""){
+	if (this.state.userMessageWord.trim() !== ""){
 	
 	// if user is not signed in, ask user to sign in
-	if ((this.state.username.trim() != "") && (this.state.password.trim() != "")) {
+	if ((this.state.username.trim() !== "") && (this.state.password.trim() !== "")) {
 	
 	try{
-		// var element = this;
 		$.ajax({
 			url: 'https://icanmakemyownapp.com/iqbal/v3/post-comment.php',
                 	type: 'POST',
@@ -148,7 +138,6 @@ async send_word_message(){
 	}
 
 	console.log("messageSher sent to send sher message function");
-	// console.log(this.messageSher);
 
 	}	// if not logged in empty
 	else{
@@ -203,13 +192,14 @@ async send_word_message(){
 
 	        var wordTextLocal = this.state.sherText[0].split(" ").concat(this.state.sherText[1].split(" "));
 	        var ii;
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            console.log("Original array: ")
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            for (ii=0; ii<wordTextLocal.length;ii++)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             	                  console.log(wordTextLocal[ii]);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            	for (ii=0; ii<wordTextLocal.length; ii++){
+			console.log("Original array: ")
+			for (ii=0; ii<wordTextLocal.length;ii++)
+				console.log(wordTextLocal[ii]);
+			for (ii=0; ii<wordTextLocal.length; ii++){
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                if (wordTextLocal[ii] == "" || wordTextLocal[ii] == " " || wordTextLocal[ii] == "،"){
-			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               wordTextLocal.splice(ii,1);                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ii--;
+			if (wordTextLocal[ii] === "" || wordTextLocal[ii] === " " || wordTextLocal[ii] === "،"){
+					wordTextLocal.splice(ii,1);
+					ii--;
               	 console.log("inside if Value of wordTextLocal[ii]");
               	 console.log(ii);
               	 console.log(wordTextLocal[ii]);
@@ -232,9 +222,9 @@ async send_word_message(){
           for (ii=0; ii<wordTextLocal.length;ii++)
           	console.log(wordTextLocal[ii]);
 
-	        if (wordTextLocal[6] == "")
+	        if (wordTextLocal[6] === "")
             console.log("Empty string");
-          else if (wordTextLocal[6] == " ")
+          else if (wordTextLocal[6] === " ")
             console.log("Space string");
           else {
             console.log("Neither empty nor space: ");
@@ -245,7 +235,6 @@ async send_word_message(){
       	  this.setState({wordText: wordTextLocal});
 
 
-      	  // this.sherText = yamlObject.sher[sherIndex].sherContent[0].text;
       	  var poemTextLocal = yamlObject.heading[0].text;
       	  var sherGeneralDiscussionServerResponseLocal = data;
 
@@ -302,7 +291,6 @@ async send_word_message(){
 				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
 			  type: 'POST',
 			  dataType: 'text',
-			 	// data: {sher: this.$route.query.sherId, discussion_type: "word-meanings"},
 			 	data: {sher: sherName, discussion_type: "word-meanings"},
 			  success: (data) => {    // success funciton starts
 
@@ -359,7 +347,7 @@ async send_word_message(){
 
   signMeIn = () => {
 
-	  if (this.state.username == "") {
+	  if (this.state.username === "") {
 	  	this.props.history.push({
 		    pathname: '/RegisterPage',
 		    state: { profileSigninConfirmation : this.state.signinConfirmation, profileUsername : this.state.username, profilePassword: this.state.password}
@@ -376,7 +364,7 @@ async send_word_message(){
 	console.log("Value of comment_general_id");
 	console.log(comment_general_id);
 
-	if (this.state.username != ""){
+	if (this.state.username !== ""){
 	try{
 		// var element = this;
 		$.ajax({
@@ -387,9 +375,9 @@ async send_word_message(){
                  	success: (data) => {	// success funciton starts
 				console.log("data");
 				console.log(data);
-				if (data == "vote registered")
+				if (data === "vote registered")
 					this.getSherWordDiscussion(this.state.sherId);	
-				else if (data == "vote already registered") {
+				else if (data === "vote already registered") {
 					alert("Vote is already registerd. Unregister vote first and then you can revote");
 					// this.toggle_word(idx);
 				}
@@ -422,7 +410,7 @@ async send_word_message(){
 	console.log(comment_general_id);
 
 
-	if (this.state.username != ""){
+	if (this.state.username !== ""){
 	try{
 		// var element = this;
 		$.ajax({
@@ -433,9 +421,9 @@ async send_word_message(){
                  	success: (data) => {	// success funciton starts
 				console.log("data");
 				console.log(data);
-				if (data == "vote registered")
+				if (data === "vote registered")
 					this.getSherWordDiscussion(this.state.sherId);	
-				else if (data == "vote already registered"){
+				else if (data === "vote already registered"){
 					alert("Vote is already registerd. Unregister vote first and then you can revote");
 					// this.toggle_word(idx);
 					
@@ -456,7 +444,6 @@ async send_word_message(){
 	}
 
 	console.log("messageSher sent to send sher message function");
-	// console.log(this.messageSher);
     }
 
 	///////////////////////////////////////////////////////////
@@ -468,7 +455,7 @@ async send_word_message(){
 	console.log("Value of comment_general_id");
 	console.log(comment_general_id);
 
-	if (this.state.username != ""){
+	if (this.state.username !== ""){
 	try{
 		// var element = this;
 		$.ajax({
@@ -479,12 +466,12 @@ async send_word_message(){
                  	success: (data) => {	// success funciton starts
 				console.log("data");
 				console.log(data);
-				if (data == "vote removed"){
+				if (data === "vote removed"){
 					// this.toggle_word(idx);
 					this.getSherWordDiscussion(this.state.sherId);	
 					alert("Your vote is removed");
 				}
-				else if (data == "invalid is_cancel value") {
+				else if (data === "invalid is_cancel value") {
 					alert("You have not liked or disliked it yet.");
 				}
 	
@@ -502,7 +489,6 @@ async send_word_message(){
 	}
 
 	console.log("messageSher sent to send sher message function");
-	// console.log(this.messageSher);
     }
 
 
@@ -516,7 +502,7 @@ async send_word_message(){
 	console.log("Value of comment_general_id");
 	console.log(comment_general_id);
 
-	if (this.state.username != ""){
+	if (this.state.username !== ""){
 	try{
 		// var element = this;
 		$.ajax({
@@ -527,11 +513,10 @@ async send_word_message(){
 			success: (data) => {	// success funciton starts
 				console.log("data");
 				console.log(data);
-				if (data == "vote registered")
+				if (data === "vote registered")
 					this.getSherGeneralDiscussion(this.state.sherId);	
-				else if (data == "vote already registered") {
+				else if (data === "vote already registered") {
 					alert("Vote is already registerd. Unregister vote first and then you can revote");
-					// this.toggle(idx);
 				}
 	
 
@@ -548,7 +533,6 @@ async send_word_message(){
 	}
 
 	console.log("messageSher sent to send sher message function");
-	// console.log(this.messageSher);
     }
 
 	
@@ -561,9 +545,8 @@ async send_word_message(){
 	console.log("Value of comment_general_id");
 	console.log(comment_general_id);
 
-	if (this.state.username != ""){
+	if (this.state.username !== ""){
 	try{
-		// var element = this;
 		$.ajax({
 			url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
                 	type: 'POST',
@@ -572,11 +555,10 @@ async send_word_message(){
                  	success: (data) => {	// success funciton starts
 				console.log("data");
 				console.log(data);
-				if (data == "vote registered")
+				if (data === "vote registered")
 					this.getSherGeneralDiscussion(this.state.sherId);	
-				else if (data == "vote already registered"){
+				else if (data === "vote already registered"){
 					alert("Vote is already registerd. Unregister vote first and then you can revote");
-					// this.toggle(idx);
 					
 
 				}
@@ -587,7 +569,6 @@ async send_word_message(){
 	}catch(err){
 		alert("inside catch err");
 		alert(err);
-		// this.message = err;
 	}
 	}	// if username not empty ends
 	else{
@@ -607,7 +588,7 @@ async send_word_message(){
 	console.log("Value of comment_general_id");
 	console.log(comment_general_id);
 
-	if (this.state.username != ""){
+	if (this.state.username !== ""){
 	try{
 		// var element = this;
 		$.ajax({
@@ -618,12 +599,12 @@ async send_word_message(){
                  	success: (data) => {	// success funciton starts
 				console.log("data");
 				console.log(data);
-				if (data == "vote removed"){
+				if (data === "vote removed"){
 					// this.toggle(idx);
 					this.getSherGeneralDiscussion(this.state.sherId);	
 					alert("Your vote is removed");
 				}
-				else if (data == "invalid is_cancel value") {
+				else if (data === "invalid is_cancel value") {
 					alert("You have not liked or disliked it yet.");
 				}
 	
@@ -664,21 +645,18 @@ async send_word_message(){
 
 		var item6 = this.state.sherDiscussionDetail.map( (item, index) =>
 			<div key={item.id}> <div  class="float-left"><p> {item.username}</p></div> <div class="float-right"><p>  {item.timestamp}</p> </div><br/> <p>{item.text}<br/><br/> <button type="button" class="btn btn-primary px-2"onClick={() => this.vote_like(item.id)}> LIKE </button> <span class="px-2">SCORE: {item.score}</span><button type="button" class="btn btn-primary"onClick={() => this.vote_dislike(item.id)} >DISLIKE</button><p></p><button type="button" class="btn btn-primary"onClick={() => this.vote_unregister(item.id)} >UNREGISTER</button></p><Divider/></div>
-			/*<div key={item.id}> <div  class="float-left"><p> {item.username}</p></div> <div class="float-right"><p>  {item.timestamp}</p> </div><br/> <p>{item.text}<br/> {item.islike} <button type="button" class="btn btn-primary" onClick={() => this.vote_like({item.id})}>LIKE</button> SCORE: {item.score} <button type="button" class="btn btn-primary" onClick={() => this.vote_like({item.id})}>DISLIKE</button> </p><Divider/></div>*/
+
 		);
 
 
 		var item7 = this.state.wordDiscussionDetail.map( (item, index) =>
 			{
-				// console.log("this.state.mySelectedId")
-				// console.log(this.state.mySelectedId)
-				// console.log("item.wordposition")
-				// console.log(item.wordposition)
-				if ((item.wordposition-1) == this.state.mySelectedId)
+				if ((item.wordposition-1) === this.state.mySelectedId)
 				return (
-			<div key={item.id}> <div  class="float-left"><p> {item.username}</p></div> <div class="float-right"><p>  {item.timestamp}</p> </div><br/> <p>{item.text}<br/><br/> <button type="button" class="btn btn-primary"onClick={() => this.vote_like_word(item.id)}> LIKE </button><span class="px-2"> SCORE: {item.score}</span><button type="button" class="btn btn-primary"onClick={() => this.vote_dislike_word(item.id)} >DISLIKE</button><p></p><button type="button" class="btn btn-primary"onClick={() => this.vote_unregister_word(item.id)} >UNREGISTER</button></p><Divider/></div>
-			/*<p key={item.id}> {item.id}: {item.islike} : {item.score} : {item.text} : {item.timestamp} : {item.username} : {item.wordposition}</p>*/
-		)}
+					<div key={item.id}> <div  class="float-left"><p> {item.username}</p></div> <div class="float-right"><p>  {item.timestamp}</p> </div><br/> <p>{item.text}<br/><br/> <button type="button" class="btn btn-primary"onClick={() => this.vote_like_word(item.id)}> LIKE </button><span class="px-2"> SCORE: {item.score}</span><button type="button" class="btn btn-primary"onClick={() => this.vote_dislike_word(item.id)} >DISLIKE</button><p></p><button type="button" class="btn btn-primary"onClick={() => this.vote_unregister_word(item.id)} >UNREGISTER</button></p><Divider/></div>
+				)
+				return null;
+			}
 		)
 
   	let signinTag
@@ -733,7 +711,6 @@ async send_word_message(){
 	    			<p></p>
 
 	    			Selected Word: {this.state.mySelectedWord}
-	    			{/*Selected Id: {this.state.mySelectedId}*/}
 	    			<p></p>
 			       {item7}
 				<form onSubmit={this.handleSubmitWord}>

@@ -5,13 +5,9 @@ import './index.css';
 
 import {
 	Route,
-	Link,
-	NavLink,
-	Switch,
 	BrowserRouter as Router
 } from 'react-router-dom'
 
-// this index.js sets TabView1 and TabView2 to / and sets the addressess for all other pages in this web application
 import TopPortionMainPage from './main_page/TopSectionMainPage/TopSectionMainPage';
 import BottomSectionMainPage from './main_page/BottomSectionMainPage/BottomSectionMainPage';
 
@@ -27,7 +23,6 @@ import ForgotPasswordPage from './account/ForgotPasswordPage'
 import ProfilePage from './account/ProfilePage'
 import ChangePasswordPage from './account/ChangePasswordPage'
 
-// following are present in TabView2, apart from other pages
 import InfoPage from './misc/InfoPage'
 import CommentPage from './misc/CommentPage'
 import SearchPage from './misc/SearchPage'
@@ -64,9 +59,7 @@ const routing = (
 
 const app = document.getElementById('root');
 
-// ReactDOM.render(routing, document.getElementById('root'))
 ReactDOM.render(routing, app);
-// ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

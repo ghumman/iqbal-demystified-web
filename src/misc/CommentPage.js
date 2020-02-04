@@ -1,14 +1,11 @@
 import React from 'react'
 import StaticContentService from './StaticContentServiceYaml'
-// import Tabs from './Tabs'
 
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
-
-// import PoemPage from './PoemPage';
 
 var YAML = require('yaml')
 
@@ -38,7 +35,7 @@ class CommentsPage extends React.Component {
             popularData: [],
 
             testString: "",
-	    key: 'home'
+            key: 'home'
 
         }
 
@@ -96,11 +93,11 @@ class CommentsPage extends React.Component {
             try {
                 el.sherContent[1].text = el.sherContent[1].text.split('|')
                 console.log(el.sherContent[1].text)
-            } catch (err) {}
+            } catch (err) { }
             try {
                 el.sherContent[2].text = el.sherContent[2].text.split('|')
-            } catch (err) {}
-            return el.sherContent = el.sherContent
+            } catch (err) { }
+            return el.sherContent;
         })
 
         console.log("Value of newArr")
@@ -163,11 +160,11 @@ class CommentsPage extends React.Component {
             try {
                 el.sherContent[1].text = el.sherContent[1].text.split('|')
                 console.log(el.sherContent[1].text)
-            } catch (err) {}
+            } catch (err) { }
             try {
                 el.sherContent[2].text = el.sherContent[2].text.split('|')
-            } catch (err) {}
-            return el.sherContent = el.sherContent
+            } catch (err) { }
+            return el.sherContent;
         })
 
         this.setState({
@@ -218,22 +215,14 @@ class CommentsPage extends React.Component {
                     console.log("this.state.sherText");
                     console.log(this.state.sherText);
 
-                    // this.wordText = this.state.sherText[0].split(" ").concat(this.sherText[1].split(" "));
-                    // this.state.wordText = this.state.sherText[0].split(" ").concat(this.sherText[1].split(" "));
-
                     var wordTextLocal = this.state.sherText[0].split(" ").concat(this.state.sherText[1].split(" "));
-
-                    // this.setState({wordText : this.state.sherText[0].split(" ").concat(this.state.sherText[1].split(" "))});
 
                     var ii;
                     console.log("Original array: ")
-                    // for (ii=0; ii<this.wordText.length;ii++)
                     for (ii = 0; ii < wordTextLocal.length; ii++)
-                        // console.log(this.wordText[ii]);
                         console.log(wordTextLocal[ii]);
                     for (ii = 0; ii < wordTextLocal.length; ii++) {
-                        if (wordTextLocal[ii] == "" || wordTextLocal[ii] == " " || wordTextLocal[ii] == "،") {
-                            // if (this.wordText[ii] == " "){
+                        if (wordTextLocal[ii] === "" || wordTextLocal[ii] === " " || wordTextLocal[ii] === "،") {
                             wordTextLocal.splice(ii, 1);
                             ii--;
                             console.log("inside if Value of wordTextLocal[ii]");
@@ -257,16 +246,15 @@ class CommentsPage extends React.Component {
                     for (ii = 0; ii < wordTextLocal.length; ii++)
                         console.log(wordTextLocal[ii]);
 
-                    if (wordTextLocal[6] == "")
+                    if (wordTextLocal[6] === "")
                         console.log("Empty string");
-                    else if (wordTextLocal[6] == " ")
+                    else if (wordTextLocal[6] === " ")
                         console.log("Space string");
                     else {
                         console.log("Neither empty nor space: ");
                         console.log(wordTextLocal[6]);
                     }
 
-                    // make wordTextLocal equal to this.state.wordText
                     this.setState({
                         wordText: wordTextLocal
                     });
@@ -379,7 +367,7 @@ class CommentsPage extends React.Component {
     }
 
     componentDidMount() {
-	    window.scrollTo(0, 0)
+        window.scrollTo(0, 0)
         // retrive the data
         try {
 
@@ -408,7 +396,7 @@ class CommentsPage extends React.Component {
 
     signMeIn = () => {
 
-        if (this.state.username == "") {
+        if (this.state.username === "") {
             this.props.history.push({
                 pathname: '/RegisterPage',
                 state: {
@@ -428,80 +416,71 @@ class CommentsPage extends React.Component {
     }
 
     render() {
-            var itemsRecent = this.state.recentData.map((item, index) =>
-                <
-                span key = {
-                    item.index
-                }
-                onClick = {
-                    () => this.onSubmit(item.id)
-                } > {
+        var itemsRecent = this.state.recentData.map((item, index) =>
+            <span key={item.index} onClick={() => this.onSubmit(item.id)}> 
+                {
                     item.sherContent[0].text[0]
-                } < br / > {
+                } 
+                < br /> {
                     item.sherContent[0].text[1]
-                } < br / > {
+                } < br /> {
                     item.sherContent[1].text[0]
-                } < br / > {
+                } < br /> {
                     item.sherContent[1].text[1]
-                } < br / > < br / > < /span>
+                } < br /> < br /> 
+            </span>
             );
 
             var itemsPopular = this.state.popularData.map((item, index) =>
-                <
-                span key = {
-                    item.index
-                }
-                onClick = {
-                    () => this.onSubmit(item.id)
-                } > {
-                    item.sherContent[0].text[0]
-                } < br / > {
-                    item.sherContent[0].text[1]
-                } < br / > {
-                    item.sherContent[1].text[0]
-                } < br / > {
-                    item.sherContent[1].text[1]
-                } < br / > < br / > < /span>
-            );
-
-		let signinTag
-		var signinMessageLocal = ""
+                <span key={item.index} onClick={() => this.onSubmit(item.id)}> {
+                        item.sherContent[0].text[0]
+                    } < br /> {
+                        item.sherContent[0].text[1]
+                    } < br /> {
+                        item.sherContent[1].text[0]
+                    } < br /> {
+                        item.sherContent[1].text[1]
+                    } < br /> < br /> </span>
+                );
+    
+            let signinTag
+            var signinMessageLocal = ""
 		if (this.state.signinConfirmation  === "done") {
-			signinMessageLocal = this.state.username.charAt(0).toUpperCase()
+                        signinMessageLocal = this.state.username.charAt(0).toUpperCase()
 		  signinTag = <button type="button" class="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>
-		}
+                    }
 		else {
-			signinMessageLocal = "Sign In"
+                        signinMessageLocal = "Sign In"
 		  signinTag = <button type="button" class="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>
-		}
-
-
-
-            return (
+                    }
+            
+            
+            
+                        return (
               <div >
-		<div class="text-right">
-                {signinTag}
-		</div>
+                        <div class="text-right">
+                            {signinTag}
+                        </div>
 
-		<div class="tabTitle">
-		<Tabs
-			id="controlled-tab-example"
-			activeKey={this.state.key}
-			onSelect={key => this.setState({ key })}
-			class="nav-tabs"
-		>
-			<Tab eventKey="home"  title="RECENT">
-                    {itemsRecent}
-		    	</Tab>
-			<Tab eventKey="profile"  title="POPULAR">
-                    {itemsPopular}
-		    	</Tab>
-                  </Tabs>
-	       </div>
-              </div>
-            )
-    }
-}
-
+                        <div class="tabTitle">
+                            <Tabs
+                                id="controlled-tab-example"
+                                activeKey={this.state.key}
+                                onSelect={key => this.setState({ key })}
+                                class="nav-tabs"
+                            >
+                                <Tab eventKey="home" title="RECENT">
+                                    {itemsRecent}
+                                </Tab>
+                                <Tab eventKey="profile" title="POPULAR">
+                                    {itemsPopular}
+                                </Tab>
+                            </Tabs>
+                        </div>
+                    </div>
+                    )
+            }
+        }
+        
 // return <h1>I got following message : {this.props.location.state.detail}</h1>
-export default CommentsPage
+                    export default CommentsPage

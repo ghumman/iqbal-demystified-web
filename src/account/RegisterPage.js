@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import SigninPage from './SigninPage'
@@ -12,9 +13,9 @@ class Register extends React.Component {
 
 	constructor(props) {
 		super(props)
-		this.state ={
+		this.state = {
 
-		        signinConfirmation: "",
+			signinConfirmation: "",
 			firstName: '',
 			lastName: '',
 			username: '',
@@ -38,34 +39,34 @@ class Register extends React.Component {
 
 	// handlechange
 	handleChangeFirstName(event) {
-		this.setState({firstName: event.target.value})
+		this.setState({ firstName: event.target.value })
 	}
 
 	handleChangeLastName(event) {
-		this.setState({lastName: event.target.value})
+		this.setState({ lastName: event.target.value })
 	}
 
 	handleChangeUsername(event) {
-		this.setState({username: event.target.value})
+		this.setState({ username: event.target.value })
 	}
 
 	handleChangeEmail(event) {
-		this.setState({email: event.target.value})
+		this.setState({ email: event.target.value })
 	}
 
 	handleChangePassword1(event) {
-		this.setState({password1: event.target.value})
+		this.setState({ password1: event.target.value })
 	}
 
 	handleChangePassword2(event) {
-		this.setState({password2: event.target.value})
+		this.setState({ password2: event.target.value })
 	}
 
 	onSubmitSignin = () => {
 
 		this.props.history.push({
 			pathname: 'SigninPage',
-			state: {none: 'none'}
+			state: { none: 'none' }
 		})
 	}
 
@@ -92,42 +93,42 @@ class Register extends React.Component {
 		console.log("password2: ");
 		console.log(this.state.password2);
 
-		if (this.state.password1.trim() == this.state.password2.trim()){
-			this.setState({password: this.state.password1})
-					try{
-						$.ajax({
-							url: 'https://www.icanmakemyownapp.com/iqbal/v3/create-account.php',
-                					type: 'POST',
-                 					dataType: 'text',
-		 					data: {first_name: this.state.firstName, last_name: this.state.lastName, username: this.state.username, password: this.state.password, email: this.state.email},
-                 					success: (data, status, username, message) => {	// success funciton starts
+		if (this.state.password1.trim() === this.state.password2.trim()) {
+			this.setState({ password: this.state.password1 })
+			try {
+				$.ajax({
+					url: 'https://www.icanmakemyownapp.com/iqbal/v3/create-account.php',
+					type: 'POST',
+					dataType: 'text',
+					data: { first_name: this.state.firstName, last_name: this.state.lastName, username: this.state.username, password: this.state.password, email: this.state.email },
+					success: (data, status, username, message) => {	// success funciton starts
 
-								if (data.trim() == "Your account has been created! Please check your email and activate your account by clicking on a link that we have sent you in the email. Don't forget to check in your Junk folder.")	{
-									alert(data);
-									console.log("Successfully Registered");
-															this.setState({signinConfirmation: "done"})
+						if (data.trim() === "Your account has been created! Please check your email and activate your account by clicking on a link that we have sent you in the email. Don't forget to check in your Junk folder.") {
+							alert(data);
+							console.log("Successfully Registered");
+							this.setState({ signinConfirmation: "done" })
 
-				  		    this.props.history.push({
-					    	    	pathname: '/',
-					    	    	state: { profileUsername: this.state.username, profilePassword: this.state.password, profileSigninConfirmation: this.state.signinConfirmation }
-				  		    })	// this.props.history.push ends
-								}	// if data.trim... ends
-								// else if account not registered
-								else {
-									alert("Unable to register your account:" + data);
-									this.setState({errorMessage : "Unable to register your account:" + data});
-								}
-              }	// success function ends
-						});	// ajax call ends
-					}	// try ends
-					catch(err){
-						alert("inside catch err");
-						alert(err);
-						this.state.errorMessage = err;
-					}	// catch ends
+							this.props.history.push({
+								pathname: '/',
+								state: { profileUsername: this.state.username, profilePassword: this.state.password, profileSigninConfirmation: this.state.signinConfirmation }
+							})	// this.props.history.push ends
+						}	// if data.trim... ends
+						// else if account not registered
+						else {
+							alert("Unable to register your account:" + data);
+							this.setState({ errorMessage: "Unable to register your account:" + data });
+						}
+					}	// success function ends
+				});	// ajax call ends
+			}	// try ends
+			catch (err) {
+				alert("inside catch err");
+				alert(err);
+				this.setState({ errorMessage:  err});
+			}	// catch ends
 		}	// if both passwords are same end
 		else {
-			this.setState({errorMessage: "Passwords are not same"})
+			this.setState({ errorMessage: "Passwords are not same" })
 		}
 		event.preventDefault()
 	}	// handleSubmit(event) ends
@@ -141,42 +142,42 @@ class Register extends React.Component {
 				<h1 class="text-center"> REGISTER </h1>
 				<form onSubmit={this.handleSubmit}>
 					<label>
-				    First Name:
+						First Name:
 				    <input type="text" value={this.state.firstName} onChange={this.handleChangeFirstName} />
-				  </label>
-				  <p></p>
+					</label>
+					<p></p>
 
-				  <label>
-				    Last Name:
+					<label>
+						Last Name:
 				    <input type="text" value={this.state.lastName} onChange={this.handleChangeLastName} />
-				  </label>
-				  <p></p>
+					</label>
+					<p></p>
 
-				  <label>
-				    Username:
-				    <input type="text" value={this.state.username} onChange={this.handleChangeUsername}/>
-				  </label>
-				  <p></p>
+					<label>
+						Username:
+				    <input type="text" value={this.state.username} onChange={this.handleChangeUsername} />
+					</label>
+					<p></p>
 
-				  <label>
-				    Email:
+					<label>
+						Email:
 				    <input type="text" value={this.state.email} onChange={this.handleChangeEmail} />
-				  </label>
-				  <p></p>
+					</label>
+					<p></p>
 
-				  <label>
-				    Password:
-				    <input type="password" value={this.state.password1} onChange={this.handleChangePassword1}/>
-				  </label>
-				  <p></p>
+					<label>
+						Password:
+				    <input type="password" value={this.state.password1} onChange={this.handleChangePassword1} />
+					</label>
+					<p></p>
 
-				  <label>
-				    Password (again):
-				    <input type="password" value={this.state.password2} onChange={this.handleChangePassword2}/>
-				  </label>
-				  <p></p>
+					<label>
+						Password (again):
+				    <input type="password" value={this.state.password2} onChange={this.handleChangePassword2} />
+					</label>
+					<p></p>
 
-				  <input type="submit" value="REGISTER" />
+					<input type="submit" value="REGISTER" />
 				</form>
 				<p onClick={() => this.onSubmitSignin()}>
 

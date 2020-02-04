@@ -1,13 +1,7 @@
 import React from 'react'
-import StaticContentService from './StaticContentServiceYaml'
 
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
-
-
-import PoemPage from '../poetry/PoemPage';
-
-var  YAML = require('yaml');
 
 class InfoPage extends React.Component {
 
@@ -24,7 +18,6 @@ class InfoPage extends React.Component {
 
 		componentDidMount() {
 			window.scrollTo(0, 0)
-      // retrive the data
 	   		try {
   				this.setState({signinConfirmation: this.props.location.state.profileSigninConfirmation});
   				this.setState({username: this.props.location.state.profileUsername});
@@ -38,7 +31,7 @@ class InfoPage extends React.Component {
 
 		signMeIn = () => {
 
-		  if (this.state.username == "") {
+		  if (this.state.username === "") {
 		  	this.props.history.push({
 			    pathname: '/RegisterPage',
 			    state: { profileSigninConfirmation : this.state.signinConfirmation, profileUsername : this.state.username, profilePassword: this.state.password}

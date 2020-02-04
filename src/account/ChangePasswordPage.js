@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import SigninPage from './SigninPage'
@@ -55,11 +56,6 @@ class ChangePassword extends React.Component {
 		})
 
 	}
-
-
-
-
-
 
 	// handleSubmit
 	handleSubmit(event) {

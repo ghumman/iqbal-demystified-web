@@ -4,8 +4,6 @@ import StaticContentService from '../misc/StaticContentServiceYaml'
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
-import Divider from '@material-ui/core/Divider';
-
 var  YAML = require('yaml');
 
 class PoemPage extends React.Component {
@@ -42,9 +40,6 @@ class PoemPage extends React.Component {
 
 
 	  var yamlObject = YAML.parse(response)
-	  // this.poemList = yamlObject
-	  // this.setState({poemList: yamlObject.name});
-	    //
 	  console.log("yamlObject : ")
 	  console.log(yamlObject)
 
@@ -78,7 +73,7 @@ class PoemPage extends React.Component {
 				console.log(el.sherContent[2].text)
 	    
 	    }
-            return el.sherContent = el.sherContent
+            return el.sherContent;
           })
 
 
@@ -97,20 +92,6 @@ class PoemPage extends React.Component {
         this.setState({
             poemTextNew: newArr[0]
         })
-		/*
-	  for (var i=0; i<yamlObject.sher.length; i++) {
-
-		  try {
-		  	for (var j=0; j<yamlObject.sher[i].sherContent.length; j++){
-					this.state.poemText.push({"text" : yamlObject.sher[i].sherContent[j].text[0], "id" : yamlObject.sher[i].id});
-					this.state.poemText.push({"text" : yamlObject.sher[i].sherContent[j].text[1], "id" : yamlObject.sher[i].id});
-				}
-		  }
-			catch(e) {
-		    console.log("catch caught an error");
-			}
-	  }
-	  	*/
 	  this.setState({poemNameUrdu: yamlObject.heading[0].text});
 	  this.setState({poemNameEnglish: yamlObject.heading[1].text});
 
@@ -141,7 +122,7 @@ class PoemPage extends React.Component {
 
 	signMeIn = () => {
 
-	  if (this.state.username == "") {
+	  if (this.state.username === "") {
 	  	this.props.history.push({
 		    pathname: '/RegisterPage',
 		    state: { profileSigninConfirmation : this.state.signinConfirmation, profileUsername : this.state.username, profilePassword: this.state.password}
@@ -190,6 +171,4 @@ class PoemPage extends React.Component {
 	}	// render function ends
 
 }	// class ends
-
-		      // return <h1>I got following message : {this.props.location.state.detail}</h1>
 export default PoemPage
