@@ -1,88 +1,26 @@
-# If you have deleted node_modules directory use following. 
+# To install and start the project 
 ```
 npm install
-```
-
-# To run project
-```
 npm start
 ```
-# Putting comments in js file like src/App.js
-- {/* */}
 
-# Addding comments in css file
-- /* */
+# To submit a PR
+```
+When naming the branch if you are working on a new feature or addition, prefix the branch name with feature otherwise if it is fixing a bug call it bug-fix. If you are working on existing issues, please include the issue name in your branch, otherwise create an issue first and then include that issue name in your branch name. Also adding a short description for that branch will be great. Following are the examples of branch names. ID-1/ID-2 in following examples are issues' names. Also ID stands for Iqbal Demystified. 
 
-# Install react-router-dom 
-```npm install react-router-dom ```
+feature/ID-1-fix-structure-of-project
+bug-fix/ID-2-change-password-not-working
+```
 
+# ES-Lint
+```
+Please fix all formatting and linting errors before creating PR. Currently project has babel-eslint installed which will be replaced with typescript-eslint once we convert the project to typescript. You can run 'npm run lint' / 'npm run lint-fix' and please use a eslint plugin with your IDE. 
+```
 
-# Following portion of README.md is automatically created using npx create-react-app iqbal-demystified-react 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# Coding Standard
+```
+Use long and explanatory variable names. 
+Divide your code in smaller functions.
+Declare all constants inside constants file. 
+Please include name of issue you are working on in your commit message like 'ID-3: Updated Readme'
+```
