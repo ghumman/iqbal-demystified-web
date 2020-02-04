@@ -1,8 +1,8 @@
 import React from 'react'
-import StaticContentService from './StaticContentServiceYaml'
+import StaticContentService from '../misc/StaticContentServiceYaml'
 
 // for formatting
-import './TabView1.css';
+import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 import Divider from '@material-ui/core/Divider';
 

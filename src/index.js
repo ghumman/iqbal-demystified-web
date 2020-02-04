@@ -12,36 +12,36 @@ import {
 } from 'react-router-dom'
 
 // this index.js sets TabView1 and TabView2 to / and sets the addressess for all other pages in this web application
-import TabView1 from './TabView1';
-import TabView2 from './TabView2';
+import TopPortionMainPage from './main_page/TopSectionMainPage/TopSectionMainPage';
+import BottomSectionMainPage from './main_page/BottomSectionMainPage/BottomSectionMainPage';
 
 // for 3 tiers of heirarcy
-import ListPoemPage from './ListPoemPage'
-import PoemPage from './PoemPage'
-import SherPage from './SherPage'
+import ListPoemPage from './poetry/ListPoemPage'
+import PoemPage from './poetry/PoemPage'
+import SherPage from './poetry/SherPage'
 
 // for User account interaction
-import RegisterPage from './RegisterPage'
-import SigninPage from './SigninPage'
-import ForgotPasswordPage from './ForgotPasswordPage'
-import ProfilePage from './ProfilePage'
-import ChangePasswordPage from './ChangePasswordPage'
+import RegisterPage from './account/RegisterPage'
+import SigninPage from './account/SigninPage'
+import ForgotPasswordPage from './account/ForgotPasswordPage'
+import ProfilePage from './account/ProfilePage'
+import ChangePasswordPage from './account/ChangePasswordPage'
 
 // following are present in TabView2, apart from other pages
-import InfoPage from './InfoPage'
-import CommentPage from './CommentPage'
-import SearchPage from './SearchPage'
+import InfoPage from './misc/InfoPage'
+import CommentPage from './misc/CommentPage'
+import SearchPage from './misc/SearchPage'
 
 // for some default use
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './misc/serviceWorker';
 
 
 const routing = (
 	  <Router>
 	    <div>
 	      {/* Inside JSX use this format to give comments*/}
-	      <Route exact path="/" component={TabView1} />
-	      <Route exact path="/" component={TabView2} />
+	      <Route exact path="/" component={TopPortionMainPage} />
+	      <Route exact path="/" component={BottomSectionMainPage} />
 
 	      <Route path="/ListPoemPage" component={ListPoemPage} />
 	      <Route path="/PoemPage" component={PoemPage} />

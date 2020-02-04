@@ -8,14 +8,14 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 // import logo from './IqbalPic.jpg';
-import iconSignIn from './assets/android_app_assets/icon_signed_in.png';
-import iconBest from './assets/android_app_assets/icon_best.png';
-import iconDiscussion from './assets/android_app_assets/icon_discussion.png';
-import iconSearch from './assets/android_app_assets/icon_search.png';
-import iconInfo from './assets/android_app_assets/icon_info.png';
+import iconSignIn from './../../assets/android_app_assets/icon_signed_in.png';
+import iconBest from './../../assets/android_app_assets/icon_best.png';
+import iconDiscussion from './../../assets/android_app_assets/icon_discussion.png';
+import iconSearch from './../../assets/android_app_assets/icon_search.png';
+import iconInfo from './../../assets/android_app_assets/icon_info.png';
 
 // for formatting
-import './TabView1.css';
+import './BottomSectionMainPage.css';
 
 // import './TabView1.css';
 // import Tabs from './Tabs';

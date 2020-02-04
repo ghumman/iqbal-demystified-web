@@ -8,7 +8,7 @@ export default {
 	// var  YAML = require('yamljs');
         // const yamlFile = require('raw-loader!./' + listId + '.yaml');
         // const yamlFile = require('!raw-loader!./assets/lists/' + listId + '.yaml');
-        const yamlFile = require('!raw-loader!./assets/lists/' + listId + '.yaml');
+        const yamlFile = require('!raw-loader!../assets/lists/' + listId + '.yaml');
         // require('./bgs/' + this.id + '.jpg')
         // console.log({yamlFile});
         console.log("yamlFile: ");
@@ -36,11 +36,11 @@ export default {
 	for (i=1; i<=11; i++)
 
 		if (i <= 9){
-        		yamlFile[i-1] = require('!raw-loader!./assets/lists/List_00' + i + '.yaml');
+        		yamlFile[i-1] = require('!raw-loader!../assets/lists/List_00' + i + '.yaml');
       			yamlObject[i-1] = YAML.parse(yamlFile[i-1].default);
 		}
 		else{
-	       		yamlFile[i-1] = require('!raw-loader!./assets/lists/List_0' + i + '.yaml');
+	       		yamlFile[i-1] = require('!raw-loader!../assets/lists/List_0' + i + '.yaml');
       			yamlObject[i-1] = YAML.parse(yamlFile[i-1].default);
 		}
 			
@@ -211,29 +211,29 @@ return newList;
 	for (i=1; i<=numberOfFiles[l-1]; i++){
 		if (l <=9 ){	// if l/books number is between 1-9
 		if (i <= 9){
-        		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!./assets/poems/00' + l + '/00' + l + '_00' + i + '.yaml');
+        		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!../assets/poems/00' + l + '/00' + l + '_00' + i + '.yaml');
       			yamlObject[i-1 + sumOfFiles[l-1]] = YAML.parse(yamlFile[i-1+sumOfFiles[l-1]].default);
 		}
 		else if (i <= 99){
-	       		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!./assets/poems/00' + l + '/00' + l + '_0' + i + '.yaml');
+	       		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!../assets/poems/00' + l + '/00' + l + '_0' + i + '.yaml');
       			yamlObject[i-1+sumOfFiles[l-1]] = YAML.parse(yamlFile[i-1+sumOfFiles[l-1]].default);
 		}
 		else {
-	       		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!./assets/poems/00' + l + '/00' + l + '_' + i + '.yaml');
+	       		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!../assets/poems/00' + l + '/00' + l + '_' + i + '.yaml');
       			yamlObject[i-1+sumOfFiles[l-1]] = YAML.parse(yamlFile[i-1+sumOfFiles[l-1]].default);
 		}
 		}	// if l <= 9 ends
 		else {	// else if l/books nubmer is between 10-11
 		if (i <= 9){
-        		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!./assets/poems/0' + l + '/0' + l + '_00' + i + '.yaml');
+        		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!../assets/poems/0' + l + '/0' + l + '_00' + i + '.yaml');
       			yamlObject[i-1 + sumOfFiles[l-1]] = YAML.parse(yamlFile[i-1+sumOfFiles[l-1]].default);
 		}
 		else if (i <= 99){
-	       		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!./assets/poems/0' + l + '/0' + l + '_0' + i + '.yaml');
+	       		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!../assets/poems/0' + l + '/0' + l + '_0' + i + '.yaml');
       			yamlObject[i-1+sumOfFiles[l-1]] = YAML.parse(yamlFile[i-1+sumOfFiles[l-1]].default);
 		}
 		else {
-	       		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!./assets/poems/0' + l + '/0' + l + '_' + i + '.yaml');
+	       		yamlFile[i-1 + sumOfFiles[l-1]] = require('!raw-loader!../assets/poems/0' + l + '/0' + l + '_' + i + '.yaml');
       			yamlObject[i-1+sumOfFiles[l-1]] = YAML.parse(yamlFile[i-1+sumOfFiles[l-1]].default);
 		}
 
@@ -391,7 +391,7 @@ return newList;
 
 
         // const yamlFile = require('raw-loader!./../assets/lists/' + listId + '.yaml');
-        const yamlFile = require('!raw-loader!./assets/poems/' + arr[0] + '/' + poemId + '.yaml');
+        const yamlFile = require('!raw-loader!../assets/poems/' + arr[0] + '/' + poemId + '.yaml');
         // const yamlFile = require('raw-loader!./../assets/poems/001/001_001.yaml');
         console.log(yamlFile.default);
         return yamlFile.default;
@@ -418,7 +418,7 @@ return newList;
 
         // const yamlFile = require('raw-loader!./../assets/poems/' + arr[0] + '/' + sherList + '.yaml');
 
-        const yamlFile = require('!raw-loader!./assets/poems/' + arr[0] + '/' + arr[0] + '_' + arr[1] + '.yaml');
+        const yamlFile = require('!raw-loader!../assets/poems/' + arr[0] + '/' + arr[0] + '_' + arr[1] + '.yaml');
 
 	/*
 	console.log("Equal");

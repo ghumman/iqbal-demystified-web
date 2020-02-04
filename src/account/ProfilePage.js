@@ -1,10 +1,10 @@
 import React from 'react'
-import StaticContentService from './StaticContentServiceYaml'
+import StaticContentService from '../misc/StaticContentServiceYaml'
 
 // for formatting
-import './TabView1.css';
+import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
-import PoemPage from './PoemPage';
+import PoemPage from '../poetry/PoemPage';
 
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
