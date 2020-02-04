@@ -33,7 +33,7 @@ import CommentPage from './misc/CommentPage'
 import SearchPage from './misc/SearchPage'
 
 // for some default use
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './misc/serviceWorker';
 
 
 const routing = (

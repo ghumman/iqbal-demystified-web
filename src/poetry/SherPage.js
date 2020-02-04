@@ -1,5 +1,5 @@
 import React from 'react'
-import StaticContentService from '../StaticContentServiceYaml'
+import StaticContentService from '../misc/StaticContentServiceYaml'
 // import Tabs from './Tabs';
 
 // for formatting

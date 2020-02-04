@@ -1,5 +1,5 @@
 import React from 'react'
-import StaticContentService from '../StaticContentServiceYaml'
+import StaticContentService from './StaticContentServiceYaml'
 
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
