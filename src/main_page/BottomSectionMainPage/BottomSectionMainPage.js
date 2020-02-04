@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 // import logo from './IqbalPic.jpg';
 import iconSignIn from './../../assets/android_app_assets/icon_signed_in.png';
@@ -13,33 +13,39 @@ import iconInfo from './../../assets/android_app_assets/icon_info.png';
 
 // for formatting
 import './BottomSectionMainPage.css';
+import PropTypes from 'prop-types';
 
 class TabView2 extends React.Component {
 
+	static propTypes = {
+		location: PropTypes.object.isRequired,
+		history: PropTypes.object.isRequired
+	}
+
 	state = {
-		username: "",
-		password: "",
-		signinConfirmation: "",
-		gotoPage: ""
+		username: '',
+		password: '',
+		signinConfirmation: '',
+		gotoPage: ''
 	}
 
 	onSubmit = (pageName) => {
 		if (pageName === 'Intikhab') {
 			this.props.history.push({
 				pathname: '/ListPoemPage',
-				state: { detailBook: "List_Editor_Pick", profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
-			})
+				state: { detailBook: 'List_Editor_Pick', profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
+			});
 		}
 		else {
 			this.props.history.push({
 				pathname: pageName,
 				state: { profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
-			})
+			});
 		}
 	}
 
 	componentDidMount() {
-		window.scrollTo(0, 0)
+		window.scrollTo(0, 0);
 		try {
 			this.setState({ signinConfirmation: this.props.location.state.profileSigninConfirmation });
 			this.setState({ username: this.props.location.state.profileUsername });
@@ -47,27 +53,22 @@ class TabView2 extends React.Component {
 
 			if (this.props.location.state.profileSigninConfirmation !== 'done') {
 
-				console.log("Profile Signin Confirmation message is not done ")
-				console.log("Something went wrong setting signinVar to Sign in again")
-				this.setState({ signinVar: "Sign In" })
+				this.setState({ signinVar: 'Sign In' });
 
 				this.setState({ signinConfirmation: 'not signed in' });
 				this.setState({ username: '' });
-				this.setState({ gotoPage: "RegisterPage" })
+				this.setState({ gotoPage: 'RegisterPage' });
 
 			}
 			else {
-				console.log("You're signed in and profileSigninConfirmation message is done");
-				this.setState({ gotoPage: "ProfilePage" })
+				this.setState({ gotoPage: 'ProfilePage' });
 			}
 		}
 		catch (e) {
-			console.log("Inside catch")
-			console.log("Not signed in or just started the app");
 
 			this.setState({ signinConfirmation: 'not signed in' });
 			this.setState({ username: '' });
-			this.setState({ gotoPage: "RegisterPage" })
+			this.setState({ gotoPage: 'RegisterPage' });
 		}
 	}
 
@@ -79,13 +80,13 @@ class TabView2 extends React.Component {
 
 						<Container>
 							<Row>
-								<Col><img src={iconSignIn} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit(this.state.gotoPage)} /><div class="tab2Text"> PROFILE </div></Col>
-								<Col><img src={iconBest} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("Intikhab")} /><div class="tab2Text"> INTIKHAB </div></Col>
-								<Col><img src={iconDiscussion} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("CommentPage")} /><div class="tab2Text"> COMMENTS </div></Col>
+								<Col><img src={iconSignIn} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit(this.state.gotoPage)} /><div className="tab2Text"> PROFILE </div></Col>
+								<Col><img src={iconBest} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('Intikhab')} /><div className="tab2Text"> INTIKHAB </div></Col>
+								<Col><img src={iconDiscussion} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('CommentPage')} /><div className="tab2Text"> COMMENTS </div></Col>
 							</Row>
 							<Row>
-								<Col><img src={iconSearch} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("SearchPage")} /><div class="tab2Text"> SEARCH </div></Col>
-								<Col><img src={iconInfo} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("InfoPage")} /><div class="tab2Text"> INFO </div></Col>
+								<Col><img src={iconSearch} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('SearchPage')} /><div className="tab2Text"> SEARCH </div></Col>
+								<Col><img src={iconInfo} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('InfoPage')} /><div className="tab2Text"> INFO </div></Col>
 							</Row>
 						</Container>
 
@@ -93,7 +94,7 @@ class TabView2 extends React.Component {
 
 				</header>
 			</div>
-		)
+		);
 	}	// render extend
 
 }	// class TabView2 ends

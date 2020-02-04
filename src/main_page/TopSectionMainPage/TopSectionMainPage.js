@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 // logo is used to display main allama iqbal picture
-import logo from './../../assets/allam_iqbal_pic.jpg'
+import logo from './../../assets/allam_iqbal_pic.jpg';
 
 // following are books in first tab - Urdu
 import urduBook1 from './../../assets/android_app_assets/book_bal_ae_jabreel_urdu_2.jpg';
@@ -30,30 +30,40 @@ import farsi2Book3 from './../../assets/android_app_assets/book_armaghan_ae_hija
 // for formatting
 import './TopSectionMainPage.css';
 
+import PropTypes from 'prop-types';
+
 // to go to ListPoemPage when a book logo is pressed
 import ListPoemPage from '../../poetry/ListPoemPage';
 
-class TabView1 extends React.Component {
+
+
+class TopSectionMainPage extends React.Component {
+
+	static propTypes = {
+		location: PropTypes.object.isRequired,
+		history: PropTypes.object.isRequired
+	}
+
 	state = {
 		textvalue: 'Change me',
-		id: "1",
+		id: '1',
 
-		username: "",
-		password: "",
-		signinConfirmation: "",
+		username: '',
+		password: '',
+		signinConfirmation: '',
 
-		signinVar: "",
+		signinVar: '',
 
 		key: 'home'
 	}
 
 	signMeIn = () => {
 
-		if (this.state.username === "") {
+		if (this.state.username === '') {
 			this.props.history.push({
 				pathname: '/RegisterPage',
 				state: { profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
-			})
+			});
 		}
 	}
 
@@ -61,44 +71,29 @@ class TabView1 extends React.Component {
 		this.props.history.push({
 			pathname: '/ListPoemPage',
 			state: { detailBook: bookNumber, profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
-		})
+		});
 	}
 
 	// componentDidMount is used when you want to display this.state.xxxx and want to make sure that new value is displayed
 	componentDidUpdate(prevProps, prevState) {
-		console.log("this.state.username")
-		console.log(this.state.username)
-
-		console.log("this.state.password")
-		console.log(this.state.password)
-
-		console.log("this.state.profileSigninConfirmation")
-		console.log(this.state.signinConfirmation)
-
-		console.log("this.state.signinVar")
-		console.log(this.state.signinVar)
 	}
 
 	// componentDidMount is called when after render function
 	componentDidMount() {
-		window.scrollTo(0, 0)
+		window.scrollTo(0, 0);
 		// retrive the data
 		try {
 			this.setState({ signinConfirmation: this.props.location.state.profileSigninConfirmation });
 			this.setState({ username: this.props.location.state.profileUsername });
 			this.setState({ password: this.props.location.state.profilePassword });
 			if (this.props.location.state.profileSigninConfirmation !== 'done') {
-				console.log("Profile Signin Confirmation message is not done ")
-				console.log("Something went wrong setting signinVar to Sign in again")
-				this.setState({ signinVar: "Sign In" })
+				this.setState({ signinVar: 'Sign In' });
 			}
 			else {
-				console.log("You're signed in and profileSigninConfirmation message is done");
+				// TODO
 			}
 		}
 		catch (e) {
-			console.log("Inside catch")
-			console.log("Not signed in or just started the app");
 			this.setState({ signinConfirmation: 'not signed in' });
 			this.setState({ username: '' });
 		}
@@ -106,15 +101,15 @@ class TabView1 extends React.Component {
 
 	render() {
 		// decides when if logged in or not and display either sign in or first character of username
-		let signinTag
-		var signinMessageLocal = ""
-		if (this.state.signinConfirmation === "done") {
-			signinMessageLocal = this.state.username.charAt(0).toUpperCase()
-			signinTag = <button type="button" class="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>
+		let signinTag;
+		var signinMessageLocal = '';
+		if (this.state.signinConfirmation === 'done') {
+			signinMessageLocal = this.state.username.charAt(0).toUpperCase();
+			signinTag = <button type="button" className="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>;
 		}
 		else {
-			signinMessageLocal = "Sign In"
-			signinTag = <button type="button" class="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>
+			signinMessageLocal = 'Sign In';
+			signinTag = <button type="button" className="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>;
 		}
 
 
@@ -124,11 +119,11 @@ class TabView1 extends React.Component {
 
 
 			<div>
-				<h3 class="text-right">{signinTag}</h3>
-				<h3 class="text-center app-title">Allama Iqbal</h3>
-				<img src={logo} class="rounded mx-auto d-block" alt="Allama Iqbal" />
+				<h3 className="text-right">{signinTag}</h3>
+				<h3 className="text-center app-title">Allama Iqbal</h3>
+				<img src={logo} className="rounded mx-auto d-block" alt="Allama Iqbal" />
 
-				<div class="tabTitle">
+				<div className="tabTitle">
 					<Tabs
 						id="controlled-tab-example"
 						activeKey={this.state.key}
@@ -138,12 +133,12 @@ class TabView1 extends React.Component {
 						<Tab eventKey="home" title="ﺍﺭﺩﻭ">
 							<Container>
 								<Row>
-									<Col><img src={urduBook1} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_002")} /></Col>
-									<Col><img src={urduBook2} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_001")} /></Col>
+									<Col><img src={urduBook1} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_002')} /></Col>
+									<Col><img src={urduBook2} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_001')} /></Col>
 								</Row>
 								<Row>
-									<Col><img src={urduBook3} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_004")} /></Col>
-									<Col><img src={urduBook4} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_003")} /></Col>
+									<Col><img src={urduBook3} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_004')} /></Col>
+									<Col><img src={urduBook4} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_003')} /></Col>
 
 								</Row>
 							</Container>
@@ -153,32 +148,31 @@ class TabView1 extends React.Component {
 						<Tab eventKey="profile" title="(فارسی (۱">
 							<Container>
 								<Row>
-									<Col><img src={farsi1Book1} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_006")} /></Col>
-									<Col><img src={farsi1Book2} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_005")} /></Col>
+									<Col><img src={farsi1Book1} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_006')} /></Col>
+									<Col><img src={farsi1Book2} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_005')} /></Col>
 								</Row>
 								<Row>
-									<Col><img src={farsi1Book3} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_007")} /></Col>
-									<Col><img src={farsi1Book4} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_008")} /></Col>
+									<Col><img src={farsi1Book3} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_007')} /></Col>
+									<Col><img src={farsi1Book4} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_008')} /></Col>
 								</Row>
 							</Container>
 						</Tab>
 						<Tab eventKey="contact" title="(فارسی (۲">
 							<Container>
 								<Row>
-									<Col><img src={farsi2Book1} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_009")} /></Col>
-									<Col><img src={farsi2Book2} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_010")} /></Col>
+									<Col><img src={farsi2Book1} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_009')} /></Col>
+									<Col><img src={farsi2Book2} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_010')} /></Col>
 								</Row>
 								<Row>
-									<Col><img src={farsi2Book3} class="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit("List_011")} /></Col>
+									<Col><img src={farsi2Book3} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('List_011')} /></Col>
 								</Row>
 							</Container>
 						</Tab>
 					</Tabs>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
-
-export default TabView1;
+export default TopSectionMainPage;
