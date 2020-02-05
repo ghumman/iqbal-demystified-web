@@ -13,16 +13,20 @@ import PropTypes from 'prop-types';
 
 import $ from 'jquery';
 import YAML from 'yaml';
-window.jQuery = $;
 
-class SherPage extends React.Component {
+declare var window : any;
+window.$ = window.jQuery = $;
+
+// window.jQuery = $;
+
+class SherPage extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 			username: '',
@@ -44,7 +48,8 @@ class SherPage extends React.Component {
 			userMessageSher: '',
 			userMessageWord: '',
 
-			key: 'home'
+			key: 'home', 
+			message: ''
 		};
 		this.handleUserMessageSher = this.handleUserMessageSher.bind(this);
 		this.handleUserMessageWord = this.handleUserMessageWord.bind(this);
@@ -53,21 +58,21 @@ class SherPage extends React.Component {
 		this.handleSubmitWord = this.handleSubmitWord.bind(this);
 	}
 
-	handleUserMessageSher(event) {
+	handleUserMessageSher(event: any) {
 		this.setState({ userMessageSher: event.target.value });
 	}
 
-	handleUserMessageWord(event) {
+	handleUserMessageWord(event: any) {
 		this.setState({ userMessageWord: event.target.value });
 	}
 
 
-	handleSubmitSher(event) {
+	handleSubmitSher(event: any) {
 		this.send_sher_message();
 		event.preventDefault();
 	}
 
-	handleSubmitWord(event) {
+	handleSubmitWord(event: any) {
 		this.send_word_message();
 		event.preventDefault();
 	}
@@ -149,14 +154,14 @@ class SherPage extends React.Component {
 	}
 
 
-	onSubmit = (sherNumber) => {
+	onSubmit = (sherNumber: any) => {
 		this.props.history.push({
 			pathname: '/SherPage',
 			state: { detailSher: sherNumber, profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
 		});
 	}
 
-	async getSherGeneralDiscussion(sherName) {
+	async getSherGeneralDiscussion(sherName: any) {
 		try {
 			$.ajax({
 				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
@@ -212,12 +217,12 @@ class SherPage extends React.Component {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.message = err;
+			this.setState({message: err})
 		}
 	} // async getSherGeneralDiscussion ends
 
 
-	getSherDiscussion(sherGeneralDiscussionServerResponse) {
+	getSherDiscussion(sherGeneralDiscussionServerResponse: any) {
 		var response = sherGeneralDiscussionServerResponse;
 
 		var sherDiscussionDetailLocal = JSON.parse(response);
@@ -231,7 +236,7 @@ class SherPage extends React.Component {
 	}
 
 
-	async getSherWordDiscussion(sherName) {
+	async getSherWordDiscussion(sherName: any) {
 		try {
 			$.ajax({
 				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
@@ -254,7 +259,7 @@ class SherPage extends React.Component {
 		}  // catch ends
 	}
 
-	getWordDiscussion(sherWordDiscussionServerResponse) {
+	getWordDiscussion(sherWordDiscussionServerResponse: any) {
 		var wordDiscussionDetailLocal = JSON.parse(sherWordDiscussionServerResponse);
 
 		for (var i = 0; i < wordDiscussionDetailLocal.length; i++) {
@@ -298,7 +303,7 @@ class SherPage extends React.Component {
 	//	Vote Like Word
 	///////////////////////////////////////////////////////////
 
-	vote_like_word(comment_general_id) {
+	vote_like_word(comment_general_id: any) {
 
 
 		if (this.state.username !== '') {
@@ -335,7 +340,7 @@ class SherPage extends React.Component {
 	//	Vote Dislike Word
 	///////////////////////////////////////////////////////////
 
-	vote_dislike_word(comment_general_id) {
+	vote_dislike_word(comment_general_id: any) {
 
 
 		if (this.state.username !== '') {
@@ -362,7 +367,7 @@ class SherPage extends React.Component {
 			} catch (err) {
 				alert('inside catch err');
 				alert(err);
-				this.message = err;
+				this.setState({message: err});
 			}
 		}	// if username not empty ends
 		else {
@@ -374,7 +379,7 @@ class SherPage extends React.Component {
 	//	Vote Unregister Word
 	///////////////////////////////////////////////////////////
 
-	vote_unregister_word(comment_general_id) {
+	vote_unregister_word(comment_general_id: any) {
 
 		if (this.state.username !== '') {
 			try {
@@ -413,7 +418,7 @@ class SherPage extends React.Component {
 	//	Vote Like General
 	///////////////////////////////////////////////////////////
 
-	vote_like(comment_general_id) {
+	vote_like(comment_general_id: any) {
 
 		if (this.state.username !== '') {
 			try {
@@ -449,7 +454,7 @@ class SherPage extends React.Component {
 	//	Vote Dislike General
 	///////////////////////////////////////////////////////////
 
-	vote_dislike(comment_general_id) {
+	vote_dislike(comment_general_id: any) {
 
 		if (this.state.username !== '') {
 			try {
@@ -485,7 +490,7 @@ class SherPage extends React.Component {
 	///////////////////////////////////////////////////////////
 
 
-	vote_unregister(comment_general_id) {
+	vote_unregister(comment_general_id: any) {
 
 		if (this.state.username !== '') {
 			try {
@@ -519,28 +524,28 @@ class SherPage extends React.Component {
 		}
 	}
 
-	selectedWord(wordText, wordId) {
+	selectedWord(wordText: any, wordId: any) {
 		this.setState({ mySelectedWord: wordText });
 		this.setState({ mySelectedId: wordId });
 	}
 
 	render() {
-		var item4 = this.state.sherText.map((item) =>
+		var item4 = this.state.sherText.map((item: any) =>
 			<p key={item.index}> {item}</p>
 		);
 
-		var item5 = this.state.wordText.map((item) =>
-			<span key={item.index}><button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item)}> {item} </button>  </span>
+		var item5 = this.state.wordText.map((item: any) =>
+			<span key={item.index}><button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item.text, item.index)}> {item} </button>  </span>
 			/*<span key={item.index}> {item}: {index}</span>*/
 		);
 
-		var item6 = this.state.sherDiscussionDetail.map((item) =>
+		var item6 = this.state.sherDiscussionDetail.map((item: any) =>
 			<div key={item.id}> <div className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br /> <p>{item.text}<br /><br /> <button type="button" className="btn btn-primary px-2" onClick={() => this.vote_like(item.id)}> LIKE </button> <span className="px-2">SCORE: {item.score}</span><button type="button" className="btn btn-primary" onClick={() => this.vote_dislike(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary" onClick={() => this.vote_unregister(item.id)} >UNREGISTER</button></p><Divider /></div>
 
 		);
 
 
-		var item7 = this.state.wordDiscussionDetail.map((item) => {
+		var item7 = this.state.wordDiscussionDetail.map((item: any) => {
 			if ((item.wordposition - 1) === this.state.mySelectedId)
 				return (
 					<div key={item.id}> <div className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br /> <p>{item.text}<br /><br /> <button type="button" className="btn btn-primary" onClick={() => this.vote_like_word(item.id)}> LIKE </button><span className="px-2"> SCORE: {item.score}</span><button type="button" className="btn btn-primary" onClick={() => this.vote_dislike_word(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary" onClick={() => this.vote_unregister_word(item.id)} >UNREGISTER</button></p><Divider /></div>
@@ -572,8 +577,8 @@ class SherPage extends React.Component {
 					<Tabs
 						id="controlled-tab-example"
 						activeKey={this.state.key}
-						onSelect={key => this.setState({ key })}
-						class="nav-tabs"
+						onSelect={(key: any) => this.setState({ key })}
+						className="nav-tabs"
 					>
 						<Tab class="sherPageText" eventKey="home" title="DISCUSSION">
 							{item4}
@@ -587,7 +592,7 @@ class SherPage extends React.Component {
 								</label>
 								<p></p>
 
-								<textarea type="text" rows="5" value={this.state.userMessageSher} onChange={this.handleUserMessageSher} ></textarea>
+								<textarea value={this.state.userMessageSher} onChange={this.handleUserMessageSher} ></textarea>
 
 								<p></p>
 
@@ -608,7 +613,7 @@ class SherPage extends React.Component {
 									Comments:
 								</label>
 								<p></p>
-								<textarea type="text" rows="5" value={this.state.userMessageWord} onChange={this.handleUserMessageWord} ></textarea>
+								<textarea value={this.state.userMessageWord} onChange={this.handleUserMessageWord} ></textarea>
 								<p></p>
 
 								<input type="submit" value="SUBMIT" />

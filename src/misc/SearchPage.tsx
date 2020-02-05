@@ -7,17 +7,16 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
 
-import PoemPage from '../poetry/PoemPage';
 
 
-class SearchPage extends React.Component {
+class SearchPage extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 
@@ -52,7 +51,7 @@ class SearchPage extends React.Component {
 
 	}
 
-	handleAlphabet(alphabetValue) {
+	handleAlphabet(alphabetValue: any) {
 		if (alphabetValue !== 'Back')
 			this.setState({ searchText: this.state.searchText + alphabetValue });
 		else
@@ -65,16 +64,16 @@ class SearchPage extends React.Component {
 		this.setState({ inputBoxClicked: true });
 	}
 
-	handleOptionChange(changeEvent) {
+	handleOptionChange(changeEvent: any) {
 		this.setState({ selectedOption: changeEvent.target.value });
 	}
 
-	handleSearchText(event) {
+	handleSearchText(event: any) {
 		this.setState({ searchText: event.target.value });
 	}
 
 	// handleSubmit
-	handleSubmit(event) {
+	handleSubmit(event: any) {
 
 		this.setState({ inputBoxClicked: false });
 
@@ -97,7 +96,7 @@ class SearchPage extends React.Component {
 	}
 
 
-	getPoemListSearch(listId) {
+	getPoemListSearch(listId: any) {
 
 		var response = StaticContentService.getPoemListSearch(listId);
 
@@ -106,10 +105,10 @@ class SearchPage extends React.Component {
 	}
 
 
-	getPoemSearch(poemId) {
+	getPoemSearch(poemId: any) {
 
 		var response = StaticContentService.getPoemSearch(poemId);
-		response.sher.map(el => {
+		response.sher.map((el: any) => {
 			el.sherContent[0].text = el.sherContent[0].text.split('|');
 			try {
 				el.sherContent[1].text = el.sherContent[1].text.split('|');
@@ -129,14 +128,14 @@ class SearchPage extends React.Component {
 		this.setState({ sherList: response.sher });
 	}
 
-	onSubmitPoem = (poemNumber) => {
+	onSubmitPoem = (poemNumber: any) => {
 		this.props.history.push({
 			pathname: '/PoemPage',
 			state: { detailPoem: poemNumber, profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
 		});
 	}
 
-	onSubmitSher = (sherNumber) => {
+	onSubmitSher = (sherNumber: any) => {
 		this.props.history.push({
 			pathname: '/SherPage',
 			state: { detailSher: sherNumber, profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
@@ -168,24 +167,16 @@ class SearchPage extends React.Component {
 	}
 
 	render() {
-		var items = this.state.bookSections.map((item, key) =>
+		var items = this.state.bookSections.map((item: any) =>
 			<li key={item.sectionName}>{item.sectionName}</li>
 		);
-		var items2 = items.map((item, key) =>
-			<li key={item.text}>{item.text}</li>
-		);
 
-		var item3 = this.state.poemText.map((item) =>
-			<li key={item.index} onClick={() => this.onSubmit(item.id)}> {item.text}: {item.id}</li>
-		);
 
-		var itemsPoemOrSher = [];
-		var lenghtPoem = this.state.poemList.length;
-		var lenghtSher = this.state.sherList.length;
+		var itemsPoemOrSher: any = [];
 		if (this.state.selectedOption === 'title') {
 			if (this.state.poemList.length !== 0) {
 
-				itemsPoemOrSher = this.state.poemList.map((item, key) =>
+				itemsPoemOrSher = this.state.poemList.map((item: any) =>
 					<p key={item.id} onClick={() => this.onSubmitPoem(item.id)}>{item.poemName[0].text} <br /> {item.poemName[1].text} </p>
 				);
 			}
@@ -196,7 +187,7 @@ class SearchPage extends React.Component {
 		}
 		else {
 			if (this.state.sherList.length !== 0) {
-				itemsPoemOrSher = this.state.sherList.map((item, key) =>
+				itemsPoemOrSher = this.state.sherList.map((item: any) =>
 					<p key={item.id} onClick={() => this.onSubmitSher(item.id)}> {item.sherContent[0].text[0]} <br /> {item.sherContent[0].text[1]} <br /> {item.sherContent[1].text[0]} <br /> {item.sherContent[1].text[1]}</p>
 				);
 			}
@@ -204,16 +195,7 @@ class SearchPage extends React.Component {
 				itemsPoemOrSher = <p>No Results Found</p>;
 			}
 		}
-
-		var aVar = this.state.bookSections.length;
-		var stationsArr = [];
-		for (var i = 0; i < this.state.bookSections.length; i++) {
-			stationsArr.push(
-				<div className="station">
-					{this.data}
-				</div>
-			);
-		}
+		
 		let signinTag;
 		var signinMessageLocal = '';
 		if (this.state.signinConfirmation === 'done') {

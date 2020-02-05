@@ -12,14 +12,14 @@ import PropTypes from 'prop-types';
 
 import YAML from 'yaml';
 
-class ListPoemPage extends React.Component {
+class ListPoemPage extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 
@@ -42,7 +42,7 @@ class ListPoemPage extends React.Component {
 		};	// this.state ends
 	}	// constructor ends
 
-	onSubmit = (poemNumber) => {
+	onSubmit = (poemNumber: any) => {
 
 		if (poemNumber !== 0) {
 			this.props.history.push({
@@ -52,7 +52,7 @@ class ListPoemPage extends React.Component {
 		}
 	}
 
-	getPoemList(listId) {
+	getPoemList(listId: any) {
 
 		var response = StaticContentService.getPoemList(listId);
 
@@ -72,7 +72,7 @@ class ListPoemPage extends React.Component {
 			catch (e) {
 				if (yamlObject.sections[i].poems[0].poemName[0]) {
 					for (var jj = 0; jj < yamlObject.sections[i].poems.length; jj++) {
-						for (var k = 0; k < yamlObject.sections[i].poems[j].poemName.length; k++)
+						for (var k = 0; k < yamlObject.sections[i].poems[jj].poemName.length; k++)
 							this.state.poemText.push({ 'text': yamlObject.sections[i].poems[jj].poemName[k].text, 'id': yamlObject.sections[i].poems[jj].id });
 						this.setState({ poemObject: yamlObject.sections[i].poems[jj] });
 					}
@@ -82,7 +82,7 @@ class ListPoemPage extends React.Component {
 
 		try {
 			this.setState({
-				bookName: yamlObject.sections[0].sectionName.map((item) =>
+				bookName: yamlObject.sections[0].sectionName.map((item: any) =>
 					<li key={item.text}>{item.text}</li>)
 			});
 		}
@@ -123,17 +123,9 @@ class ListPoemPage extends React.Component {
 
 	render() {
 
-		var item3 = this.state.poemText.map((item) =>
+		var item3 = this.state.poemText.map((item: any) =>
 			<p key={item.index} onClick={() => this.onSubmit(item.id)}> {item.text}<Divider /></p>
 		);
-		var stationsArr = [];
-		for (var i = 0; i < this.state.bookSections.length; i++) {
-			stationsArr.push(
-				<div className="station">
-					{this.data}
-				</div>
-			);
-		}
 
 		let signinTag;
 		var signinMessageLocal = '';

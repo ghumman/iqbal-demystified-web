@@ -7,14 +7,14 @@ import PropTypes from 'prop-types';
 
 import YAML from 'yaml';
 
-class PoemPage extends React.Component {
+class PoemPage extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 			username: '',
@@ -31,14 +31,14 @@ class PoemPage extends React.Component {
 		};
 	}
 
-	onSubmit = (sherNumber) => {
+	onSubmit = (sherNumber: any) => {
 		this.props.history.push({
 			pathname: '/SherPage',
 			state: { detailSher: sherNumber, profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
 		});
 	}
 
-	getPoem(listId) {
+	getPoem(listId: any) {
 		var response = StaticContentService.getPoem(listId);
 
 
@@ -46,7 +46,7 @@ class PoemPage extends React.Component {
 
 		let newArr = [yamlObject.sher];
 
-		yamlObject.sher.map(el => {
+		yamlObject.sher.map((el: any) => {
 			try {
 				el.sherContent[0].text = el.sherContent[0].text.split('|');
 			} catch (err) {
@@ -102,7 +102,7 @@ class PoemPage extends React.Component {
 
 
 	render() {
-		var item3 = this.state.poemTextNew.map((item) =>
+		var item3 = this.state.poemTextNew.map((item: any) =>
 			<p key={item.index} onClick={() => this.onSubmit(item.id)}> {item.sherContent[0].text[0]}<br />{item.sherContent[0].text[1]}<br />{item.sherContent[1].text[0]}<br />{item.sherContent[1].text[1]}</p>
 		);
 		let signinTag;

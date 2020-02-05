@@ -5,16 +5,19 @@ import SigninPage from './SigninPage';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-window.jQuery = $;
+declare var window : any;
+window.$ = window.jQuery = $;
 
-class ForgotPassword extends React.Component {
+// window.jQuery = $;
+
+class ForgotPassword extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 
@@ -30,7 +33,7 @@ class ForgotPassword extends React.Component {
 
 
 	// handlechange
-	handleChangeEmail(event) {
+	handleChangeEmail(event: any) {
 		this.setState({ email: event.target.value });
 	}
 
@@ -42,7 +45,7 @@ class ForgotPassword extends React.Component {
 	}
 
 	// handleSubmit
-	handleSubmit(event) {
+	handleSubmit(event: any) {
 
 		if (this.state.email.trim() !== '') {
 			try {

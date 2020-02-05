@@ -12,16 +12,19 @@ import PropTypes from 'prop-types';
 import $ from 'jquery';
 import YAML from 'yaml';
 
-window.jQuery = $;
+declare var window : any;
+window.$ = window.jQuery = $;
 
-class CommentsPage extends React.Component {
+// window.jQuery = $;
+
+class CommentsPage extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 			username: '',
@@ -41,13 +44,14 @@ class CommentsPage extends React.Component {
 			popularData: [],
 
 			testString: '',
-			key: 'home'
+			key: 'home', 
+			message: ''
 
 		};
 
 	}
 
-	onSubmit = (sherNumber) => {
+	onSubmit = (sherNumber: any) => {
 		this.props.history.push({
 			pathname: '/SherPage',
 			state: {
@@ -78,16 +82,16 @@ class CommentsPage extends React.Component {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.message = err;
+			this.setState({message: err})
 		}
 
 	}
 
-	getRecentSher(sherRecentList) {
+	getRecentSher(sherRecentList: any) {
 		var response = StaticContentService.getRecentSher(sherRecentList);
 		let newArr = [response.sher];
 
-		response.sher.map(el => {
+		response.sher.map((el: any) => {
 			el.sherContent[0].text = el.sherContent[0].text.split('|');
 			try {
 				el.sherContent[1].text = el.sherContent[1].text.split('|');
@@ -131,16 +135,16 @@ class CommentsPage extends React.Component {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.message = err;
+			this.setState({message: err})
 		}
 
 	}
 
-	getPopularSher(sherPopularList) {
+	getPopularSher(sherPopularList: any) {
 		var response = StaticContentService.getRecentSher(sherPopularList);
 		let newArrPopular = [response.sher];
 
-		response.sher.map(el => {
+		response.sher.map((el: any) => {
 			el.sherContent[0].text = el.sherContent[0].text.split('|');
 			try {
 				el.sherContent[1].text = el.sherContent[1].text.split('|');
@@ -164,7 +168,7 @@ class CommentsPage extends React.Component {
 	//	Popular Function Ends
 	///////////////////////////////////////////////////////////////////
 
-	async getSherGeneralDiscussion(sherName) {
+	async getSherGeneralDiscussion(sherName: any) {
 		try {
 			$.ajax({
 				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
@@ -233,13 +237,13 @@ class CommentsPage extends React.Component {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.message = err;
+			this.setState({message: err});
 		}
 
 	}
 
 
-	getSherDiscussion(sherGeneralDiscussionServerResponse) {
+	getSherDiscussion(sherGeneralDiscussionServerResponse: any) {
 		var response = sherGeneralDiscussionServerResponse;
 		var sherDiscussionDetailLocal = JSON.parse(response);
 
@@ -255,7 +259,7 @@ class CommentsPage extends React.Component {
 	}
 
 
-	async getSherWordDiscussion(sherName) {
+	async getSherWordDiscussion(sherName: any) {
 		try {
 			$.ajax({
 				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
@@ -274,12 +278,12 @@ class CommentsPage extends React.Component {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.message = err;
+			this.setState({message: err});
 		}
 
 	}
 
-	getWordDiscussion(sherWordDiscussionServerResponse) {
+	getWordDiscussion(sherWordDiscussionServerResponse: any) {
 		var wordDiscussionDetailLocal = JSON.parse(sherWordDiscussionServerResponse);
 
 		for (var i = 0; i < wordDiscussionDetailLocal.length; i++) {
@@ -342,7 +346,7 @@ class CommentsPage extends React.Component {
 	}
 
 	render() {
-		var itemsRecent = this.state.recentData.map((item) =>
+		var itemsRecent = this.state.recentData.map((item: any) =>
 			<span key={item.index} onClick={() => this.onSubmit(item.id)}>
 				{
 					item.sherContent[0].text[0]
@@ -357,7 +361,7 @@ class CommentsPage extends React.Component {
 			</span>
 		);
 
-		var itemsPopular = this.state.popularData.map((item) =>
+		var itemsPopular = this.state.popularData.map((item: any) =>
 			<span key={item.index} onClick={() => this.onSubmit(item.id)}> {
 				item.sherContent[0].text[0]
 			} < br /> {
@@ -392,8 +396,8 @@ class CommentsPage extends React.Component {
 					<Tabs
 						id="controlled-tab-example"
 						activeKey={this.state.key}
-						onSelect={key => this.setState({ key })}
-						class="nav-tabs"
+						onSelect={(key: any) => this.setState({ key })}
+						className="nav-tabs"
 					>
 						<Tab eventKey="home" title="RECENT">
 							{itemsRecent}
