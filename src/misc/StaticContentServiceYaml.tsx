@@ -1,19 +1,19 @@
 /* eslint-disable no-undef */
 export default {
 
-	getPoemList(listId) {
+	getPoemList(listId: any) {
 		const yamlFile = require('!raw-loader!../assets/lists/' + listId + '.yaml');
 		return yamlFile.default;
 
 	},
 
-	getPoemListSearch(listId) {
+	getPoemListSearch(listId: any) {
 		var YAML = require('yamljs');
 
 		var yamlFile = Array(11);
 		var yamlObject = Array(11);
 		var i, j, k;
-		var newList = { poems: [] };
+		var newList: any = { poems: [] };
 
 
 		for (i = 1; i <= 11; i++)
@@ -31,7 +31,8 @@ export default {
 		for (k = 0; k < yamlObject.length; k++) {
 			for (i = 0; i < (yamlObject[k].sections).length; i++) {
 
-				if (Object.keys(yamlObject[k].sections[i]) === 'poems') {
+				// if (Object.keys(yamlObject[k].sections[i]) === 'poems') {
+				if (yamlObject[k].sections[i] === 'poems') {
 					for (j = 0; j < (yamlObject[k].sections[i].poems).length; j++) {
 						if (JSON.stringify(yamlObject[k].sections[i].poems[j].poemName[0].text).match(listId)) {
 							newList['poems'].push(yamlObject[k].sections[i].poems[j]);
@@ -47,7 +48,7 @@ export default {
 
 	},
 
-	getPoemSearch(poemId) {
+	getPoemSearch(poemId: any) {
 		var YAML = require('yamljs');
 
 		var yamlFile = Array(1440);
@@ -58,7 +59,7 @@ export default {
 		var numberOfFiles = [172, 179, 202, 43, 19, 31, 163, 153, 61, 25, 392];
 		var sumOfFiles = [0, 172, 351, 553, 596, 615, 646, 809, 962, 1023, 1048];
 
-		var newList = { sher: [] };
+		var newList: any = { sher: [] };
 
 		for (l = 1; l <= numberOfFiles.length; l++) {
 			for (i = 1; i <= numberOfFiles[l - 1]; i++) {
@@ -108,7 +109,7 @@ export default {
 		return newList;
 
 	},
-	getPoem(poemId) {
+	getPoem(poemId: any) {
 		// split the stirng listId
 		var arr = poemId.split('_');
 
@@ -117,10 +118,10 @@ export default {
 
 	},
 
-	getRecentSher(sherList) {
+	getRecentSher(sherList: any) {
 		var YAML = require('yamljs');
 
-		var newList = { sher: [] };
+		var newList: any = { sher: [] };
 		var i;
 		var sherArray = sherList.split(',');
 		for (i = 0; i < (sherArray.length - 1); i++) {

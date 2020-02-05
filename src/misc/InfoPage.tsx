@@ -5,14 +5,14 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 import PropTypes from 'prop-types';
 
-class InfoPage extends React.Component {
+class InfoPage extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 
