@@ -15,7 +15,7 @@ import iconInfo from './../../assets/android_app_assets/icon_info.png';
 import './BottomSectionMainPage.css';
 import PropTypes from 'prop-types';
 
-class TabView2 extends React.Component {
+class TabView2 extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
@@ -29,7 +29,7 @@ class TabView2 extends React.Component {
 		gotoPage: ''
 	}
 
-	onSubmit = (pageName) => {
+	onSubmit = (pageName: any) => {
 		if (pageName === 'Intikhab') {
 			this.props.history.push({
 				pathname: '/ListPoemPage',

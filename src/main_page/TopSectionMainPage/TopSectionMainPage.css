@@ -128,6 +128,7 @@
 	line-height: 1.33;
 	border-radius: 25px;
 }
+
 .btn-circle.btn-xl {
 	width: 70px;
 	height: 70px;
@@ -135,4 +136,10 @@
 	font-size: 24px;
 	line-height: 1.33;
 	border-radius: 35px;
+}
+
+.nav-tabs {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
 }

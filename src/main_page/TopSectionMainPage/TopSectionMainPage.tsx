@@ -37,7 +37,7 @@ import ListPoemPage from '../../poetry/ListPoemPage';
 
 
 
-class TopSectionMainPage extends React.Component {
+class TopSectionMainPage extends React.Component <any, any>  {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
@@ -67,16 +67,13 @@ class TopSectionMainPage extends React.Component {
 		}
 	}
 
-	onSubmit = (bookNumber) => {
+	onSubmit = (bookNumber: any) => {
 		this.props.history.push({
 			pathname: '/ListPoemPage',
 			state: { detailBook: bookNumber, profileSigninConfirmation: this.state.signinConfirmation, profileUsername: this.state.username, profilePassword: this.state.password }
 		});
 	}
 
-	// componentDidMount is used when you want to display this.state.xxxx and want to make sure that new value is displayed
-	componentDidUpdate(prevProps, prevState) {
-	}
 
 	// componentDidMount is called when after render function
 	componentDidMount() {
@@ -127,8 +124,8 @@ class TopSectionMainPage extends React.Component {
 					<Tabs
 						id="controlled-tab-example"
 						activeKey={this.state.key}
-						onSelect={key => this.setState({ key })}
-						class="nav-tabs"
+						onSelect={(key:any) => this.setState({ key })}
+						className="nav-tabs"
 					>
 						<Tab eventKey="home" title="ﺍﺭﺩﻭ">
 							<Container>

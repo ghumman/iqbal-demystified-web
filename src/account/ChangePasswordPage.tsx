@@ -9,16 +9,19 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-window.jQuery = $;
+declare var window : any;
+window.$ = window.jQuery = $;
 
-class ChangePassword extends React.Component {
+// window.jQuery = $;
+
+class ChangePassword extends React.Component<any, any>  {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 
@@ -43,15 +46,15 @@ class ChangePassword extends React.Component {
 
 
 	// handlechange
-	handleChangeCurrentPassword(event) {
+	handleChangeCurrentPassword(event: any) {
 		this.setState({ currentPassword: event.target.value });
 	}
 
-	handleChangeNewPassword1(event) {
+	handleChangeNewPassword1(event: any) {
 		this.setState({ newPassword1: event.target.value });
 	}
 
-	handleChangeNewPassword2(event) {
+	handleChangeNewPassword2(event: any) {
 		this.setState({ newPassword2: event.target.value });
 	}
 
@@ -65,7 +68,7 @@ class ChangePassword extends React.Component {
 	}
 
 	// handleSubmit
-	handleSubmit(event) {
+	handleSubmit(event: any) {
 		event.preventDefault();
 		if (this.state.currentPassword !== '' && this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
 			if (this.state.newPassword1.trim() === this.state.newPassword2.trim()) {

@@ -9,17 +9,20 @@ import 'react-table/react-table.css';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-window.jQuery = $;
+declare var window : any;
+window.$ = window.jQuery = $;
+
+// window.jQuery = $;
 
 
-class ProfilePage extends React.Component {
+class ProfilePage extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 
@@ -53,13 +56,14 @@ class ProfilePage extends React.Component {
 			leaderBoardTextOddWordName: [],
 			leaderBoardTextWordConcat: [],
 
-			dropdownState: 'discussion'
+			dropdownState: 'discussion', 
+			message: ''
 
 		};
 		this.dropChange = this.dropChange.bind(this);
 
 	}
-	dropChange(event) {
+	dropChange(event: any) {
 		this.setState({ dropdownState: event.target.value });
 	}
 
@@ -109,13 +113,13 @@ class ProfilePage extends React.Component {
 
 	async get_leader_board() {
 
-		var leaderBoardTextLocal = [];
-		var leaderBoardTextEvenLocal = [];
-		var leaderBoardTextOddLocal = [];
-		var leaderBoardTextEvenDiscussionLocal = [];
-		var leaderBoardTextOddDiscussionLocal = [];
-		var leaderBoardTextEvenWordLocal = [];
-		var leaderBoardTextOddWordLocal = [];
+		var leaderBoardTextLocal: any = [];
+		var leaderBoardTextEvenLocal: any = [];
+		var leaderBoardTextOddLocal: any = [];
+		var leaderBoardTextEvenDiscussionLocal: any = [];
+		var leaderBoardTextOddDiscussionLocal: any = [];
+		var leaderBoardTextEvenWordLocal: any = [];
+		var leaderBoardTextOddWordLocal: any = [];
 
 		try {
 
@@ -167,7 +171,7 @@ class ProfilePage extends React.Component {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.message = err;
+			this.setState({message: err});
 		}
 
 	}
@@ -204,7 +208,7 @@ class ProfilePage extends React.Component {
 		}];
 
 
-		var myTable = '';
+		var myTable: any = '';
 
 		if (this.state.dropdownState === 'discussion') {
 			myTable = <ReactTable data={this.state.leaderBoardTextDiscussionConcat} columns={columns} />;

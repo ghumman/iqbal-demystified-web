@@ -10,16 +10,19 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-window.jQuery = $;
+declare var window : any;
+window.$ = window.jQuery = $;
 
-class Signin extends React.Component {
+// window.jQuery = $;
+
+class Signin extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 
@@ -45,7 +48,7 @@ class Signin extends React.Component {
 		}       // else if user or password are empty ends
 	}      // function login ends
 
-	async try_login(inputUsername, inputPassword) {
+	async try_login(inputUsername: any, inputPassword: any) {
 		try {
 			$.ajax({
 				url: 'https://www.icanmakemyownapp.com/iqbal/v3/login.php',
@@ -53,7 +56,7 @@ class Signin extends React.Component {
 				dataType: 'text',
 				data: { username: inputUsername, password: inputPassword },
 
-				success: (data, status, username, message) => {
+				success: (data: any) => {
 					if (data === 'done') {
 						this.setState({ errorMessage: 'Successfully Logged in' });
 						this.setState({ signinConfirmation: data });
@@ -77,16 +80,16 @@ class Signin extends React.Component {
 		}	// catch ends
 	}	// async try_login ends
 
-	handleChangeUsername(event) {
+	handleChangeUsername(event: any) {
 		this.setState({ username: event.target.value });
 	}
 
-	handleChangePassword(event) {
+	handleChangePassword(event: any) {
 		this.setState({ password: event.target.value });
 	}
 
 	// handleSubmit
-	handleSubmit(event) {
+	handleSubmit(event: any) {
 		this.login();
 		event.preventDefault();
 	}

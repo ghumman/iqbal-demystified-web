@@ -8,16 +8,19 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-window.jQuery = $;
+declare var window : any;
+window.$ = window.jQuery = $;
 
-class Register extends React.Component {
+// window.jQuery = $;
+
+class Register extends React.Component<any, any> {
 
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 
@@ -44,27 +47,27 @@ class Register extends React.Component {
 
 
 	// handlechange
-	handleChangeFirstName(event) {
+	handleChangeFirstName(event: any) {
 		this.setState({ firstName: event.target.value });
 	}
 
-	handleChangeLastName(event) {
+	handleChangeLastName(event: any) {
 		this.setState({ lastName: event.target.value });
 	}
 
-	handleChangeUsername(event) {
+	handleChangeUsername(event: any) {
 		this.setState({ username: event.target.value });
 	}
 
-	handleChangeEmail(event) {
+	handleChangeEmail(event: any) {
 		this.setState({ email: event.target.value });
 	}
 
-	handleChangePassword1(event) {
+	handleChangePassword1(event: any) {
 		this.setState({ password1: event.target.value });
 	}
 
-	handleChangePassword2(event) {
+	handleChangePassword2(event: any) {
 		this.setState({ password2: event.target.value });
 	}
 
@@ -79,7 +82,7 @@ class Register extends React.Component {
 
 
 	// handleSubmit
-	handleSubmit(event) {
+	handleSubmit(event: any) {
 
 		if (this.state.password1.trim() === this.state.password2.trim()) {
 			this.setState({ password: this.state.password1 });
@@ -89,7 +92,7 @@ class Register extends React.Component {
 					type: 'POST',
 					dataType: 'text',
 					data: { first_name: this.state.firstName, last_name: this.state.lastName, username: this.state.username, password: this.state.password, email: this.state.email },
-					success: (data, status, username, message) => {	// success funciton starts
+					success: (data: any) => {	// success funciton starts
 
 						if (data.trim() === 'Your account has been created! Please check your email and activate your account by clicking on a link that we have sent you in the email. Don\'t forget to check in your Junk folder.') {
 							alert(data);
