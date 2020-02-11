@@ -22,12 +22,18 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "react-table": "^6.10.0",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3",
     "yaml": "^1.6.0",
     "yamljs": "^0.3.0"
   },
   "scripts": {
-    "build": "react-scripts build",
-    "postinstall": "npm run build",
+    "build": "tsc",
+		"postinstall": "npm run build",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -49,12 +55,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "raw-loader": "^2.0.0",
-    "source-map-loader": "^0.2.4",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.5"
-  },
+  "devDependencies": {},
   "rnpm": {
     "assets": [
       "assets/fonts/Sarpanch"
