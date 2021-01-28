@@ -32,7 +32,7 @@ import * as serviceWorker from './misc/serviceWorker';
 
 
 const routing = (
-	<Router>
+	<Router  basename={process.env.PUBLIC_URL}>
 		<div>
 			{/* Inside JSX use this format to give comments*/}
 			<Route exact path="/" component={TopPortionMainPage} />
