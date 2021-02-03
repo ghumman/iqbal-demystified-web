@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/iqbal-demystified-web/precache-manifest.e8974c00cf4a6ada3df0838aa959e993.js"
+  "/iqbal-demystified-web/precache-manifest.0f4e00f8ad074f951c6bd1826fa56a58.js"
 );
 
 self.addEventListener('message', (event) => {
