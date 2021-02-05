@@ -35,6 +35,8 @@ import PropTypes from 'prop-types';
 // to go to ListPoemPage when a book logo is pressed
 import ListPoemPage from '../../poetry/ListPoemPage';
 
+import Header from '../../header/Header'
+
 
 
 class TopSectionMainPage extends React.Component <any, any>  {
@@ -116,6 +118,7 @@ class TopSectionMainPage extends React.Component <any, any>  {
 
 
 			<div>
+				<Header {...this.props}/>
 				<h3 className="text-right">{signinTag}</h3>
 				<h3 className="text-center app-title">Allama Iqbal</h3>
 				<img src={logo} className="rounded mx-auto d-block" alt="Allama Iqbal" />

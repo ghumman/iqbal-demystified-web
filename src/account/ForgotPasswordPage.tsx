@@ -3,6 +3,7 @@ import React from 'react';
 
 import SigninPage from './SigninPage';
 import PropTypes from 'prop-types';
+import Header from '../header/Header';
 
 import $ from 'jquery';
 declare var window : any;
@@ -91,6 +92,8 @@ class ForgotPassword extends React.Component<any, any> {
 
 	render() {
 		return (
+			<span>
+				<Header {...this.props}/>
 			<div className="text-center">
 				<h1>FORGOT PASSWORD</h1>
 				<form onSubmit={this.handleSubmit}>
@@ -109,6 +112,7 @@ class ForgotPassword extends React.Component<any, any> {
 					{this.state.errorMessage}
 				</p>
 			</div>
+			</span>
 		);	// return ends
 	}	// render ends
 }	// class ends

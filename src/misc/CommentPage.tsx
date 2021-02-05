@@ -6,6 +6,7 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Header from '../header/Header';
 
 import PropTypes from 'prop-types';
 
@@ -388,6 +389,7 @@ class CommentsPage extends React.Component<any, any> {
 
 		return (
 			<div >
+				<Header {...this.props}/>
 				<div className="text-right">
 					{signinTag}
 				</div>

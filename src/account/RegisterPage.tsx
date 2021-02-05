@@ -2,6 +2,7 @@
 import React from 'react';
 
 import SigninPage from './SigninPage';
+import Header from '../header/Header';
 
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
@@ -128,6 +129,8 @@ class Register extends React.Component<any, any> {
 
 	render() {
 		return (
+			<span>
+				<Header {...this.props}/>
 			<div className="text-center">
 				<h1 className="text-center"> REGISTER </h1>
 				<form onSubmit={this.handleSubmit}>
@@ -177,6 +180,7 @@ class Register extends React.Component<any, any> {
 				</p>
 				{this.state.errorMessage}
 			</div>
+			</span>
 		);	// return ends
 	}	// render function ends
 }

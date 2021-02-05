@@ -8,7 +8,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import Divider from '@material-ui/core/Divider';
-
+import Header from '../header/Header';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
@@ -567,6 +567,7 @@ class SherPage extends React.Component<any, any> {
 
 		return (
 			<div>
+				<Header {...this.props}/>
 				<div className="text-right">
 					{signinTag}
 				</div>

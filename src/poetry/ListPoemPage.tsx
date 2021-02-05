@@ -9,6 +9,7 @@ import Divider from '@material-ui/core/Divider';
 // eslint-disable-next-line no-unused-vars
 import PoemPage from './PoemPage';
 import PropTypes from 'prop-types';
+import Header from '../header/Header';
 
 import YAML from 'yaml';
 
@@ -140,6 +141,7 @@ class ListPoemPage extends React.Component<any, any> {
 
 		return (
 			<div>
+				<Header {...this.props}/>
 				<div className="text-right">
 					{signinTag}
 				</div>

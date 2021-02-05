@@ -4,6 +4,7 @@ import StaticContentService from '../misc/StaticContentServiceYaml';
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
+import Header from '../header/Header';
 
 import YAML from 'yaml';
 
@@ -118,6 +119,7 @@ class PoemPage extends React.Component<any, any> {
 
 		return (
 			<div>
+				<Header {...this.props}/>
 				<div className="text-right">
 					{signinTag}
 				</div>
