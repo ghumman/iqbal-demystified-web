@@ -120,9 +120,9 @@ class PoemPage extends React.Component<any, any> {
 		return (
 			<div>
 				<Header {...this.props}/>
-				<div className="text-right">
+				{/* <div className="text-right">
 					{signinTag}
-				</div>
+				</div> */}
 				<div className="tabTitle">
 
 

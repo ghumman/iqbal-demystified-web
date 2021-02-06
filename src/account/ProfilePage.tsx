@@ -221,9 +221,9 @@ class ProfilePage extends React.Component<any, any> {
 			<span>
 				<Header {...this.props}/>
 			<div>
-				<div className="text-right">
+				{/* <div className="text-right">
 					{signinTag}
-				</div>
+				</div> */}
 				<h1 className="text-center">My Profile</h1>
 				<div className="text-center">
 					<p>Now you can write comments!</p>

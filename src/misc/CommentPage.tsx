@@ -347,8 +347,10 @@ class CommentsPage extends React.Component<any, any> {
 	}
 
 	render() {
-		var itemsRecent = this.state.recentData.map((item: any) =>
-			<span key={item.index} onClick={() => this.onSubmit(item.id)}>
+		var itemsRecent = this.state.recentData.map((item: any) => {
+			try {
+			return (
+			<span className="customFont" key={item.index} onClick={() => this.onSubmit(item.id)}>
 				{
 					item.sherContent[0].text[0]
 				}
@@ -360,10 +362,18 @@ class CommentsPage extends React.Component<any, any> {
 					item.sherContent[1].text[1]
 				} < br /> < br />
 			</span>
-		);
+			)
+			} 
+			catch(err) {
+				return;
+			}
+		})
 
-		var itemsPopular = this.state.popularData.map((item: any) =>
-			<span key={item.index} onClick={() => this.onSubmit(item.id)}> {
+
+		var itemsPopular = this.state.popularData.map((item: any) => {
+			try {
+			return (
+			<span className="customFont" key={item.index} onClick={() => this.onSubmit(item.id)}> {
 				item.sherContent[0].text[0]
 			} < br /> {
 				item.sherContent[0].text[1]
@@ -372,7 +382,12 @@ class CommentsPage extends React.Component<any, any> {
 			} < br /> {
 				item.sherContent[1].text[1]
 			} < br /> < br /> </span>
-		);
+			)
+		} catch(err) {
+			return;
+		}
+
+		})
 
 		let signinTag;
 		var signinMessageLocal = '';
@@ -388,11 +403,11 @@ class CommentsPage extends React.Component<any, any> {
 
 
 		return (
-			<div >
+			<div className="customFont">
 				<Header {...this.props}/>
-				<div className="text-right">
+				{/* <div className="text-right">
 					{signinTag}
-				</div>
+				</div> */}
 
 				<div className="tabTitle">
 					<Tabs

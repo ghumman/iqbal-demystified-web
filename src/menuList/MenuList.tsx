@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -36,8 +36,9 @@ const useStyles = makeStyles(theme => ({
       width: '75px',
     },
     photoIcon: {
-        height: '25px',
-        width: '25px',
+        height: '40px',
+        width: '40px',
+        borderRadius: "50%",
     },
     list: {
       width: 250,
@@ -51,8 +52,18 @@ const useStyles = makeStyles(theme => ({
 
 const MenuList = (props) => {
     const classes = useStyles();
-    const [loginStatusPage, setLoginStatusPage] = useState('RegisterPage')
+    const [loginStatusPage, setLoginStatusPage] = useState('')
     const { toggleDrawer, history, location } = props;
+
+    useEffect(() => {
+      try {
+        if (location.state.profileSigninConfirmation ) {
+          setLoginStatusPage("ProfilePage");
+        } else {
+          setLoginStatusPage("RegisterPage");
+        }
+      } catch(err) {}
+    },[props])
 
     const onSubmit = (pageName:string) => {
       console.log("value of props: ");
@@ -62,13 +73,13 @@ const MenuList = (props) => {
       if (pageName === 'Intikhab') {
         history.push({
           pathname: '/ListPoemPage',
-          state: { detailBook: 'List_Editor_Pick', profileSigninConfirmation: '', profileUsername: '', profilePassword: '' }
+          state: { detailBook: 'List_Editor_Pick', ...location.state }
         });
       }
       else {
         history.push({
           pathname: pageName,
-          state: { profileSigninConfirmation: '', profileUsername: '', profilePassword: '' }
+          state: { ...location.state }
         });
       }
     }
@@ -82,7 +93,7 @@ const MenuList = (props) => {
         >
           <List>
             <ListItem button key={'Profile'} onClick={() => onSubmit(loginStatusPage)}>
-              <ListItemIcon>
+              <ListItemIcon >
               <img src={iconSignIn} className={classes.photoIcon} alt="signin"/>
               </ListItemIcon>
               <ListItemText primary={'Profile'} />

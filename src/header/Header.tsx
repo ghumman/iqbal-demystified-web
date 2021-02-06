@@ -59,6 +59,10 @@ const useStyles = makeStyles(theme => ({
         maxWidth: "8%",
         height: "auto",
         width: "auto",
+    }, 
+    paper: {
+      background: "purple",
+      color: 'white'
     }
   }))
   
@@ -111,11 +115,12 @@ const Header = (props) => {
       let signinMessageLocal;
       if (signinConfirmation === true && username !== '') {
         signinMessageLocal = username.charAt(0).toUpperCase();
-        signinTag = <button type="button" className="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>;
+        signinTag = <button onClick={handleClickOpen} type="button" className="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>;
       }
       else {
         signinMessageLocal = 'Sign In';
-        signinTag = <button type="button" className="btn btn-primary" onClick={() => signMeIn()}> {signinMessageLocal} </button>;
+        // signinTag = <button type="button" className="btn btn-primary" onClick={() => signMeIn()}> {signinMessageLocal} </button>;
+        signinTag = <button type="button" className="btn btn-primary" onClick={handleClickOpen}> {signinMessageLocal} </button>;
       }
     
     return (
@@ -129,11 +134,12 @@ const Header = (props) => {
           >
             <MenuIcon onClick={toggleDrawer(true)} {...props}/> 
             <Drawer
+              classes={{ paper: classes.paper }}
               anchor={'left'}
               open={drawerOpen}
               onClose={toggleDrawer(false)}
             >
-              <MenuList toggleDrawer={toggleDrawer} {...props}/>
+              <MenuList  toggleDrawer={toggleDrawer} {...props}/>
             </Drawer>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
@@ -153,8 +159,8 @@ const Header = (props) => {
           </Button>
           <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Open simple dialog
-      </Button>
-      <SimpleDialog open={open} onClose={handleClose} {...props}/> */}
+      </Button> */}
+      <SimpleDialog open={open} onClose={handleClose} {...props}/>
         </Toolbar>
       </AppBar>
         </div>

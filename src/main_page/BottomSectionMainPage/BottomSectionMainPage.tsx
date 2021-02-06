@@ -78,7 +78,7 @@ class TabView2 extends React.Component<any, any> {
 				<header className="App-header">
 					<div>
 
-						<Container>
+						{/* <Container>
 							<Row>
 								<Col><img src={iconSignIn} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit(this.state.gotoPage)} /><div className="tab2Text"> PROFILE </div></Col>
 								<Col><img src={iconBest} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('Intikhab')} /><div className="tab2Text"> INTIKHAB </div></Col>
@@ -88,7 +88,7 @@ class TabView2 extends React.Component<any, any> {
 								<Col><img src={iconSearch} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('SearchPage')} /><div className="tab2Text"> SEARCH </div></Col>
 								<Col><img src={iconInfo} className="rounded mx-auto d-block imgSizing" alt="logo" onClick={() => this.onSubmit('InfoPage')} /><div className="tab2Text"> INFO </div></Col>
 							</Row>
-						</Container>
+						</Container> */}
 
 					</div>
 
