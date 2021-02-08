@@ -19,7 +19,12 @@ import CardContent from '@material-ui/core/CardContent';
 
 const useStyles = (theme) => ({
 	root: {
-		minWidth: 275,
+		display: "block",
+		margin: "10px",
+		textAlign: "center" as "center",
+		borderStyle: "solid",
+		borderRadius: "25px",
+		background: "#FFFAFA",
 	  },
 
 	poetryBookTitle: {
@@ -34,7 +39,7 @@ const useStyles = (theme) => ({
 	  poetryPoemsList: {
 		fontFamily: "Jameel",
 		color: "black",
-		fontSize: "20px",
+		fontSize: "30px",
 		textAlign: "center" as "center",
 		cursor: "pointer",
 	  },
@@ -42,7 +47,7 @@ const useStyles = (theme) => ({
 	  poetryPoemsSectionsList: {
 		fontFamily: "Jameel",
 		color: "red",
-		fontSize: "20px",
+		fontSize: "30px",
 		textAlign: "center" as "center",
 	  }
 
@@ -169,6 +174,8 @@ class ListPoemPage extends React.Component<any, any> {
 
 		const { classes } = this.props;
 		var item3 = this.state.poemText.map((item: any) =>
+		<div>
+
 		<Card className={classes.root}>
 			<CardContent>
 				{item.id == '0' ? (
@@ -193,6 +200,8 @@ class ListPoemPage extends React.Component<any, any> {
 				
 			</CardContent>
 		</Card>
+		<div></div>
+		</div>
 		);
 
 		let signinTag;
