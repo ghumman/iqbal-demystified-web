@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -97,6 +97,9 @@ export default function MainPage(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const [signinConfirmation, setSigninConfirmation] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -109,9 +112,18 @@ export default function MainPage(props) {
   const onSubmit = (bookNumber: any) => {
       props.history.push({
           pathname: '/ListPoemPage',
-          state: { detailBook: bookNumber, profileSigninConfirmation: '', profileUsername: '', profilePassword: '' }
+          state: { detailBook: bookNumber, profileSigninConfirmation: signinConfirmation, profileUsername: username, profilePassword: password }
       });
   }
+
+  useEffect(() => {
+
+    if (props.location.state) {
+      setSigninConfirmation(props.location.state.profileSigninConfirmation);
+      setUsername(props.location.state.profileUsername);
+      setPassword(props.location.state.profilePassword);
+    }
+  }, [props.location]);
 
   return (
       <span>

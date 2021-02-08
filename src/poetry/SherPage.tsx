@@ -2,7 +2,8 @@ import React from 'react';
 // import Tabs from './Tabs';
 
 // for formatting
-import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
+// import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
+
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -14,10 +15,50 @@ import PropTypes from 'prop-types';
 import $ from 'jquery';
 import YAML from 'yaml';
 
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Box from '@material-ui/core/Box';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+
 declare var window : any;
 window.$ = window.jQuery = $;
 
-// window.jQuery = $;
+const useStyles = (theme) => ({
+	root: {
+		display: "block",
+		margin: "10px",
+		textAlign: "center" as "center",
+		borderStyle: "solid",
+		borderRadius: "25px",
+		background: "#FFFAFA",
+	  },
+
+	poetryBookTitle: {
+		textAlign: "center" as "center",
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "40px",
+		fontWeight: "bold" as "bold",
+		fontStyle: "bold",
+	  },
+	
+	  poetryPoemsList: {
+		fontFamily: "Jameel",
+		color: "black",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+	  },
+
+	  poetryPoemsSectionsList: {
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+	  }
+
+});
 
 class SherPage extends React.Component<any, any> {
 
@@ -530,8 +571,9 @@ class SherPage extends React.Component<any, any> {
 	}
 
 	render() {
-		var item4 = this.state.sherText.map((item: any) =>
-			<p key={item.index}> {item}</p>
+		const { classes } = this.props;
+		var sherText = this.state.sherText.map((item: any) =>
+			<p key={item.index } className={classes.poetryPoemsList}> {item}</p>
 		);
 
 		var item5 = this.state.wordText.map((item: any) =>
@@ -539,8 +581,78 @@ class SherPage extends React.Component<any, any> {
 			/*<span key={item.index}> {item}: {index}</span>*/
 		);
 
-		var item6 = this.state.sherDiscussionDetail.map((item: any) =>
-			<div key={item.id}> <div className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br /> <p>{item.text}<br /><br /> <button type="button" className="btn btn-primary px-2" onClick={() => this.vote_like(item.id)}> LIKE </button> <span className="px-2">SCORE: {item.score}</span><button type="button" className="btn btn-primary" onClick={() => this.vote_dislike(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary" onClick={() => this.vote_unregister(item.id)} >UNREGISTER</button></p><Divider /></div>
+		var userComments = this.state.sherDiscussionDetail.map((item: any) =>
+		<div>
+			<Card className={classes.root}>
+				<CardContent>
+				<Box
+        display="flex"
+      >
+        <Box 
+        m={1}
+		p={1}
+		
+        >
+          <ThumbUpIcon/>
+		  <div/>
+		  {item.score}
+		  <div/>
+		  <ThumbDownIcon/>
+        </Box>
+        <Box
+        display="flex"
+		flexDirection="column"
+		flexGrow={1}
+      >
+        <Box 
+
+        p={4}
+        >
+			<span className={classes.poetryPoemsList}>
+          		{item.text}
+		  	</span>
+        </Box>
+        <Box 
+        p={1}
+        textAlign="center"
+        >
+          <span className="float-left">{item.username} </span>
+		  <span className="float-right">{item.timestamp} </span>
+        </Box>
+        </Box>
+        
+      </Box>
+					{/* <div key={item.id}> 
+						<div className="float-left">
+							<p> {item.username}</p>
+						</div> 
+						<div className="float-right">
+							<p>  {item.timestamp}</p> 
+						</div>
+						<br /> 
+						<p className={classes.poetryPoemsList}>
+							{item.text}
+							<br /><br /> 
+							<button type="button" className="btn btn-primary px-2" onClick={() => this.vote_like(item.id)}> 
+								LIKE 
+							</button> 
+							<span className="px-2">
+								SCORE: {item.score}
+							</span>
+							<button type="button" className="btn btn-primary" onClick={() => this.vote_dislike(item.id)} >
+								DISLIKE
+							</button>
+							<p></p>
+							<button type="button" className="btn btn-primary" onClick={() => this.vote_unregister(item.id)} >
+								UNREGISTER
+							</button>
+						</p>
+						<Divider />
+					</div> */}
+				</CardContent>
+			</Card>
+			<div></div>
+		</div>
 
 		);
 
@@ -568,22 +680,20 @@ class SherPage extends React.Component<any, any> {
 		return (
 			<div>
 				<Header {...this.props}/>
-				{/* <div className="text-right">
-					{signinTag}
-				</div> */}
-				<div className="tabTitle">
+
+				<div className={classes.poetryBookTitle}>
 					{this.state.poemText}
 				</div>
-				<div className="sherPageText">
+				<div>
 					<Tabs
 						id="controlled-tab-example"
 						activeKey={this.state.key}
 						onSelect={(key: any) => this.setState({ key })}
 						className="nav-tabs"
 					>
-						<Tab class="sherPageText" eventKey="home" title="DISCUSSION">
-							{item4}
-							{item6}
+						<Tab eventKey="home" title="DISCUSSION">
+							{sherText}
+							{userComments}
 
 
 							<form onSubmit={this.handleSubmitSher}>
@@ -627,4 +737,4 @@ class SherPage extends React.Component<any, any> {
 	}  // render function ends
 } // class ends
 
-export default SherPage;
+export default withStyles(useStyles)(SherPage);

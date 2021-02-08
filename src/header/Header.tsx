@@ -101,15 +101,12 @@ const Header = (props) => {
       }
 
       useEffect(() => {
-
-        console.log("value of props.location");
-        console.log(props.location);
         if (props.location.state) {
           setSigninConfirmation(props.location.state.profileSigninConfirmation);
           setUsername(props.location.state.profileUsername);
           setPassword(props.location.state.profilePassword);
         }
-      }, [props.location]); // Only re-run the effect if count changes
+      }, [props.location]);
 
       let signinTag;
       let signinMessageLocal;
