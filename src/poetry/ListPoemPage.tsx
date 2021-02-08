@@ -2,7 +2,7 @@ import React from 'react';
 import StaticContentService from '../misc/StaticContentServiceYaml';
 
 // for formatting
-import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
+// import './Poetry.css'
 
 import Divider from '@material-ui/core/Divider';
 
@@ -12,6 +12,41 @@ import PropTypes from 'prop-types';
 import Header from '../header/Header';
 
 import YAML from 'yaml';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+
+const useStyles = (theme) => ({
+	root: {
+		minWidth: 275,
+	  },
+
+	poetryBookTitle: {
+		textAlign: "center" as "center",
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "40px",
+		fontWeight: "bold" as "bold",
+		fontStyle: "bold",
+	  },
+	
+	  poetryPoemsList: {
+		fontFamily: "Jameel",
+		color: "black",
+		fontSize: "20px",
+		textAlign: "center" as "center",
+		cursor: "pointer",
+	  },
+
+	  poetryPoemsSectionsList: {
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "20px",
+		textAlign: "center" as "center",
+	  }
+
+});
 
 class ListPoemPage extends React.Component<any, any> {
 
@@ -66,15 +101,23 @@ class ListPoemPage extends React.Component<any, any> {
 		for (var i = 0; i < yamlObject.sections.length; i++) {
 			try {
 				if (yamlObject.sections[i].sectionName[0]) {
-					for (var j = 0; j < yamlObject.sections[i].sectionName.length; j++)
-						this.state.poemText.push({ 'text': yamlObject.sections[i].sectionName[j].text, 'id': '0' });
+					// for (var j = 0; j < yamlObject.sections[i].sectionName.length; j++) {
+						// console.log("value of yamlObject.sections[i].sectionName[j].text: i: j:");
+						// console.log(yamlObject.sections[i].sectionName[j].text);
+						// console.log(i);
+						// console.log(j);
+						this.state.poemText.push({ 'textUrdu': yamlObject.sections[i].sectionName[0].text, 'textEnglish': yamlObject.sections[i].sectionName[1].text, 'id': '0' });
+					// }
 				}
 			}
 			catch (e) {
 				if (yamlObject.sections[i].poems[0].poemName[0]) {
 					for (var jj = 0; jj < yamlObject.sections[i].poems.length; jj++) {
-						for (var k = 0; k < yamlObject.sections[i].poems[jj].poemName.length; k++)
-							this.state.poemText.push({ 'text': yamlObject.sections[i].poems[jj].poemName[k].text, 'id': yamlObject.sections[i].poems[jj].id });
+						// for (var k = 0; k < yamlObject.sections[i].poems[jj].poemName.length; k++) {
+							// console.log("value of yamlObject.sections[i].poems[jj].poemName.length: ");
+							// console.log(yamlObject.sections[i].poems[jj].poemName.length);
+							this.state.poemText.push({ 'textUrdu': yamlObject.sections[i].poems[jj].poemName[0].text, 'textEnglish': yamlObject.sections[i].poems[jj].poemName[1].text, 'id': yamlObject.sections[i].poems[jj].id });
+						// }
 						this.setState({ poemObject: yamlObject.sections[i].poems[jj] });
 					}
 				}	// if yamlObject.... ends
@@ -124,8 +167,32 @@ class ListPoemPage extends React.Component<any, any> {
 
 	render() {
 
+		const { classes } = this.props;
 		var item3 = this.state.poemText.map((item: any) =>
-			<p key={item.index} onClick={() => this.onSubmit(item.id)}> {item.text}<Divider /></p>
+		<Card className={classes.root}>
+			<CardContent>
+				{item.id == '0' ? (
+					<div className={classes.poetryPoemsSectionsList} key={item.index} > 
+						<div>
+							{item.textUrdu}
+						</div>
+						<div>
+							{item.textEnglish}
+						</div>
+					</div>
+				 ) : (
+					<div className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
+						<div>
+							{item.textUrdu}
+						</div>
+						<div>
+							{item.textEnglish}
+						</div>
+					</div>
+				 )}
+				
+			</CardContent>
+		</Card>
 		);
 
 		let signinTag;
@@ -145,7 +212,7 @@ class ListPoemPage extends React.Component<any, any> {
 				{/* <div className="text-right">
 					{signinTag}
 				</div> */}
-				<div className="tabTitle">
+				<div className={classes.poetryBookTitle}>
 					<p>
 						{this.state.bookNameUrdu}
 					</p>
@@ -153,7 +220,7 @@ class ListPoemPage extends React.Component<any, any> {
 						{this.state.bookNameEnglish}
 					</p>
 				</div>
-				<div className="text-center listPoemPageText">
+				<div>
 					{item3}
 				</div>
 			</div>
@@ -161,4 +228,4 @@ class ListPoemPage extends React.Component<any, any> {
 		);
 	}
 }
-export default ListPoemPage;
+export default withStyles(useStyles)(ListPoemPage);

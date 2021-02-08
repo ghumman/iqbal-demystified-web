@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: 'Jameel';
     src: local('Jameel'), url(../../assets/fonts/Jameel.ttf) format('truetype');
 }
@@ -8,4 +8,4 @@
 .customFont {
     font-family: Jameel;
     color: red;
-}
+} */
