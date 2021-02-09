@@ -112,7 +112,8 @@ export default function MainPage(props) {
   const onSubmit = (bookNumber: any) => {
       props.history.push({
           pathname: '/ListPoemPage',
-          state: { detailBook: bookNumber, profileSigninConfirmation: signinConfirmation, profileUsername: username, profilePassword: password }
+          state: { detailBook: bookNumber, profileSigninConfirmation: signinConfirmation, profileUsername: username, profilePassword: password },
+          ...props
       });
   }
 

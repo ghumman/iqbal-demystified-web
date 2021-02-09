@@ -73,7 +73,7 @@ const MenuList = (props) => {
       
       if (pageName === 'Intikhab') {
         history.push({
-          pathname: '/ListPoemPage',
+          pathname: 'ListPoemPage',
           state: { detailBook: 'List_Editor_Pick', ...location.state }
         });
       }

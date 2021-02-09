@@ -12,7 +12,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 const useStyles = (theme) => ({
-	root: {
+	cardBackground: {
 		display: "block",
 		margin: "10px",
 		textAlign: "center" as "center",
@@ -22,6 +22,7 @@ const useStyles = (theme) => ({
 	  },
 
 	poetryBookTitle: {
+		margin: "10px",
 		textAlign: "center" as "center",
 		fontFamily: "Jameel",
 		color: "red",
@@ -147,7 +148,7 @@ class PoemPage extends React.Component<any, any> {
 		var item3 = this.state.poemTextNew.map((item: any) => 
 		<div>
 
-		<Card className={classes.root}>
+		<Card className={classes.cardBackground}>
 			<CardContent>
 					<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
 						{item.sherContent[0].text[0]}

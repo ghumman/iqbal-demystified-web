@@ -26,7 +26,7 @@ declare var window : any;
 window.$ = window.jQuery = $;
 
 const useStyles = (theme) => ({
-	root: {
+	cardBackground: {
 		display: "block",
 		margin: "10px",
 		textAlign: "center" as "center",
@@ -36,6 +36,7 @@ const useStyles = (theme) => ({
 	  },
 
 	poetryBookTitle: {
+		margin: "10px",
 		textAlign: "center" as "center",
 		fontFamily: "Jameel",
 		color: "red",
@@ -606,7 +607,7 @@ class SherPage extends React.Component<any, any> {
 
 		var userComments = this.state.sherDiscussionDetail.map((item: any) =>
 		<div>
-			<Card className={classes.root}>
+			<Card className={classes.cardBackground}>
 				<CardContent>
 				<Box
 					display="flex"
@@ -657,7 +658,7 @@ class SherPage extends React.Component<any, any> {
 					if ((item.wordposition - 1) === this.state.mySelectedId)
 						return (
 							<div>
-							<Card className={classes.root}>
+							<Card className={classes.cardBackground}>
 								<CardContent>
 								<Box
 									display="flex"
