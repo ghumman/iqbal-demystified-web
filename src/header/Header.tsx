@@ -56,7 +56,15 @@ const useStyles = makeStyles(theme => ({
         color: blue[600],
       },
     img: {
-        maxWidth: "8%",
+        [theme.breakpoints.down('sm')]: {
+          maxWidth: "40%",
+        },
+        [theme.breakpoints.up('md')]: {
+          maxWidth: "8%",
+        },
+        [theme.breakpoints.up('lg')]: {
+          maxWidth: "8%",
+        },
         height: "auto",
         width: "auto",
     }, 
