@@ -147,6 +147,7 @@ class ListPoemPage extends React.Component<any, any> {
 	}	// getPoemList ends
 
 	componentDidMount() {
+		console.log("inside component Did mount")
 		window.scrollTo(0, 0);
 		// retrive the data
 		try {
@@ -160,6 +161,12 @@ class ListPoemPage extends React.Component<any, any> {
 			// TODO 
 		}
 	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.location !== this.props.location) {
+			this.getPoemList(this.props.location.state.detailBook);
+		}
+	  }
 
 	signMeIn = () => {
 		if (this.state.username === '') {
