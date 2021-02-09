@@ -10,10 +10,9 @@ import PropTypes from 'prop-types';
 import Header from '../header/Header';
 
 import $ from 'jquery';
-declare var window : any;
+declare var window: any;
 window.$ = window.jQuery = $;
 
-// window.jQuery = $;
 
 
 class ProfilePage extends React.Component<any, any> {
@@ -57,7 +56,7 @@ class ProfilePage extends React.Component<any, any> {
 			leaderBoardTextOddWordName: [],
 			leaderBoardTextWordConcat: [],
 
-			dropdownState: 'discussion', 
+			dropdownState: 'discussion',
 			message: ''
 
 		};
@@ -172,7 +171,7 @@ class ProfilePage extends React.Component<any, any> {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.setState({message: err});
+			this.setState({ message: err });
 		}
 
 	}
@@ -212,39 +211,36 @@ class ProfilePage extends React.Component<any, any> {
 		var myTable: any = '';
 
 		if (this.state.dropdownState === 'discussion') {
-			myTable = <ReactTable style={{alignItems: "center"}} data={this.state.leaderBoardTextDiscussionConcat} columns={columns} />;
+			myTable = <ReactTable style={{ alignItems: "center" }} data={this.state.leaderBoardTextDiscussionConcat} columns={columns} />;
 		}
 		else {
 			myTable = <ReactTable data={this.state.leaderBoardTextWordConcat} columns={columns} />;
 		}
 		return (
 			<span>
-				<Header {...this.props}/>
-			<div>
-				{/* <div className="text-right">
-					{signinTag}
-				</div> */}
-				<h1 className="text-center">My Profile</h1>
-				<div className="text-center">
-					<p>Now you can write comments!</p>
-					<p>You can also vote to others&apos; comments!</p>
-					<p>More profile features coming soon!</p>
+				<Header {...this.props} />
+				<div>
+					<h1 className="text-center">My Profile</h1>
+					<div className="text-center">
+						<p>Now you can write comments!</p>
+						<p>You can also vote to others&apos; comments!</p>
+						<p>More profile features coming soon!</p>
 
 
-					<button onClick={() => this.changePassword()} > CHANGE PASSWORD </button>
+						<button onClick={() => this.changePassword()} > CHANGE PASSWORD </button>
 
-					<button onClick={() => this.signOut()} > SIGN OUT </button>
+						<button onClick={() => this.signOut()} > SIGN OUT </button>
+					</div>
+					<p>
+						<select value={this.state.dropdownState} onChange={this.dropChange}>
+							<option selected value="discussion">Discussion</option>
+							<option value="word">Word Meanings</option>
+						</select>
+					</p>
+
+					{myTable}
+
 				</div>
-				<p>
-					<select value={this.state.dropdownState} onChange={this.dropChange}>
-						<option selected value="discussion">Discussion</option>
-						<option value="word">Word Meanings</option>
-					</select>
-				</p>
-
-				{myTable}
-
-			</div>
 			</span>
 		);
 	}

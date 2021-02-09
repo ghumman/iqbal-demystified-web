@@ -1,16 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 
-import RegisterPage from './RegisterPage';
 import Header from '../header/Header';
-import ForgotPasswordPage from './ForgotPasswordPage';
 
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-declare var window : any;
+declare var window: any;
 window.$ = window.jQuery = $;
 
 // window.jQuery = $;
@@ -112,36 +110,36 @@ class Signin extends React.Component<any, any> {
 	render() {
 		return (
 			<span>
-				<Header {...this.props}/>
-			<div className="text-center">
-				<h1>Sign In</h1>
-				<form onSubmit={this.handleSubmit}>
+				<Header {...this.props} />
+				<div className="text-center">
+					<h1>Sign In</h1>
+					<form onSubmit={this.handleSubmit}>
 
-					<label>
-						Username:
+						<label>
+							Username:
 						<input type="text" value={this.state.username} onChange={this.handleChangeUsername} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<label>
-						Password:
+						<label>
+							Password:
 						<input type="password" value={this.state.password} onChange={this.handleChangePassword} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<input type="submit" value="SIGN IN" />
-				</form>
+						<input type="submit" value="SIGN IN" />
+					</form>
 
-				<p onClick={() => this.onSubmitForgot()}>
-					I Forgot My Password!
+					<p onClick={() => this.onSubmitForgot()}>
+						I Forgot My Password!
 				</p>
 
-				<p onClick={() => this.onSubmitRegister()}>
-					Do not have an account? {'\n'}
+					<p onClick={() => this.onSubmitRegister()}>
+						Do not have an account? {'\n'}
 					Register Here
 				</p>
-				{this.state.errorMessage}
-			</div>
+					{this.state.errorMessage}
+				</div>
 			</span>
 		);
 	}

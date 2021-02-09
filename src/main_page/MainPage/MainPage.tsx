@@ -29,14 +29,6 @@ import farsi2Book1 from './../../assets/android_app_assets/book_javed_nama_persi
 import farsi2Book2 from './../../assets/android_app_assets/book_pas_cheh_bayad_kard_persian_10.jpg';
 import farsi2Book3 from './../../assets/android_app_assets/book_armaghan_ae_hijaz_persian_11.jpg';
 
-// import './MainPage.css';
-// import Font from './../Fonts/Fonts';
-// import './MainPage.css';
-
-
-
-
-
 
 interface TabPanelProps {
   children?: React.ReactNode;

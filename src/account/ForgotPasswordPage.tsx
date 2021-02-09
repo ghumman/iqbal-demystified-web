@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 
-import SigninPage from './SigninPage';
 import PropTypes from 'prop-types';
 import Header from '../header/Header';
 
 import $ from 'jquery';
-declare var window : any;
+declare var window: any;
 window.$ = window.jQuery = $;
 
-// window.jQuery = $;
 
 class ForgotPassword extends React.Component<any, any> {
 
@@ -93,25 +91,25 @@ class ForgotPassword extends React.Component<any, any> {
 	render() {
 		return (
 			<span>
-				<Header {...this.props}/>
-			<div className="text-center">
-				<h1>FORGOT PASSWORD</h1>
-				<form onSubmit={this.handleSubmit}>
-					<label>
-						Email:
+				<Header {...this.props} />
+				<div className="text-center">
+					<h1>FORGOT PASSWORD</h1>
+					<form onSubmit={this.handleSubmit}>
+						<label>
+							Email:
 						<input type="text" value={this.state.email} onChange={this.handleChangeEmail} />
-					</label>
-					<p></p>
-					<input type="submit" value="RESET MY PASSWORD!" />
-				</form>
-				<p onClick={() => this.onSubmitSignin()}>
-					Already Registered?{'\n'}
+						</label>
+						<p></p>
+						<input type="submit" value="RESET MY PASSWORD!" />
+					</form>
+					<p onClick={() => this.onSubmitSignin()}>
+						Already Registered?{'\n'}
 					Login Here
 				</p>
-				<p>
-					{this.state.errorMessage}
-				</p>
-			</div>
+					<p>
+						{this.state.errorMessage}
+					</p>
+				</div>
 			</span>
 		);	// return ends
 	}	// render ends

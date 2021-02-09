@@ -1,8 +1,6 @@
 import React from 'react';
 import StaticContentService from '../misc/StaticContentServiceYaml';
 
-// for formatting
-// import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 import Header from '../header/Header';
 
@@ -19,7 +17,7 @@ const useStyles = (theme) => ({
 		borderStyle: "solid",
 		borderRadius: "25px",
 		background: "#FFFAFA",
-	  },
+	},
 
 	poetryBookTitle: {
 		margin: "10px",
@@ -29,22 +27,22 @@ const useStyles = (theme) => ({
 		fontSize: "40px",
 		fontWeight: "bold" as "bold",
 		fontStyle: "bold",
-	  },
-	
-	  poetryPoemsList: {
+	},
+
+	poetryPoemsList: {
 		fontFamily: "Jameel",
 		color: "black",
 		fontSize: "30px",
 		textAlign: "center" as "center",
 		cursor: "pointer",
-	  },
+	},
 
-	  poetryPoemsSectionsList: {
+	poetryPoemsSectionsList: {
 		fontFamily: "Jameel",
 		color: "red",
 		fontSize: "30px",
 		textAlign: "center" as "center",
-	  }
+	}
 
 });
 
@@ -145,24 +143,24 @@ class PoemPage extends React.Component<any, any> {
 	render() {
 
 		const { classes } = this.props;
-		var item3 = this.state.poemTextNew.map((item: any) => 
-		<div>
+		var item3 = this.state.poemTextNew.map((item: any) =>
+			<div>
 
-		<Card className={classes.cardBackground}>
-			<CardContent>
-					<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
-						{item.sherContent[0].text[0]}
-						<br />
-						{item.sherContent[0].text[1]}
-						<br />
-						{item.sherContent[1].text[0]}
-						<br />
-						{item.sherContent[1].text[1]}
-					</p>
-			</CardContent>
-		</Card>
-		<div></div>
-		</div>
+				<Card className={classes.cardBackground}>
+					<CardContent>
+						<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}>
+							{item.sherContent[0].text[0]}
+							<br />
+							{item.sherContent[0].text[1]}
+							<br />
+							{item.sherContent[1].text[0]}
+							<br />
+							{item.sherContent[1].text[1]}
+						</p>
+					</CardContent>
+				</Card>
+				<div></div>
+			</div>
 
 		);
 		let signinTag;
@@ -178,20 +176,16 @@ class PoemPage extends React.Component<any, any> {
 
 		return (
 			<div>
-				<Header {...this.props}/>
+				<Header {...this.props} />
 
-				<div  className={classes.poetryBookTitle}>
-
-
+				<div className={classes.poetryBookTitle}>
 					<p>
 						{this.state.poemNameUrdu}
 					</p>
-
 					<p>
 						{this.state.poemNameEnglish}
 					</p>
 				</div>
-
 				<div>
 					{item3}
 				</div>

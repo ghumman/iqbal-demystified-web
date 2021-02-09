@@ -17,7 +17,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-declare var window : any;
+declare var window: any;
 window.$ = window.jQuery = $;
 
 
@@ -29,7 +29,7 @@ const useStyles = (theme) => ({
 		borderStyle: "solid",
 		borderRadius: "25px",
 		background: "#FFFAFA",
-	  },
+	},
 
 	poetryBookTitle: {
 		margin: "10px",
@@ -39,22 +39,22 @@ const useStyles = (theme) => ({
 		fontSize: "40px",
 		fontWeight: "bold" as "bold",
 		fontStyle: "bold",
-	  },
-	
-	  poetryPoemsList: {
+	},
+
+	poetryPoemsList: {
 		fontFamily: "Jameel",
 		color: "black",
 		fontSize: "30px",
 		textAlign: "center" as "center",
 		cursor: "pointer",
-	  },
+	},
 
-	  poetryPoemsSectionsList: {
+	poetryPoemsSectionsList: {
 		fontFamily: "Jameel",
 		color: "red",
 		fontSize: "30px",
 		textAlign: "center" as "center",
-	  }
+	}
 
 });
 
@@ -85,7 +85,7 @@ class CommentsPage extends React.Component<any, any> {
 			popularData: [],
 
 			testString: '',
-			key: 'home', 
+			key: 'home',
 			message: ''
 
 		};
@@ -123,7 +123,7 @@ class CommentsPage extends React.Component<any, any> {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.setState({message: err})
+			this.setState({ message: err })
 		}
 
 	}
@@ -141,7 +141,7 @@ class CommentsPage extends React.Component<any, any> {
 			}
 			try {
 				el.sherContent[2].text = el.sherContent[2].text.split('|');
-			} catch (err) { 
+			} catch (err) {
 				// TODO 
 			}
 			return el.sherContent;
@@ -176,7 +176,7 @@ class CommentsPage extends React.Component<any, any> {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.setState({message: err})
+			this.setState({ message: err })
 		}
 
 	}
@@ -189,12 +189,12 @@ class CommentsPage extends React.Component<any, any> {
 			el.sherContent[0].text = el.sherContent[0].text.split('|');
 			try {
 				el.sherContent[1].text = el.sherContent[1].text.split('|');
-			} catch (err) { 
+			} catch (err) {
 				// TODO 
 			}
 			try {
 				el.sherContent[2].text = el.sherContent[2].text.split('|');
-			} catch (err) { 
+			} catch (err) {
 				// TODO 
 			}
 			return el.sherContent;
@@ -278,7 +278,7 @@ class CommentsPage extends React.Component<any, any> {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.setState({message: err});
+			this.setState({ message: err });
 		}
 
 	}
@@ -319,7 +319,7 @@ class CommentsPage extends React.Component<any, any> {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.setState({message: err});
+			this.setState({ message: err });
 		}
 
 	}
@@ -390,39 +390,27 @@ class CommentsPage extends React.Component<any, any> {
 		const { classes } = this.props;
 		var itemsRecent = this.state.recentData.map((item: any) => {
 			try {
-			return (
-				<div>
+				return (
+					<div>
 
-				<Card className={classes.cardBackground}>
-					<CardContent>
-							<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
-								{item.sherContent[0].text[0] }
-								<br />
-								{item.sherContent[0].text[1]}
-								<br />
-								{item.sherContent[1] ? item.sherContent[1].text[0] : '#translation missing'}
-								<br />
-								{item.sherContent[1] ? item.sherContent[1].text[1] : '#translation missing'}
-							</p>
-					</CardContent>
-				</Card>
-				<div></div>
-				</div>
-			// <span className="customFont" key={item.index} onClick={() => this.onSubmit(item.id)}>
-			// 	{
-			// 		item.sherContent[0].text[0]
-			// 	}
-			// 	< br /> {
-			// 		item.sherContent[0].text[1]
-			// 	} < br /> {
-			// 		item.sherContent[1].text[0]
-			// 	} < br /> {
-			// 		item.sherContent[1].text[1]
-			// 	} < br /> < br />
-			// </span>
-			)
-			} 
-			catch(err) {
+						<Card className={classes.cardBackground}>
+							<CardContent>
+								<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}>
+									{item.sherContent[0].text[0]}
+									<br />
+									{item.sherContent[0].text[1]}
+									<br />
+									{item.sherContent[1] ? item.sherContent[1].text[0] : '#translation missing'}
+									<br />
+									{item.sherContent[1] ? item.sherContent[1].text[1] : '#translation missing'}
+								</p>
+							</CardContent>
+						</Card>
+						<div></div>
+					</div>
+				)
+			}
+			catch (err) {
 				return;
 			}
 		})
@@ -430,38 +418,28 @@ class CommentsPage extends React.Component<any, any> {
 
 		var itemsPopular = this.state.popularData.map((item: any) => {
 			try {
-			return (
-				<div>
+				return (
+					<div>
 
-				<Card className={classes.cardBackground}>
-					<CardContent>
-							<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
-								{item.sherContent[0].text[0]}
-								<br />
-								{item.sherContent[0].text[1]}
-								<br />
-								{item.sherContent[1] ? item.sherContent[1].text[0] : '#translation missing'}
-								<br />
-								{item.sherContent[1] ? item.sherContent[1].text[1] : '#translation missing'}
-							</p>
-					</CardContent>
-				</Card>
-				<div></div>
-				</div>
-				
-			// <span className="customFont" key={item.index} onClick={() => this.onSubmit(item.id)}> {
-			// 	item.sherContent[0].text[0]
-			// } < br /> {
-			// 	item.sherContent[0].text[1]
-			// } < br /> {
-			// 	item.sherContent[1].text[0]
-			// } < br /> {
-			// 	item.sherContent[1].text[1]
-			// } < br /> < br /> </span>
-			)
-		} catch(err) {
-			return;
-		}
+						<Card className={classes.cardBackground}>
+							<CardContent>
+								<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}>
+									{item.sherContent[0].text[0]}
+									<br />
+									{item.sherContent[0].text[1]}
+									<br />
+									{item.sherContent[1] ? item.sherContent[1].text[0] : '#translation missing'}
+									<br />
+									{item.sherContent[1] ? item.sherContent[1].text[1] : '#translation missing'}
+								</p>
+							</CardContent>
+						</Card>
+						<div></div>
+					</div>
+				)
+			} catch (err) {
+				return;
+			}
 
 		})
 
@@ -480,7 +458,7 @@ class CommentsPage extends React.Component<any, any> {
 
 		return (
 			<div>
-				<Header {...this.props}/>
+				<Header {...this.props} />
 
 				<Tabs
 					id="controlled-tab-example"

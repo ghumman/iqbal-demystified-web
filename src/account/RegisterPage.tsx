@@ -9,10 +9,9 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-declare var window : any;
+declare var window: any;
 window.$ = window.jQuery = $;
 
-// window.jQuery = $;
 
 class Register extends React.Component<any, any> {
 
@@ -130,56 +129,56 @@ class Register extends React.Component<any, any> {
 	render() {
 		return (
 			<span>
-				<Header {...this.props}/>
-			<div className="text-center">
-				<h1 className="text-center"> REGISTER </h1>
-				<form onSubmit={this.handleSubmit}>
-					<label>
-						First Name:
+				<Header {...this.props} />
+				<div className="text-center">
+					<h1 className="text-center"> REGISTER </h1>
+					<form onSubmit={this.handleSubmit}>
+						<label>
+							First Name:
 						<input type="text" value={this.state.firstName} onChange={this.handleChangeFirstName} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<label>
-						Last Name:
+						<label>
+							Last Name:
 						<input type="text" value={this.state.lastName} onChange={this.handleChangeLastName} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<label>
-						Username:
+						<label>
+							Username:
 						<input type="text" value={this.state.username} onChange={this.handleChangeUsername} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<label>
-						Email:
+						<label>
+							Email:
 						<input type="text" value={this.state.email} onChange={this.handleChangeEmail} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<label>
-						Password:
+						<label>
+							Password:
 						<input type="password" value={this.state.password1} onChange={this.handleChangePassword1} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<label>
-						Password (again):
+						<label>
+							Password (again):
 						<input type="password" value={this.state.password2} onChange={this.handleChangePassword2} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<input type="submit" value="REGISTER" />
-				</form>
-				<p onClick={() => this.onSubmitSignin()}>
+						<input type="submit" value="REGISTER" />
+					</form>
+					<p onClick={() => this.onSubmitSignin()}>
 
-					Already Registered?{'\n'}
+						Already Registered?{'\n'}
 					Login Here
 
 				</p>
-				{this.state.errorMessage}
-			</div>
+					{this.state.errorMessage}
+				</div>
 			</span>
 		);	// return ends
 	}	// render function ends

@@ -19,7 +19,7 @@ const useStyles = (theme) => ({
 		borderStyle: "solid",
 		borderRadius: "25px",
 		background: "#FFFAFA",
-	  },
+	},
 
 	poetryBookTitle: {
 		margin: "10px",
@@ -29,22 +29,22 @@ const useStyles = (theme) => ({
 		fontSize: "40px",
 		fontWeight: "bold" as "bold",
 		fontStyle: "bold",
-	  },
-	
-	  poetryPoemsList: {
+	},
+
+	poetryPoemsList: {
 		fontFamily: "Jameel",
 		color: "black",
 		fontSize: "30px",
 		textAlign: "center" as "center",
 		cursor: "pointer",
-	  },
+	},
 
-	  poetryPoemsSectionsList: {
+	poetryPoemsSectionsList: {
 		fontFamily: "Jameel",
 		color: "red",
 		fontSize: "30px",
 		textAlign: "center" as "center",
-	  }
+	}
 
 });
 
@@ -217,32 +217,27 @@ class SearchPage extends React.Component<any, any> {
 		var itemsPoemOrSher: any = [];
 		if (this.state.selectedOption === 'title') {
 			if (this.state.poemList.length !== 0) {
-				
+
 				itemsPoemOrSher = this.state.poemList.map((item: any) =>
 
-				<div>
+					<div>
 
-				<Card className={classes.cardBackground}>
-					<CardContent>
-						<div className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmitPoem(item.id)}> 
-							<div>
-								{item.poemName[0].text} 
-							</div>
-							<div>
-								{item.poemName[1].text} 
-							</div>
-						</div>
-						
-					</CardContent>
-				</Card>
-				<div></div>
-				</div>
-				
-					// <p key={item.id} onClick={() => this.onSubmitPoem(item.id)}>
-					// 	{item.poemName[0].text} 
-					// 	<br /> 
-					// 	{item.poemName[1].text} 
-					// </p>
+						<Card className={classes.cardBackground}>
+							<CardContent>
+								<div className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmitPoem(item.id)}>
+									<div>
+										{item.poemName[0].text}
+									</div>
+									<div>
+										{item.poemName[1].text}
+									</div>
+								</div>
+
+							</CardContent>
+						</Card>
+						<div></div>
+					</div>
+
 				);
 			}
 			else {
@@ -253,39 +248,31 @@ class SearchPage extends React.Component<any, any> {
 		else {
 			if (this.state.sherList.length !== 0) {
 				itemsPoemOrSher = this.state.sherList.map((item: any) =>
-				<div>
+					<div>
 
-				<Card className={classes.cardBackground}>
-					<CardContent>
-							<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmitSher(item.id)}> 
-								{item.sherContent[0].text[0]}
-								<br />
-								{item.sherContent[0].text[1]}
-								<br />
-								{item.sherContent[1].text[0]}
-								<br />
-								{item.sherContent[1].text[1]}
-							</p>
-					</CardContent>
-				</Card>
-				<div></div>
-				</div>
-					// <p key={item.id} onClick={() => this.onSubmitSher(item.id)}> 
-					// 	{item.sherContent[0].text[0]} 
-					// 	<br /> 
-					// 	{item.sherContent[0].text[1]} 
-					// 	<br /> 
-					// 	{item.sherContent[1].text[0]} 
-					// 	<br /> 
-					// 	{item.sherContent[1].text[1]}
-					// </p>
+						<Card className={classes.cardBackground}>
+							<CardContent>
+								<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmitSher(item.id)}>
+									{item.sherContent[0].text[0]}
+									<br />
+									{item.sherContent[0].text[1]}
+									<br />
+									{item.sherContent[1].text[0]}
+									<br />
+									{item.sherContent[1].text[1]}
+								</p>
+							</CardContent>
+						</Card>
+						<div></div>
+					</div>
+
 				);
 			}
 			else {
 				itemsPoemOrSher = <p>No Results Found</p>;
 			}
 		}
-		
+
 		let signinTag;
 		var signinMessageLocal = '';
 		if (this.state.signinConfirmation === 'done') {
@@ -353,63 +340,6 @@ class SearchPage extends React.Component<any, any> {
 					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ہ')}>ہ</button>
 					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('و')}>و</button>
 				</div>
-				{/*
-				<ButtonToolbar class="text-center">
-				  <Button variant="primary" onClick={() => this.handleAlphabet("Back")} class="text-center">-></Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("خ")}>خ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ح")}>ح</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("چ")}>چ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ج")}>ج</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ث")}>ث</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ٹ")}>ٹ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ت")}>ت</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("پ")}>پ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ب")}>ب</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ا")}>ا</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("آ")}>آ</Button>
-				</ButtonToolbar>
-
-				<ButtonToolbar>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ض")}>ض</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ص")}>ص</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ش")}>ش</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("س")}>س</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ژ")}>ژ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ز")}>ز</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ڑ")}>ڑ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ر")}>ر</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ذ")}>ذ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ڈ")}>ڈ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("د")}>د</Button>
-				</ButtonToolbar>
-
-				<ButtonToolbar>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ں")}>ں</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ن")}>ن</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("م")}>م</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ل")}>ل</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("گ")}>گ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ک")}>ک</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ق")}>ق</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ف")}>ف</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("غ")}>غ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ع")}>ع</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ظ")}>ظ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ط")}>ط</Button>
-				</ButtonToolbar>
-
-				<ButtonToolbar>
-
-				  <Button variant="primary" onClick={() => this.handleAlphabet(" ")}>Space</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ے")}>ے</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ي")}>ي</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ء")}>ء</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ھ")}>ھ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("ہ")}>ہ</Button>
-				  <Button variant="primary" onClick={() => this.handleAlphabet("و")}>و</Button>
-
-				</ButtonToolbar>
-				*/}
 
 			</p>;
 		}
@@ -419,7 +349,7 @@ class SearchPage extends React.Component<any, any> {
 		}
 		return (
 			<div>
-				<Header {...this.props}/>
+				<Header {...this.props} />
 
 				<div className="text-center">
 					<div className="tab2Text">

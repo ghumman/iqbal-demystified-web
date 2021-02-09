@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 
-import SigninPage from './SigninPage';
 import Header from '../header/Header';
 
 // for formatting
@@ -10,10 +9,9 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
-declare var window : any;
+declare var window: any;
 window.$ = window.jQuery = $;
 
-// window.jQuery = $;
 
 class ChangePassword extends React.Component<any, any>  {
 
@@ -140,42 +138,42 @@ class ChangePassword extends React.Component<any, any>  {
 	render() {
 		return (
 			<span>
-				<Header {...this.props}/>
-			<div className="text-center">
-				<h1>CHANGE PASSWORD</h1>
-				<form onSubmit={this.handleSubmit}>
+				<Header {...this.props} />
+				<div className="text-center">
+					<h1>CHANGE PASSWORD</h1>
+					<form onSubmit={this.handleSubmit}>
 
-					<label>
-						Current Password:
+						<label>
+							Current Password:
 						<input type="text" value={this.state.currentPassword} onChange={this.handleChangeCurrentPassword} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<label>
-						New Password:
+						<label>
+							New Password:
 						<input type="text" value={this.state.newPassword1} onChange={this.handleChangeNewPassword1} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<label>
-						New Password(again):
+						<label>
+							New Password(again):
 						<input type="text" value={this.state.newPassword2} onChange={this.handleChangeNewPassword2} />
-					</label>
-					<p></p>
+						</label>
+						<p></p>
 
-					<input type="submit" value="CHANGE PASSWORD!" />
-				</form>
-				<p onClick={() => this.onSubmitSignin()}>
+						<input type="submit" value="CHANGE PASSWORD!" />
+					</form>
+					<p onClick={() => this.onSubmitSignin()}>
 
-					Already Registered?{'\n'}
+						Already Registered?{'\n'}
 					Login Here
 
 				</p>
 
-				<p>
-					{this.state.errorMessage}
-				</p>
-			</div>
+					<p>
+						{this.state.errorMessage}
+					</p>
+				</div>
 			</span>
 		);	// return ends
 	}	// render function ends

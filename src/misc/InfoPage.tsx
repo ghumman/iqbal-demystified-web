@@ -51,7 +51,6 @@ class InfoPage extends React.Component<any, any> {
 
 	render() {
 
-		let signinTag;
 		var infoText = 'Developer:\n\nAhmed Ghumman\n\n';
 		var infoText2 = '\n\nFor suggestions and reporting bugs: admin@ghummantech.com\n\nSpecial thanks to Iqbal Demystified Android App Developers:\n\nAZEEM GHUMMAN\n\nFAIZAN KHAN\n\nاخلاص عمل مانگ نيا گان کہن سے\n\'!شاہاں چہ عجب گر بنوازند گدا را\'\n\nMay Allah give them reward for making the code open source.';
 
@@ -66,28 +65,24 @@ class InfoPage extends React.Component<any, any> {
 		var signinMessageLocal = '';
 		if (this.state.signinConfirmation === 'done') {
 			signinMessageLocal = this.state.username.charAt(0).toUpperCase();
-			signinTag = <button type="button" className="btn btn-success btn-circle btn-lg"> {signinMessageLocal} </button>;
 		}
 		else {
 			signinMessageLocal = 'Sign In';
-			signinTag = <button type="button" className="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>;
 		}
 
 		return (
 			<span>
-			<Header {...this.props}/>
-			<div className="text-center">
-				{/* <div className="text-right">
-					{signinTag}
-				</div> */}
-				<div>
-					{infoTextTokens}
+				<Header {...this.props} />
+				<div className="text-center">
+
+					<div>
+						{infoTextTokens}
+					</div>
+					<a href="https://www.ghummantech.com/"> https://www.ghummantech.com </a>
+					<div className="sherPageText">
+						{infoTextTokens2}
+					</div>
 				</div>
-				<a href="https://www.ghummantech.com/"> https://www.ghummantech.com </a>
-				<div className="sherPageText">
-					{infoTextTokens2}
-				</div>
-			</div>
 			</span>
 		);	// return ends
 	}	// render function ends

@@ -1,9 +1,4 @@
 import React from 'react';
-// import Tabs from './Tabs';
-
-// for formatting
-// import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
-
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -22,7 +17,7 @@ import Box from '@material-ui/core/Box';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
-declare var window : any;
+declare var window: any;
 window.$ = window.jQuery = $;
 
 const useStyles = (theme) => ({
@@ -33,7 +28,7 @@ const useStyles = (theme) => ({
 		borderStyle: "solid",
 		borderRadius: "25px",
 		background: "#FFFAFA",
-	  },
+	},
 
 	poetryBookTitle: {
 		margin: "10px",
@@ -43,26 +38,26 @@ const useStyles = (theme) => ({
 		fontSize: "40px",
 		fontWeight: "bold" as "bold",
 		fontStyle: "bold",
-	  },
-	
-	  poetryPoemsList: {
+	},
+
+	poetryPoemsList: {
 		fontFamily: "Jameel",
 		color: "black",
 		fontSize: "30px",
 		textAlign: "center" as "center",
-	  },
+	},
 
-	  poetryPoemsSectionsList: {
+	poetryPoemsSectionsList: {
 		fontFamily: "Jameel",
 		color: "red",
 		fontSize: "30px",
 		textAlign: "center" as "center",
-	  }, 
+	},
 
-	  inputText: {
-		  width: "90%",
-		  margin: "20px"
-	  }
+	inputText: {
+		width: "90%",
+		margin: "20px"
+	}
 
 });
 
@@ -95,7 +90,7 @@ class SherPage extends React.Component<any, any> {
 			userMessageSher: '',
 			userMessageWord: '',
 
-			key: 'home', 
+			key: 'home',
 			message: ''
 		};
 		this.handleUserMessageSher = this.handleUserMessageSher.bind(this);
@@ -133,7 +128,6 @@ class SherPage extends React.Component<any, any> {
 			if ((this.state.username.trim() !== '') && (this.state.password.trim() !== '')) {
 
 				try {
-					// var element = this;
 					$.ajax({
 						url: 'https://icanmakemyownapp.com/iqbal/v3/post-comment.php',
 						type: 'POST',
@@ -148,7 +142,6 @@ class SherPage extends React.Component<any, any> {
 				} catch (err) {
 					alert('inside catch err');
 					alert(err);
-					// this.message = err;
 				}
 			}	// if not logged in empty
 			else {
@@ -232,7 +225,7 @@ class SherPage extends React.Component<any, any> {
 
 					var wordTextLocal = this.state.sherText[0].split(' ').concat(this.state.sherText[1].split(' '));
 					var ii;
-					for (ii = 0; ii < wordTextLocal.length; ii++) {	
+					for (ii = 0; ii < wordTextLocal.length; ii++) {
 
 						if (wordTextLocal[ii] === '' || wordTextLocal[ii] === ' ' || wordTextLocal[ii] === '،') {
 							wordTextLocal.splice(ii, 1);
@@ -246,8 +239,8 @@ class SherPage extends React.Component<any, any> {
 
 					} // for wordTextLocal.... ends
 					let wordObjArr: any[] = []
-					for ( let i=0; i<wordTextLocal.length; i++) {
-						wordObjArr.push({'text' : wordTextLocal[i], 'id': i});
+					for (let i = 0; i < wordTextLocal.length; i++) {
+						wordObjArr.push({ 'text': wordTextLocal[i], 'id': i });
 					}
 
 
@@ -259,7 +252,7 @@ class SherPage extends React.Component<any, any> {
 					var sherGeneralDiscussionServerResponseLocal = data;
 					this.setState({ poemText: poemTextLocal });
 					this.setState({ sherGeneralDiscussionServerResponse: sherGeneralDiscussionServerResponseLocal });
-				
+
 					this.getSherDiscussion(sherGeneralDiscussionServerResponseLocal);
 				}       // success function ends
 			});     // ajax call ends
@@ -267,7 +260,7 @@ class SherPage extends React.Component<any, any> {
 		} catch (err) {
 			alert('inside catch err');
 			alert(err);
-			this.setState({message: err})
+			this.setState({ message: err })
 		}
 	} // async getSherGeneralDiscussion ends
 
@@ -306,7 +299,6 @@ class SherPage extends React.Component<any, any> {
 		catch (err) {
 			alert('inside catch err');
 			alert(err);
-			// this.message = err;
 		}  // catch ends
 	}
 
@@ -370,7 +362,6 @@ class SherPage extends React.Component<any, any> {
 							this.getSherWordDiscussion(this.state.sherId);
 						else if (data === 'vote already registered') {
 							alert('Vote is already registerd. Unregister vote first and then you can revote');
-							// this.toggle_word(idx);
 						}
 
 
@@ -379,7 +370,6 @@ class SherPage extends React.Component<any, any> {
 			} catch (err) {
 				alert('inside catch err');
 				alert(err);
-				// this.message = err;
 			}
 		}	// if username not empty ends
 		else {
@@ -407,18 +397,13 @@ class SherPage extends React.Component<any, any> {
 							this.getSherWordDiscussion(this.state.sherId);
 						else if (data === 'vote already registered') {
 							alert('Vote is already registerd. Unregister vote first and then you can revote');
-							// this.toggle_word(idx);
-
-
 						}
-
-
 					}	// success function ends
 				});	// ajax call ends
 			} catch (err) {
 				alert('inside catch err');
 				alert(err);
-				this.setState({message: err});
+				this.setState({ message: err });
 			}
 		}	// if username not empty ends
 		else {
@@ -449,14 +434,11 @@ class SherPage extends React.Component<any, any> {
 						else if (data === 'invalid is_cancel value') {
 							alert('You have not liked or disliked it yet.');
 						}
-
-
 					}	// success function ends
 				});	// ajax call ends
 			} catch (err) {
 				alert('inside catch err');
 				alert(err);
-				// this.message = err;
 			}
 		}	// if username not empty ends
 		else {
@@ -485,14 +467,11 @@ class SherPage extends React.Component<any, any> {
 						else if (data === 'vote already registered') {
 							this.vote_unregister(comment_general_id)
 						}
-
-
 					}	// success function ends
 				});	// ajax call ends
 			} catch (err) {
 				alert('inside catch err');
 				alert(err);
-				// this.message = err;
 			}
 		}	// if username not empty ends
 		else {
@@ -520,8 +499,6 @@ class SherPage extends React.Component<any, any> {
 						else if (data === 'vote already registered') {
 							this.vote_unregister(comment_general_id)
 						}
-
-
 					}	// success function ends
 				});	// ajax call ends
 			} catch (err) {
@@ -551,21 +528,13 @@ class SherPage extends React.Component<any, any> {
 					data: { sher: this.state.sherId, discussion_type: 'general', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 1 },
 					success: (data) => {	// success funciton starts
 						if (data === 'vote removed') {
-							// this.toggle(idx);
 							this.getSherGeneralDiscussion(this.state.sherId);
-							// alert('Your vote is removed');
 						}
-						// else if (data === 'invalid is_cancel value') {
-						// 	alert('You have not liked or disliked it yet.');
-						// }
-
-
 					}	// success function ends
 				});	// ajax call ends
 			} catch (err) {
 				alert('inside catch err');
 				alert(err);
-				// this.message = err;
 			}
 		}	// if username not empty ends
 		else {
@@ -581,162 +550,130 @@ class SherPage extends React.Component<any, any> {
 	render() {
 		const { classes } = this.props;
 		var sherText = this.state.sherText.map((item: any) =>
-			<p key={item.index } className={classes.poetryPoemsList}> {item}</p>
+			<p key={item.index} className={classes.poetryPoemsList}> {item}</p>
 		);
 
 		var separateWords = this.state.wordText.map((item: any) =>
 
-			<span key={item.id} style={{margin: "10px"}}>
+			<span key={item.id} style={{ margin: "10px" }}>
 				{(item.id === this.state.mySelectedId) ? (
 					<button type="button" className="btn btn-danger" onClick={() => this.selectedWord(item.text, item.id)}>
 						<span className={classes.poetryPoemsList}>
-							{item.text} 
+							{item.text}
 						</span>
-					</button>  
+					</button>
 				) : (
-					<button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item.text, item.id)}>
-						<span className={classes.poetryPoemsList}>
-							{item.text} 
-						</span>
-					</button> 
-				)}
+						<button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item.text, item.id)}>
+							<span className={classes.poetryPoemsList}>
+								{item.text}
+							</span>
+						</button>
+					)}
 
 			</span>
-			/*<span key={item.index}> {item}: {index}</span>*/
 		);
 
 		var userComments = this.state.sherDiscussionDetail.map((item: any) =>
-		<div>
-			<Card className={classes.cardBackground}>
-				<CardContent>
-				<Box
-					display="flex"
-				>
-					<Box 
-					m={1}
-					p={1}
-					
-					>
-          <ThumbUpIcon  onClick={() => this.vote_like(item.id)}/>
-		  <div/>
-		  {item.score}
-		  <div/>
-		  <ThumbDownIcon onClick={() => this.vote_dislike(item.id)}/>
-        </Box>
-        <Box
-        display="flex"
-		flexDirection="column"
-		flexGrow={1}
-      >
-        <Box 
+			<div>
+				<Card className={classes.cardBackground}>
+					<CardContent>
+						<Box
+							display="flex"
+						>
+							<Box
+								m={1}
+								p={1}
 
-        p={4}
-        >
-			<span className={classes.poetryPoemsList}>
-          		{item.text}
-		  	</span>
-        </Box>
-        <Box 
-        p={1}
-        textAlign="center"
-        >
-          <span className="float-left">{item.username} </span>
-		  <span className="float-right">{item.timestamp} </span>
-        </Box>
-        </Box>
-        
-      </Box>
-				</CardContent>
-			</Card>
-			<div></div>
-		</div>
+							>
+								<ThumbUpIcon onClick={() => this.vote_like(item.id)} />
+								<div />
+								{item.score}
+								<div />
+								<ThumbDownIcon onClick={() => this.vote_dislike(item.id)} />
+							</Box>
+							<Box
+								display="flex"
+								flexDirection="column"
+								flexGrow={1}
+							>
+								<Box
+
+									p={4}
+								>
+									<span className={classes.poetryPoemsList}>
+										{item.text}
+									</span>
+								</Box>
+								<Box
+									p={1}
+									textAlign="center"
+								>
+									<span className="float-left">{item.username} </span>
+									<span className="float-right">{item.timestamp} </span>
+								</Box>
+							</Box>
+
+						</Box>
+					</CardContent>
+				</Card>
+				<div></div>
+			</div>
 
 		);
 
 
-				var wordCommments = this.state.wordDiscussionDetail.map((item: any) => {
-					if ((item.wordposition - 1) === this.state.mySelectedId)
-						return (
-							<div>
-							<Card className={classes.cardBackground}>
-								<CardContent>
+		var wordCommments = this.state.wordDiscussionDetail.map((item: any) => {
+			if ((item.wordposition - 1) === this.state.mySelectedId)
+				return (
+					<div>
+						<Card className={classes.cardBackground}>
+							<CardContent>
 								<Box
 									display="flex"
 								>
-									<Box 
-									m={1}
-									p={1}
-									
+									<Box
+										m={1}
+										p={1}
+
 									>
-						  <ThumbUpIcon  onClick={() => this.vote_like_word(item.id)}/>
-						  <div/>
-						  {item.score}
-						  <div/>
-						  <ThumbDownIcon onClick={() => this.vote_dislike_word(item.id)}/>
-						</Box>
-						<Box
-						display="flex"
-						flexDirection="column"
-						flexGrow={1}
-					  >
-						<Box 
-				
-						p={4}
-						>
-							<span className={classes.poetryPoemsList}>
-								  {item.text}
-							  </span>
-						</Box>
-						<Box 
-						p={1}
-						textAlign="center"
-						>
-						  <span className="float-left">{item.username} </span>
-						  <span className="float-right">{item.timestamp} </span>
-						</Box>
-						</Box>
-						
-					  </Box>
-								</CardContent>
-							</Card>
-							<div></div>
-						</div>
-							// <div key={item.id}>
-							// 	<div className="float-left">
-							// 		<p> 
-							// 			{item.username}
-							// 		</p>
-							// 	</div> 
-							// 	<div className="float-right">
-							// 		<p>
-							// 			{item.timestamp}
-							// 		</p> 
-							// 	</div>
-							// 	<br /> 
-							// 	<p>
-							// 		{item.text}
-							// 		<br /><br /> 
-							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_like_word(item.id)}>
-							// 			LIKE 
-							// 		</button>
-							// 		<span className="px-2"> 
-							// 			SCORE: {item.score}
-							// 		</span>
-							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_dislike_word(item.id)}>
-							// 			DISLIKE
-							// 		</button>
-							// 		<p></p>
-							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_unregister_word(item.id)}>
-							// 			UNREGISTER
-							// 		</button>
-							// 	</p>
-							// 	<Divider />
-							// </div>
-						);
-					return null;
-				}
+										<ThumbUpIcon onClick={() => this.vote_like_word(item.id)} />
+										<div />
+										{item.score}
+										<div />
+										<ThumbDownIcon onClick={() => this.vote_dislike_word(item.id)} />
+									</Box>
+									<Box
+										display="flex"
+										flexDirection="column"
+										flexGrow={1}
+									>
+										<Box
+
+											p={4}
+										>
+											<span className={classes.poetryPoemsList}>
+												{item.text}
+											</span>
+										</Box>
+										<Box
+											p={1}
+											textAlign="center"
+										>
+											<span className="float-left">{item.username} </span>
+											<span className="float-right">{item.timestamp} </span>
+										</Box>
+									</Box>
+
+								</Box>
+							</CardContent>
+						</Card>
+						<div></div>
+					</div>
 				);
-		
+			return null;
+		}
+		);
+
 
 		let signinTag;
 		var signinMessageLocal = '';
@@ -751,7 +688,7 @@ class SherPage extends React.Component<any, any> {
 
 		return (
 			<div>
-				<Header {...this.props}/>
+				<Header {...this.props} />
 
 				<div className={classes.poetryBookTitle}>
 					{this.state.poemText}
@@ -784,16 +721,12 @@ class SherPage extends React.Component<any, any> {
 							</form>
 						</Tab>
 
-						<Tab  eventKey="profile" title="WORD MEANING">
-							<div style={{ textAlign: "center", direction: "rtl"}}>
+						<Tab eventKey="profile" title="WORD MEANING">
+							<div style={{ textAlign: "center", direction: "rtl" }}>
 								{separateWords}
 							</div>
-							{/* <p></p>
-
-							Selected Word: {this.state.mySelectedWord}
-							<p></p> */}
 							{wordCommments}
-							<form  className={classes.poetryPoemsList} onSubmit={this.handleSubmitWord}>
+							<form className={classes.poetryPoemsList} onSubmit={this.handleSubmitWord}>
 								<label>
 									Comments:
 								</label>
