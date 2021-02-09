@@ -396,13 +396,13 @@ class CommentsPage extends React.Component<any, any> {
 				<Card className={classes.cardBackground}>
 					<CardContent>
 							<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
-								{item.sherContent[0].text[0]}
+								{item.sherContent[0].text[0] }
 								<br />
 								{item.sherContent[0].text[1]}
 								<br />
-								{item.sherContent[1].text[0]}
+								{item.sherContent[1] ? item.sherContent[1].text[0] : '#translation missing'}
 								<br />
-								{item.sherContent[1].text[1]}
+								{item.sherContent[1] ? item.sherContent[1].text[1] : '#translation missing'}
 							</p>
 					</CardContent>
 				</Card>
@@ -440,9 +440,9 @@ class CommentsPage extends React.Component<any, any> {
 								<br />
 								{item.sherContent[0].text[1]}
 								<br />
-								{item.sherContent[1].text[0]}
+								{item.sherContent[1] ? item.sherContent[1].text[0] : '#translation missing'}
 								<br />
-								{item.sherContent[1].text[1]}
+								{item.sherContent[1] ? item.sherContent[1].text[1] : '#translation missing'}
 							</p>
 					</CardContent>
 				</Card>

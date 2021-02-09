@@ -212,7 +212,7 @@ class ProfilePage extends React.Component<any, any> {
 		var myTable: any = '';
 
 		if (this.state.dropdownState === 'discussion') {
-			myTable = <ReactTable data={this.state.leaderBoardTextDiscussionConcat} columns={columns} />;
+			myTable = <ReactTable style={{alignItems: "center"}} data={this.state.leaderBoardTextDiscussionConcat} columns={columns} />;
 		}
 		else {
 			myTable = <ReactTable data={this.state.leaderBoardTextWordConcat} columns={columns} />;
