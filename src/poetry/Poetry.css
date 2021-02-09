@@ -1,0 +1,15 @@
+.poetryBookTitle {
+    font-family: 'Jameel';
+    color: red;
+    font-size: 40px;
+    font-weight: bold;
+    font-style: bold;
+    text-align:center;
+  }
+
+  .poetryPoemsList {
+    font-family: 'Jameel';
+    color: black;
+    font-size: 20px;
+    text-align:center;
+  }

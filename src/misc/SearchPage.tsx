@@ -5,6 +5,7 @@ import StaticContentService from './StaticContentServiceYaml';
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
+import Header from '../header/Header';
 
 
 
@@ -329,9 +330,10 @@ class SearchPage extends React.Component<any, any> {
 		}
 		return (
 			<div>
-				<div className="text-right">
+				<Header {...this.props}/>
+				{/* <div className="text-right">
 					{signinTag}
-				</div>
+				</div> */}
 
 				<div className="text-center">
 					<div className="tab2Text">

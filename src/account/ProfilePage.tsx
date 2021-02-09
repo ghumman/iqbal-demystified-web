@@ -7,6 +7,7 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import PropTypes from 'prop-types';
+import Header from '../header/Header';
 
 import $ from 'jquery';
 declare var window : any;
@@ -217,14 +218,12 @@ class ProfilePage extends React.Component<any, any> {
 			myTable = <ReactTable data={this.state.leaderBoardTextWordConcat} columns={columns} />;
 		}
 		return (
+			<span>
+				<Header {...this.props}/>
 			<div>
-
-
-
-
-				<div className="text-right">
+				{/* <div className="text-right">
 					{signinTag}
-				</div>
+				</div> */}
 				<h1 className="text-center">My Profile</h1>
 				<div className="text-center">
 					<p>Now you can write comments!</p>
@@ -246,6 +245,7 @@ class ProfilePage extends React.Component<any, any> {
 				{myTable}
 
 			</div>
+			</span>
 		);
 	}
 }

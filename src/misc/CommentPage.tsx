@@ -6,16 +6,57 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Header from '../header/Header';
 
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
 import YAML from 'yaml';
 
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
 declare var window : any;
 window.$ = window.jQuery = $;
 
-// window.jQuery = $;
+
+const useStyles = (theme) => ({
+	cardBackground: {
+		display: "block",
+		margin: "10px",
+		textAlign: "center" as "center",
+		borderStyle: "solid",
+		borderRadius: "25px",
+		background: "#FFFAFA",
+	  },
+
+	poetryBookTitle: {
+		margin: "10px",
+		textAlign: "center" as "center",
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "40px",
+		fontWeight: "bold" as "bold",
+		fontStyle: "bold",
+	  },
+	
+	  poetryPoemsList: {
+		fontFamily: "Jameel",
+		color: "black",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+		cursor: "pointer",
+	  },
+
+	  poetryPoemsSectionsList: {
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+	  }
+
+});
 
 class CommentsPage extends React.Component<any, any> {
 
@@ -346,32 +387,83 @@ class CommentsPage extends React.Component<any, any> {
 	}
 
 	render() {
-		var itemsRecent = this.state.recentData.map((item: any) =>
-			<span key={item.index} onClick={() => this.onSubmit(item.id)}>
-				{
-					item.sherContent[0].text[0]
-				}
-				< br /> {
-					item.sherContent[0].text[1]
-				} < br /> {
-					item.sherContent[1].text[0]
-				} < br /> {
-					item.sherContent[1].text[1]
-				} < br /> < br />
-			</span>
-		);
+		const { classes } = this.props;
+		var itemsRecent = this.state.recentData.map((item: any) => {
+			try {
+			return (
+				<div>
 
-		var itemsPopular = this.state.popularData.map((item: any) =>
-			<span key={item.index} onClick={() => this.onSubmit(item.id)}> {
-				item.sherContent[0].text[0]
-			} < br /> {
-				item.sherContent[0].text[1]
-			} < br /> {
-				item.sherContent[1].text[0]
-			} < br /> {
-				item.sherContent[1].text[1]
-			} < br /> < br /> </span>
-		);
+				<Card className={classes.cardBackground}>
+					<CardContent>
+							<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
+								{item.sherContent[0].text[0]}
+								<br />
+								{item.sherContent[0].text[1]}
+								<br />
+								{item.sherContent[1].text[0]}
+								<br />
+								{item.sherContent[1].text[1]}
+							</p>
+					</CardContent>
+				</Card>
+				<div></div>
+				</div>
+			// <span className="customFont" key={item.index} onClick={() => this.onSubmit(item.id)}>
+			// 	{
+			// 		item.sherContent[0].text[0]
+			// 	}
+			// 	< br /> {
+			// 		item.sherContent[0].text[1]
+			// 	} < br /> {
+			// 		item.sherContent[1].text[0]
+			// 	} < br /> {
+			// 		item.sherContent[1].text[1]
+			// 	} < br /> < br />
+			// </span>
+			)
+			} 
+			catch(err) {
+				return;
+			}
+		})
+
+
+		var itemsPopular = this.state.popularData.map((item: any) => {
+			try {
+			return (
+				<div>
+
+				<Card className={classes.cardBackground}>
+					<CardContent>
+							<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
+								{item.sherContent[0].text[0]}
+								<br />
+								{item.sherContent[0].text[1]}
+								<br />
+								{item.sherContent[1].text[0]}
+								<br />
+								{item.sherContent[1].text[1]}
+							</p>
+					</CardContent>
+				</Card>
+				<div></div>
+				</div>
+				
+			// <span className="customFont" key={item.index} onClick={() => this.onSubmit(item.id)}> {
+			// 	item.sherContent[0].text[0]
+			// } < br /> {
+			// 	item.sherContent[0].text[1]
+			// } < br /> {
+			// 	item.sherContent[1].text[0]
+			// } < br /> {
+			// 	item.sherContent[1].text[1]
+			// } < br /> < br /> </span>
+			)
+		} catch(err) {
+			return;
+		}
+
+		})
 
 		let signinTag;
 		var signinMessageLocal = '';
@@ -387,30 +479,24 @@ class CommentsPage extends React.Component<any, any> {
 
 
 		return (
-			<div >
-				<div className="text-right">
-					{signinTag}
-				</div>
+			<div>
+				<Header {...this.props}/>
 
-				<div className="tabTitle">
-					<Tabs
-						id="controlled-tab-example"
-						activeKey={this.state.key}
-						onSelect={(key: any) => this.setState({ key })}
-						className="nav-tabs"
-					>
-						<Tab eventKey="home" title="RECENT">
-							{itemsRecent}
-						</Tab>
-						<Tab eventKey="profile" title="POPULAR">
-							{itemsPopular}
-						</Tab>
-					</Tabs>
-				</div>
+				<Tabs
+					id="controlled-tab-example"
+					activeKey={this.state.key}
+					onSelect={(key: any) => this.setState({ key })}
+					className="nav-tabs"
+				>
+					<Tab eventKey="home" title="RECENT">
+						{itemsRecent}
+					</Tab>
+					<Tab eventKey="profile" title="POPULAR">
+						{itemsPopular}
+					</Tab>
+				</Tabs>
 			</div>
 		);
 	}
 }
-
-// return <h1>I got following message : {this.props.location.state.detail}</h1>
-export default CommentsPage;
+export default withStyles(useStyles)(CommentsPage);

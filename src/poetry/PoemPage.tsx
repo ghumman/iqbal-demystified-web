@@ -2,10 +2,51 @@ import React from 'react';
 import StaticContentService from '../misc/StaticContentServiceYaml';
 
 // for formatting
-import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
+// import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
+import Header from '../header/Header';
 
 import YAML from 'yaml';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
+const useStyles = (theme) => ({
+	cardBackground: {
+		display: "block",
+		margin: "10px",
+		textAlign: "center" as "center",
+		borderStyle: "solid",
+		borderRadius: "25px",
+		background: "#FFFAFA",
+	  },
+
+	poetryBookTitle: {
+		margin: "10px",
+		textAlign: "center" as "center",
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "40px",
+		fontWeight: "bold" as "bold",
+		fontStyle: "bold",
+	  },
+	
+	  poetryPoemsList: {
+		fontFamily: "Jameel",
+		color: "black",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+		cursor: "pointer",
+	  },
+
+	  poetryPoemsSectionsList: {
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+	  }
+
+});
 
 class PoemPage extends React.Component<any, any> {
 
@@ -102,8 +143,27 @@ class PoemPage extends React.Component<any, any> {
 
 
 	render() {
-		var item3 = this.state.poemTextNew.map((item: any) =>
-			<p key={item.index} onClick={() => this.onSubmit(item.id)}> {item.sherContent[0].text[0]}<br />{item.sherContent[0].text[1]}<br />{item.sherContent[1].text[0]}<br />{item.sherContent[1].text[1]}</p>
+
+		const { classes } = this.props;
+		var item3 = this.state.poemTextNew.map((item: any) => 
+		<div>
+
+		<Card className={classes.cardBackground}>
+			<CardContent>
+					<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmit(item.id)}> 
+						{item.sherContent[0].text[0]}
+						<br />
+						{item.sherContent[0].text[1]}
+						<br />
+						{item.sherContent[1].text[0]}
+						<br />
+						{item.sherContent[1].text[1]}
+					</p>
+			</CardContent>
+		</Card>
+		<div></div>
+		</div>
+
 		);
 		let signinTag;
 		var signinMessageLocal = '';
@@ -118,10 +178,9 @@ class PoemPage extends React.Component<any, any> {
 
 		return (
 			<div>
-				<div className="text-right">
-					{signinTag}
-				</div>
-				<div className="tabTitle">
+				<Header {...this.props}/>
+
+				<div  className={classes.poetryBookTitle}>
 
 
 					<p>
@@ -133,7 +192,7 @@ class PoemPage extends React.Component<any, any> {
 					</p>
 				</div>
 
-				<div className="text-center listPoemPageText">
+				<div>
 					{item3}
 				</div>
 			</div>
@@ -141,4 +200,4 @@ class PoemPage extends React.Component<any, any> {
 	}	// render function ends
 
 }	// class ends
-export default PoemPage;
+export default withStyles(useStyles)(PoemPage);

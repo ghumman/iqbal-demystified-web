@@ -4,6 +4,7 @@ import React from 'react';
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
 import PropTypes from 'prop-types';
+import Header from '../header/Header';
 
 class InfoPage extends React.Component<any, any> {
 
@@ -24,6 +25,7 @@ class InfoPage extends React.Component<any, any> {
 
 
 	componentDidMount() {
+		console.log("inside info page");
 		window.scrollTo(0, 0);
 		try {
 			this.setState({ signinConfirmation: this.props.location.state.profileSigninConfirmation });
@@ -72,18 +74,21 @@ class InfoPage extends React.Component<any, any> {
 		}
 
 		return (
+			<span>
+			<Header {...this.props}/>
 			<div className="text-center">
-				<div className="text-right">
+				{/* <div className="text-right">
 					{signinTag}
-				</div>
+				</div> */}
 				<div>
 					{infoTextTokens}
 				</div>
-				<a href="https://ghummantech.com"> https://ghummantech.com </a>
+				<a href="https://www.ghummantech.com/"> https://www.ghummantech.com </a>
 				<div className="sherPageText">
 					{infoTextTokens2}
 				</div>
 			</div>
+			</span>
 		);	// return ends
 	}	// render function ends
 }	// class ends

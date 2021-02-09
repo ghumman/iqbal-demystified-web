@@ -10,6 +10,7 @@ import {
 
 import TopPortionMainPage from './main_page/TopSectionMainPage/TopSectionMainPage';
 import BottomSectionMainPage from './main_page/BottomSectionMainPage/BottomSectionMainPage';
+import MainPage from './main_page/MainPage/MainPage';
 
 // for 3 tiers of heirarcy
 import ListPoemPage from './poetry/ListPoemPage';
@@ -35,8 +36,9 @@ const routing = (
 	<Router  basename={process.env.PUBLIC_URL}>
 		<div>
 			{/* Inside JSX use this format to give comments*/}
-			<Route exact path="/" component={TopPortionMainPage} />
-			<Route exact path="/" component={BottomSectionMainPage} />
+			{/* <Route exact path="/" component={TopPortionMainPage} /> */}
+			{/* <Route exact path="/" component={BottomSectionMainPage} /> */}
+			<Route exact path="/" component={MainPage} />
 
 			<Route path="/ListPoemPage" component={ListPoemPage} />
 			<Route path="/PoemPage" component={PoemPage} />

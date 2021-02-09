@@ -2,22 +2,69 @@ import React from 'react';
 // import Tabs from './Tabs';
 
 // for formatting
-import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
+// import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
+
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import Divider from '@material-ui/core/Divider';
-
+import Header from '../header/Header';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
 import YAML from 'yaml';
 
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Box from '@material-ui/core/Box';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+
 declare var window : any;
 window.$ = window.jQuery = $;
 
-// window.jQuery = $;
+const useStyles = (theme) => ({
+	cardBackground: {
+		display: "block",
+		margin: "10px",
+		textAlign: "center" as "center",
+		borderStyle: "solid",
+		borderRadius: "25px",
+		background: "#FFFAFA",
+	  },
+
+	poetryBookTitle: {
+		margin: "10px",
+		textAlign: "center" as "center",
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "40px",
+		fontWeight: "bold" as "bold",
+		fontStyle: "bold",
+	  },
+	
+	  poetryPoemsList: {
+		fontFamily: "Jameel",
+		color: "black",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+	  },
+
+	  poetryPoemsSectionsList: {
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+	  }, 
+
+	  inputText: {
+		  width: "90%",
+		  margin: "20px"
+	  }
+
+});
 
 class SherPage extends React.Component<any, any> {
 
@@ -185,7 +232,7 @@ class SherPage extends React.Component<any, any> {
 
 					var wordTextLocal = this.state.sherText[0].split(' ').concat(this.state.sherText[1].split(' '));
 					var ii;
-					for (ii = 0; ii < wordTextLocal.length; ii++) {
+					for (ii = 0; ii < wordTextLocal.length; ii++) {	
 
 						if (wordTextLocal[ii] === '' || wordTextLocal[ii] === ' ' || wordTextLocal[ii] === '،') {
 							wordTextLocal.splice(ii, 1);
@@ -198,18 +245,21 @@ class SherPage extends React.Component<any, any> {
 						}  // else ends
 
 					} // for wordTextLocal.... ends
+					let wordObjArr: any[] = []
+					for ( let i=0; i<wordTextLocal.length; i++) {
+						wordObjArr.push({'text' : wordTextLocal[i], 'id': i});
+					}
 
 
 					// make wordTextLocal equal to this.state.wordText
-					this.setState({ wordText: wordTextLocal });
+					this.setState({ wordText: wordObjArr });
 
 
 					var poemTextLocal = yamlObject.heading[0].text;
 					var sherGeneralDiscussionServerResponseLocal = data;
-
 					this.setState({ poemText: poemTextLocal });
 					this.setState({ sherGeneralDiscussionServerResponse: sherGeneralDiscussionServerResponseLocal });
-
+				
 					this.getSherDiscussion(sherGeneralDiscussionServerResponseLocal);
 				}       // success function ends
 			});     // ajax call ends
@@ -246,6 +296,7 @@ class SherPage extends React.Component<any, any> {
 				success: (data) => {    // success funciton starts
 
 					var sherWordDiscussionServerResponse = data;
+
 
 					this.getWordDiscussion(sherWordDiscussionServerResponse);
 
@@ -432,7 +483,7 @@ class SherPage extends React.Component<any, any> {
 						if (data === 'vote registered')
 							this.getSherGeneralDiscussion(this.state.sherId);
 						else if (data === 'vote already registered') {
-							alert('Vote is already registerd. Unregister vote first and then you can revote');
+							this.vote_unregister(comment_general_id)
 						}
 
 
@@ -467,9 +518,7 @@ class SherPage extends React.Component<any, any> {
 						if (data === 'vote registered')
 							this.getSherGeneralDiscussion(this.state.sherId);
 						else if (data === 'vote already registered') {
-							alert('Vote is already registerd. Unregister vote first and then you can revote');
-
-
+							this.vote_unregister(comment_general_id)
 						}
 
 
@@ -504,11 +553,11 @@ class SherPage extends React.Component<any, any> {
 						if (data === 'vote removed') {
 							// this.toggle(idx);
 							this.getSherGeneralDiscussion(this.state.sherId);
-							alert('Your vote is removed');
+							// alert('Your vote is removed');
 						}
-						else if (data === 'invalid is_cancel value') {
-							alert('You have not liked or disliked it yet.');
-						}
+						// else if (data === 'invalid is_cancel value') {
+						// 	alert('You have not liked or disliked it yet.');
+						// }
 
 
 					}	// success function ends
@@ -530,29 +579,164 @@ class SherPage extends React.Component<any, any> {
 	}
 
 	render() {
-		var item4 = this.state.sherText.map((item: any) =>
-			<p key={item.index}> {item}</p>
+		const { classes } = this.props;
+		var sherText = this.state.sherText.map((item: any) =>
+			<p key={item.index } className={classes.poetryPoemsList}> {item}</p>
 		);
 
-		var item5 = this.state.wordText.map((item: any) =>
-			<span key={item.index}><button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item.text, item.index)}> {item} </button>  </span>
+		var separateWords = this.state.wordText.map((item: any) =>
+
+			<span key={item.id} style={{margin: "10px"}}>
+				{(item.id === this.state.mySelectedId) ? (
+					<button type="button" className="btn btn-danger" onClick={() => this.selectedWord(item.text, item.id)}>
+						<span className={classes.poetryPoemsList}>
+							{item.text} 
+						</span>
+					</button>  
+				) : (
+					<button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item.text, item.id)}>
+						<span className={classes.poetryPoemsList}>
+							{item.text} 
+						</span>
+					</button> 
+				)}
+
+			</span>
 			/*<span key={item.index}> {item}: {index}</span>*/
 		);
 
-		var item6 = this.state.sherDiscussionDetail.map((item: any) =>
-			<div key={item.id}> <div className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br /> <p>{item.text}<br /><br /> <button type="button" className="btn btn-primary px-2" onClick={() => this.vote_like(item.id)}> LIKE </button> <span className="px-2">SCORE: {item.score}</span><button type="button" className="btn btn-primary" onClick={() => this.vote_dislike(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary" onClick={() => this.vote_unregister(item.id)} >UNREGISTER</button></p><Divider /></div>
+		var userComments = this.state.sherDiscussionDetail.map((item: any) =>
+		<div>
+			<Card className={classes.cardBackground}>
+				<CardContent>
+				<Box
+					display="flex"
+				>
+					<Box 
+					m={1}
+					p={1}
+					
+					>
+          <ThumbUpIcon  onClick={() => this.vote_like(item.id)}/>
+		  <div/>
+		  {item.score}
+		  <div/>
+		  <ThumbDownIcon onClick={() => this.vote_dislike(item.id)}/>
+        </Box>
+        <Box
+        display="flex"
+		flexDirection="column"
+		flexGrow={1}
+      >
+        <Box 
+
+        p={4}
+        >
+			<span className={classes.poetryPoemsList}>
+          		{item.text}
+		  	</span>
+        </Box>
+        <Box 
+        p={1}
+        textAlign="center"
+        >
+          <span className="float-left">{item.username} </span>
+		  <span className="float-right">{item.timestamp} </span>
+        </Box>
+        </Box>
+        
+      </Box>
+				</CardContent>
+			</Card>
+			<div></div>
+		</div>
 
 		);
 
 
-		var item7 = this.state.wordDiscussionDetail.map((item: any) => {
-			if ((item.wordposition - 1) === this.state.mySelectedId)
-				return (
-					<div key={item.id}> <div className="float-left"><p> {item.username}</p></div> <div className="float-right"><p>  {item.timestamp}</p> </div><br /> <p>{item.text}<br /><br /> <button type="button" className="btn btn-primary" onClick={() => this.vote_like_word(item.id)}> LIKE </button><span className="px-2"> SCORE: {item.score}</span><button type="button" className="btn btn-primary" onClick={() => this.vote_dislike_word(item.id)} >DISLIKE</button><p></p><button type="button" className="btn btn-primary" onClick={() => this.vote_unregister_word(item.id)} >UNREGISTER</button></p><Divider /></div>
+				var wordCommments = this.state.wordDiscussionDetail.map((item: any) => {
+					if ((item.wordposition - 1) === this.state.mySelectedId)
+						return (
+							<div>
+							<Card className={classes.cardBackground}>
+								<CardContent>
+								<Box
+									display="flex"
+								>
+									<Box 
+									m={1}
+									p={1}
+									
+									>
+						  <ThumbUpIcon  onClick={() => this.vote_like_word(item.id)}/>
+						  <div/>
+						  {item.score}
+						  <div/>
+						  <ThumbDownIcon onClick={() => this.vote_dislike_word(item.id)}/>
+						</Box>
+						<Box
+						display="flex"
+						flexDirection="column"
+						flexGrow={1}
+					  >
+						<Box 
+				
+						p={4}
+						>
+							<span className={classes.poetryPoemsList}>
+								  {item.text}
+							  </span>
+						</Box>
+						<Box 
+						p={1}
+						textAlign="center"
+						>
+						  <span className="float-left">{item.username} </span>
+						  <span className="float-right">{item.timestamp} </span>
+						</Box>
+						</Box>
+						
+					  </Box>
+								</CardContent>
+							</Card>
+							<div></div>
+						</div>
+							// <div key={item.id}>
+							// 	<div className="float-left">
+							// 		<p> 
+							// 			{item.username}
+							// 		</p>
+							// 	</div> 
+							// 	<div className="float-right">
+							// 		<p>
+							// 			{item.timestamp}
+							// 		</p> 
+							// 	</div>
+							// 	<br /> 
+							// 	<p>
+							// 		{item.text}
+							// 		<br /><br /> 
+							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_like_word(item.id)}>
+							// 			LIKE 
+							// 		</button>
+							// 		<span className="px-2"> 
+							// 			SCORE: {item.score}
+							// 		</span>
+							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_dislike_word(item.id)}>
+							// 			DISLIKE
+							// 		</button>
+							// 		<p></p>
+							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_unregister_word(item.id)}>
+							// 			UNREGISTER
+							// 		</button>
+							// 	</p>
+							// 	<Divider />
+							// </div>
+						);
+					return null;
+				}
 				);
-			return null;
-		}
-		);
+		
 
 		let signinTag;
 		var signinMessageLocal = '';
@@ -567,32 +751,31 @@ class SherPage extends React.Component<any, any> {
 
 		return (
 			<div>
-				<div className="text-right">
-					{signinTag}
-				</div>
-				<div className="tabTitle">
+				<Header {...this.props}/>
+
+				<div className={classes.poetryBookTitle}>
 					{this.state.poemText}
 				</div>
-				<div className="sherPageText">
+				<div>
 					<Tabs
 						id="controlled-tab-example"
 						activeKey={this.state.key}
 						onSelect={(key: any) => this.setState({ key })}
 						className="nav-tabs"
 					>
-						<Tab class="sherPageText" eventKey="home" title="DISCUSSION">
-							{item4}
-							{item6}
+						<Tab eventKey="home" title="DISCUSSION">
+							{sherText}
+							{userComments}
 
 
-							<form onSubmit={this.handleSubmitSher}>
+							<form className={classes.poetryPoemsList} onSubmit={this.handleSubmitSher}>
 
-								<label>
+								<label >
 									Comments:
 								</label>
 								<p></p>
 
-								<textarea value={this.state.userMessageSher} onChange={this.handleUserMessageSher} ></textarea>
+								<textarea className={classes.inputText} value={this.state.userMessageSher} onChange={this.handleUserMessageSher} ></textarea>
 
 								<p></p>
 
@@ -601,19 +784,21 @@ class SherPage extends React.Component<any, any> {
 							</form>
 						</Tab>
 
-						<Tab class="sherPageText" eventKey="profile" title="WORD MEANING">
-							{item5}
-							<p></p>
+						<Tab  eventKey="profile" title="WORD MEANING">
+							<div style={{ textAlign: "center", direction: "rtl"}}>
+								{separateWords}
+							</div>
+							{/* <p></p>
 
 							Selected Word: {this.state.mySelectedWord}
-							<p></p>
-							{item7}
-							<form onSubmit={this.handleSubmitWord}>
+							<p></p> */}
+							{wordCommments}
+							<form  className={classes.poetryPoemsList} onSubmit={this.handleSubmitWord}>
 								<label>
 									Comments:
 								</label>
 								<p></p>
-								<textarea value={this.state.userMessageWord} onChange={this.handleUserMessageWord} ></textarea>
+								<textarea className={classes.inputText} value={this.state.userMessageWord} onChange={this.handleUserMessageWord} ></textarea>
 								<p></p>
 
 								<input type="submit" value="SUBMIT" />
@@ -626,4 +811,4 @@ class SherPage extends React.Component<any, any> {
 	}  // render function ends
 } // class ends
 
-export default SherPage;
+export default withStyles(useStyles)(SherPage);

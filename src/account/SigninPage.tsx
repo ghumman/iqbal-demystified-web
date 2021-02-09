@@ -2,7 +2,7 @@
 import React from 'react';
 
 import RegisterPage from './RegisterPage';
-
+import Header from '../header/Header';
 import ForgotPasswordPage from './ForgotPasswordPage';
 
 // for formatting
@@ -29,7 +29,7 @@ class Signin extends React.Component<any, any> {
 			errorMessage: '',
 			username: '',
 			password: '',
-			signinConfirmation: ''
+			signinConfirmation: false
 
 		};
 
@@ -59,11 +59,11 @@ class Signin extends React.Component<any, any> {
 				success: (data: any) => {
 					if (data === 'done') {
 						this.setState({ errorMessage: 'Successfully Logged in' });
-						this.setState({ signinConfirmation: data });
+						// this.setState({ signinConfirmation: data });
 
 						this.props.history.push({
 							pathname: '/',
-							state: { profileUsername: this.state.username, profilePassword: this.state.password, profileSigninConfirmation: this.state.signinConfirmation }
+							state: { profileUsername: this.state.username, profilePassword: this.state.password, profileSigninConfirmation: true }
 						});
 					}
 					else {
@@ -111,6 +111,8 @@ class Signin extends React.Component<any, any> {
 
 	render() {
 		return (
+			<span>
+				<Header {...this.props}/>
 			<div className="text-center">
 				<h1>Sign In</h1>
 				<form onSubmit={this.handleSubmit}>
@@ -140,6 +142,7 @@ class Signin extends React.Component<any, any> {
 				</p>
 				{this.state.errorMessage}
 			</div>
+			</span>
 		);
 	}
 }

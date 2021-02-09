@@ -2,6 +2,7 @@
 import React from 'react';
 
 import SigninPage from './SigninPage';
+import Header from '../header/Header';
 
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
@@ -138,6 +139,8 @@ class ChangePassword extends React.Component<any, any>  {
 
 	render() {
 		return (
+			<span>
+				<Header {...this.props}/>
 			<div className="text-center">
 				<h1>CHANGE PASSWORD</h1>
 				<form onSubmit={this.handleSubmit}>
@@ -173,6 +176,7 @@ class ChangePassword extends React.Component<any, any>  {
 					{this.state.errorMessage}
 				</p>
 			</div>
+			</span>
 		);	// return ends
 	}	// render function ends
 }	// class ends

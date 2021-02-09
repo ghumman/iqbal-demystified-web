@@ -4,11 +4,15 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+// import Tab from 'react-bootstrap/Tab';
+// import Tabs from 'react-bootstrap/Tabs';
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 // logo is used to display main allama iqbal picture
 import logo from './../../assets/allam_iqbal_pic.jpg';
+import { withStyles } from '@material-ui/core/styles';
 
 // following are books in first tab - Urdu
 import urduBook1 from './../../assets/android_app_assets/book_bal_ae_jabreel_urdu_2.jpg';
@@ -35,7 +39,25 @@ import PropTypes from 'prop-types';
 // to go to ListPoemPage when a book logo is pressed
 import ListPoemPage from '../../poetry/ListPoemPage';
 
+import Header from '../../header/Header'
 
+
+const useStyles = (theme) => ({
+	root: {
+	   flexGrow: 1,
+	 },
+	 tabTile: {
+		// fontFamily: 'Jameel Noori Nastaleeq',
+		color: 'red',
+		// fontSize: 'large',
+		fontWeight: 800,
+		// fontWeight: "bold",
+		// fontStyle: 'bold',
+		textDecoration: 'underline',
+		// textAlign:'center',
+	 },
+});
+  
 
 class TopSectionMainPage extends React.Component <any, any>  {
 
@@ -43,6 +65,8 @@ class TopSectionMainPage extends React.Component <any, any>  {
 		location: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired
 	}
+
+
 
 	state = {
 		textvalue: 'Change me',
@@ -54,7 +78,8 @@ class TopSectionMainPage extends React.Component <any, any>  {
 
 		signinVar: '',
 
-		key: 'home'
+		key: 'home',
+		value: 1
 	}
 
 	signMeIn = () => {
@@ -96,7 +121,13 @@ class TopSectionMainPage extends React.Component <any, any>  {
 		}
 	}
 
+	handleTabChange = (event, newValue) => {
+		console.log("inside handleTabChange");
+		this.setState({value: newValue});
+	};
+
 	render() {
+		const { classes } = this.props;
 		// decides when if logged in or not and display either sign in or first character of username
 		let signinTag;
 		var signinMessageLocal = '';
@@ -116,16 +147,30 @@ class TopSectionMainPage extends React.Component <any, any>  {
 
 
 			<div>
-				<h3 className="text-right">{signinTag}</h3>
-				<h3 className="text-center app-title">Allama Iqbal</h3>
-				<img src={logo} className="rounded mx-auto d-block" alt="Allama Iqbal" />
+				<Header {...this.props}/>
+				{/* <h3 className="text-right">{signinTag}</h3> */}
+				{/* <h3 className="text-center app-title">Allama Iqbal</h3> */}
+				{/* <img src={logo} className="rounded mx-auto d-block" alt="Allama Iqbal" /> */}
 
-				<div className="tabTitle">
-					<Tabs
+
+				<div className={classes.tabTile}>
+	<Paper className={classes.root}>
+      <Tabs
+        value={this.state.value}
+        onChange={this.handleTabChange}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab label="Item One" >Test1</Tab>
+        <Tab label="Item Two" >Test2</Tab>
+        <Tab label="Item Three" >Test3</Tab>
+      </Tabs>
+    </Paper>
+					{/* <Tabs
 						id="controlled-tab-example"
 						activeKey={this.state.key}
 						onSelect={(key:any) => this.setState({ key })}
-						className="nav-tabs"
 					>
 						<Tab eventKey="home" title="ﺍﺭﺩﻭ">
 							<Container>
@@ -165,11 +210,11 @@ class TopSectionMainPage extends React.Component <any, any>  {
 								</Row>
 							</Container>
 						</Tab>
-					</Tabs>
+					</Tabs> */}
 				</div>
 			</div>
 		);
 	}
 }
 
-export default TopSectionMainPage;
+export default withStyles(useStyles)(TopSectionMainPage);
