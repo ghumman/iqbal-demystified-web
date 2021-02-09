@@ -32,7 +32,7 @@ export default {
 			for (i = 0; i < (yamlObject[k].sections).length; i++) {
 
 				// if (Object.keys(yamlObject[k].sections[i]) === 'poems') {
-				if (yamlObject[k].sections[i] === 'poems') {
+				if (yamlObject[k].sections[i].poems) {
 					for (j = 0; j < (yamlObject[k].sections[i].poems).length; j++) {
 						if (JSON.stringify(yamlObject[k].sections[i].poems[j].poemName[0].text).match(listId)) {
 							newList['poems'].push(yamlObject[k].sections[i].poems[j]);

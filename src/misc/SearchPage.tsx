@@ -6,8 +6,47 @@ import StaticContentService from './StaticContentServiceYaml';
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 import Header from '../header/Header';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 
+const useStyles = (theme) => ({
+	cardBackground: {
+		display: "block",
+		margin: "10px",
+		textAlign: "center" as "center",
+		borderStyle: "solid",
+		borderRadius: "25px",
+		background: "#FFFAFA",
+	  },
+
+	poetryBookTitle: {
+		margin: "10px",
+		textAlign: "center" as "center",
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "40px",
+		fontWeight: "bold" as "bold",
+		fontStyle: "bold",
+	  },
+	
+	  poetryPoemsList: {
+		fontFamily: "Jameel",
+		color: "black",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+		cursor: "pointer",
+	  },
+
+	  poetryPoemsSectionsList: {
+		fontFamily: "Jameel",
+		color: "red",
+		fontSize: "30px",
+		textAlign: "center" as "center",
+	  }
+
+});
 
 
 class SearchPage extends React.Component<any, any> {
@@ -99,6 +138,7 @@ class SearchPage extends React.Component<any, any> {
 
 	getPoemListSearch(listId: any) {
 
+
 		var response = StaticContentService.getPoemListSearch(listId);
 
 		this.setState({ poemList: response.poems });
@@ -168,6 +208,7 @@ class SearchPage extends React.Component<any, any> {
 	}
 
 	render() {
+		const { classes } = this.props;
 		var items = this.state.bookSections.map((item: any) =>
 			<li key={item.sectionName}>{item.sectionName}</li>
 		);
@@ -176,9 +217,32 @@ class SearchPage extends React.Component<any, any> {
 		var itemsPoemOrSher: any = [];
 		if (this.state.selectedOption === 'title') {
 			if (this.state.poemList.length !== 0) {
-
+				
 				itemsPoemOrSher = this.state.poemList.map((item: any) =>
-					<p key={item.id} onClick={() => this.onSubmitPoem(item.id)}>{item.poemName[0].text} <br /> {item.poemName[1].text} </p>
+
+				<div>
+
+				<Card className={classes.cardBackground}>
+					<CardContent>
+						<div className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmitPoem(item.id)}> 
+							<div>
+								{item.poemName[0].text} 
+							</div>
+							<div>
+								{item.poemName[1].text} 
+							</div>
+						</div>
+						
+					</CardContent>
+				</Card>
+				<div></div>
+				</div>
+				
+					// <p key={item.id} onClick={() => this.onSubmitPoem(item.id)}>
+					// 	{item.poemName[0].text} 
+					// 	<br /> 
+					// 	{item.poemName[1].text} 
+					// </p>
 				);
 			}
 			else {
@@ -189,7 +253,32 @@ class SearchPage extends React.Component<any, any> {
 		else {
 			if (this.state.sherList.length !== 0) {
 				itemsPoemOrSher = this.state.sherList.map((item: any) =>
-					<p key={item.id} onClick={() => this.onSubmitSher(item.id)}> {item.sherContent[0].text[0]} <br /> {item.sherContent[0].text[1]} <br /> {item.sherContent[1].text[0]} <br /> {item.sherContent[1].text[1]}</p>
+				<div>
+
+				<Card className={classes.cardBackground}>
+					<CardContent>
+							<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmitSher(item.id)}> 
+								{item.sherContent[0].text[0]}
+								<br />
+								{item.sherContent[0].text[1]}
+								<br />
+								{item.sherContent[1].text[0]}
+								<br />
+								{item.sherContent[1].text[1]}
+							</p>
+					</CardContent>
+				</Card>
+				<div></div>
+				</div>
+					// <p key={item.id} onClick={() => this.onSubmitSher(item.id)}> 
+					// 	{item.sherContent[0].text[0]} 
+					// 	<br /> 
+					// 	{item.sherContent[0].text[1]} 
+					// 	<br /> 
+					// 	{item.sherContent[1].text[0]} 
+					// 	<br /> 
+					// 	{item.sherContent[1].text[1]}
+					// </p>
 				);
 			}
 			else {
@@ -331,15 +420,12 @@ class SearchPage extends React.Component<any, any> {
 		return (
 			<div>
 				<Header {...this.props}/>
-				{/* <div className="text-right">
-					{signinTag}
-				</div> */}
 
 				<div className="text-center">
 					<div className="tab2Text">
-						<p>Allama Iqbal Search Engine</p>
+						<p className={classes.poetryBookTitle}>Allama Iqbal Search Engine</p>
 						<form onSubmit={this.handleSubmit}>
-							<div className="radio">
+							<div >
 								<label>
 									<input type="radio" value="title"
 										checked={this.state.selectedOption === 'title'}
@@ -371,7 +457,7 @@ class SearchPage extends React.Component<any, any> {
 						{keyboardTag}
 					</div>
 					<p className="tab2Text">Search Results</p>
-					<div className="sherPageText">
+					<div>
 
 						{itemsPoemOrSher}
 					</div>
@@ -382,4 +468,4 @@ class SearchPage extends React.Component<any, any> {
 	}	// render function ends
 }	// class ends
 
-export default SearchPage;
+export default withStyles(useStyles)(SearchPage);
