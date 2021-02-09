@@ -10,6 +10,7 @@ import iconBest from './../assets/android_app_assets/icon_best.png';
 import iconDiscussion from './../assets/android_app_assets/icon_discussion.png';
 import iconSearch from './../assets/android_app_assets/icon_search.png';
 import iconInfo from './../assets/android_app_assets/icon_info.png';
+import HomeIcon from '@material-ui/icons/Home';
 
 
 const useStyles = makeStyles(theme => ({
@@ -92,6 +93,13 @@ const MenuList = (props) => {
           onKeyDown={toggleDrawer(false)}
         >
           <List>
+          <ListItem button key={'Home'} onClick={() => onSubmit("/")}>
+              <ListItemIcon >
+              <HomeIcon fontSize="large" color="secondary"/>
+              </ListItemIcon>
+              <ListItemText primary={'Home'} />
+            </ListItem>
+
             <ListItem button key={'Profile'} onClick={() => onSubmit(loginStatusPage)}>
               <ListItemIcon >
               <img src={iconSignIn} className={classes.photoIcon} alt="signin"/>

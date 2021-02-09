@@ -583,11 +583,23 @@ class SherPage extends React.Component<any, any> {
 			<p key={item.index } className={classes.poetryPoemsList}> {item}</p>
 		);
 
-		var item5 = this.state.wordText.map((item: any) =>
-			<span key={item.index}>
-				<button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item.text, item.id)}>
-					{item.text} 
-				</button>  
+		var separateWords = this.state.wordText.map((item: any) =>
+
+			<span key={item.id} style={{margin: "10px"}}>
+				{(item.id === this.state.mySelectedId) ? (
+					<button type="button" className="btn btn-danger" onClick={() => this.selectedWord(item.text, item.id)}>
+						<span className={classes.poetryPoemsList}>
+							{item.text} 
+						</span>
+					</button>  
+				) : (
+					<button type="button" className="btn btn-primary" onClick={() => this.selectedWord(item.text, item.id)}>
+						<span className={classes.poetryPoemsList}>
+							{item.text} 
+						</span>
+					</button> 
+				)}
+
 			</span>
 			/*<span key={item.index}> {item}: {index}</span>*/
 		);
@@ -597,13 +609,13 @@ class SherPage extends React.Component<any, any> {
 			<Card className={classes.root}>
 				<CardContent>
 				<Box
-        display="flex"
-      >
-        <Box 
-        m={1}
-		p={1}
-		
-        >
+					display="flex"
+				>
+					<Box 
+					m={1}
+					p={1}
+					
+					>
           <ThumbUpIcon  onClick={() => this.vote_like(item.id)}/>
 		  <div/>
 		  {item.score}
@@ -633,33 +645,6 @@ class SherPage extends React.Component<any, any> {
         </Box>
         
       </Box>
-					{/* <div key={item.id}> 
-						<div className="float-left">
-							<p> {item.username}</p>
-						</div> 
-						<div className="float-right">
-							<p>  {item.timestamp}</p> 
-						</div>
-						<br /> 
-						<p className={classes.poetryPoemsList}>
-							{item.text}
-							<br /><br /> 
-							<button type="button" className="btn btn-primary px-2" onClick={() => this.vote_like(item.id)}> 
-								LIKE 
-							</button> 
-							<span className="px-2">
-								SCORE: {item.score}
-							</span>
-							<button type="button" className="btn btn-primary" onClick={() => this.vote_dislike(item.id)} >
-								DISLIKE
-							</button>
-							<p></p>
-							<button type="button" className="btn btn-primary" onClick={() => this.vote_unregister(item.id)} >
-								UNREGISTER
-							</button>
-						</p>
-						<Divider />
-					</div> */}
 				</CardContent>
 			</Card>
 			<div></div>
@@ -668,40 +653,84 @@ class SherPage extends React.Component<any, any> {
 		);
 
 
-				var item7 = this.state.wordDiscussionDetail.map((item: any) => {
+				var wordCommments = this.state.wordDiscussionDetail.map((item: any) => {
 					if ((item.wordposition - 1) === this.state.mySelectedId)
 						return (
-							<div key={item.id}>
-								<div className="float-left">
-									<p> 
-										{item.username}
-									</p>
-								</div> 
-								<div className="float-right">
-									<p>
-										{item.timestamp}
-									</p> 
-								</div>
-								<br /> 
-								<p>
-									{item.text}
-									<br /><br /> 
-									<button type="button" className="btn btn-primary" onClick={() => this.vote_like_word(item.id)}>
-										LIKE 
-									</button>
-									<span className="px-2"> 
-										SCORE: {item.score}
-									</span>
-									<button type="button" className="btn btn-primary" onClick={() => this.vote_dislike_word(item.id)}>
-										DISLIKE
-									</button>
-									<p></p>
-									<button type="button" className="btn btn-primary" onClick={() => this.vote_unregister_word(item.id)}>
-										UNREGISTER
-									</button>
-								</p>
-								<Divider />
-							</div>
+							<div>
+							<Card className={classes.root}>
+								<CardContent>
+								<Box
+									display="flex"
+								>
+									<Box 
+									m={1}
+									p={1}
+									
+									>
+						  <ThumbUpIcon  onClick={() => this.vote_like_word(item.id)}/>
+						  <div/>
+						  {item.score}
+						  <div/>
+						  <ThumbDownIcon onClick={() => this.vote_dislike_word(item.id)}/>
+						</Box>
+						<Box
+						display="flex"
+						flexDirection="column"
+						flexGrow={1}
+					  >
+						<Box 
+				
+						p={4}
+						>
+							<span className={classes.poetryPoemsList}>
+								  {item.text}
+							  </span>
+						</Box>
+						<Box 
+						p={1}
+						textAlign="center"
+						>
+						  <span className="float-left">{item.username} </span>
+						  <span className="float-right">{item.timestamp} </span>
+						</Box>
+						</Box>
+						
+					  </Box>
+								</CardContent>
+							</Card>
+							<div></div>
+						</div>
+							// <div key={item.id}>
+							// 	<div className="float-left">
+							// 		<p> 
+							// 			{item.username}
+							// 		</p>
+							// 	</div> 
+							// 	<div className="float-right">
+							// 		<p>
+							// 			{item.timestamp}
+							// 		</p> 
+							// 	</div>
+							// 	<br /> 
+							// 	<p>
+							// 		{item.text}
+							// 		<br /><br /> 
+							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_like_word(item.id)}>
+							// 			LIKE 
+							// 		</button>
+							// 		<span className="px-2"> 
+							// 			SCORE: {item.score}
+							// 		</span>
+							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_dislike_word(item.id)}>
+							// 			DISLIKE
+							// 		</button>
+							// 		<p></p>
+							// 		<button type="button" className="btn btn-primary" onClick={() => this.vote_unregister_word(item.id)}>
+							// 			UNREGISTER
+							// 		</button>
+							// 	</p>
+							// 	<Divider />
+							// </div>
 						);
 					return null;
 				}
@@ -754,19 +783,21 @@ class SherPage extends React.Component<any, any> {
 							</form>
 						</Tab>
 
-						<Tab class="sherPageText" eventKey="profile" title="WORD MEANING">
-							{item5}
-							<p></p>
+						<Tab  eventKey="profile" title="WORD MEANING">
+							<div style={{ textAlign: "center", direction: "rtl"}}>
+								{separateWords}
+							</div>
+							{/* <p></p>
 
 							Selected Word: {this.state.mySelectedWord}
-							<p></p>
-							{item7}
-							<form onSubmit={this.handleSubmitWord}>
+							<p></p> */}
+							{wordCommments}
+							<form  className={classes.poetryPoemsList} onSubmit={this.handleSubmitWord}>
 								<label>
 									Comments:
 								</label>
 								<p></p>
-								<textarea value={this.state.userMessageWord} onChange={this.handleUserMessageWord} ></textarea>
+								<textarea className={classes.inputText} value={this.state.userMessageWord} onChange={this.handleUserMessageWord} ></textarea>
 								<p></p>
 
 								<input type="submit" value="SUBMIT" />
