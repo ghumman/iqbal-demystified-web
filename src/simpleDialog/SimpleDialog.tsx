@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -6,80 +6,79 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import AddIcon from '@material-ui/icons/Add';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
-const useStyles = makeStyles(theme => ({
-    dialog: {
-        position: 'absolute',
-        right: 10,
-        top: 10,
-        background: 'purple',
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: '20px',
-    }
+const useStyles = makeStyles(() => ({
+  dialog: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    background: 'purple',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: '20px',
+  }
 }));
 
 const SimpleDialog = (props) => {
-    const classes = useStyles();
-    const { onClose, open } = props;
-    const [signinConfirmation, setSigninConfirmation] = useState(false);
+  const classes = useStyles();
+  const { onClose, open } = props;
+  const [signinConfirmation, setSigninConfirmation] = useState(false);
 
-    const handleClose = () => {
-      onClose();
-    }
-  
-    const signOut = () => {
-      onClose();
-      props.history.push({
-        pathname: '/',
-        state: { profileSigninConfirmation: '', profileUsername: '', profilePassword: '' }
-      });
-    };
-  
+  const handleClose = () => {
+    onClose();
+  }
 
-    useEffect(() => {
-      try {
-        if (props.location.state.profileSigninConfirmation) {
-          setSigninConfirmation(true);
-        } else {
-          setSigninConfirmation(false);
-        }
+  const signOut = () => {
+    onClose();
+    props.history.push({
+      pathname: '/',
+      state: { profileSigninConfirmation: '', profileUsername: '', profilePassword: '' }
+    });
+  };
 
-      }catch(err) {
+
+  useEffect(() => {
+    try {
+      if (props.location.state.profileSigninConfirmation) {
+        setSigninConfirmation(true);
+      } else {
         setSigninConfirmation(false);
       }
-    },[props])
 
-    const onSubmit = (pageName:string) => {
-      onClose();
-      console.log("value of props: ");
-      console.log(props);
-      console.log('inside onSubmit');
-      try {
-        props.history.push({
-          pathname: pageName,
-          state: { ...props.location.state }
-        });
-      } catch(err) {
-        props.history.push({
-          pathname: pageName,
-          state: ''
-        });
-      }
+    } catch (err) {
+      setSigninConfirmation(false);
     }
-  
-    return (
-      <Dialog 
-        classes={{
-            paper: classes.dialog
-        }}
+  }, [props])
+
+  const onSubmit = (pageName: string) => {
+    onClose();
+    console.log("value of props: ");
+    console.log(props);
+    console.log('inside onSubmit');
+    try {
+      props.history.push({
+        pathname: pageName,
+        state: { ...props.location.state }
+      });
+    } catch (err) {
+      props.history.push({
+        pathname: pageName,
+        state: ''
+      });
+    }
+  }
+
+  return (
+    <Dialog
+      classes={{
+        paper: classes.dialog
+      }}
       onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-        { signinConfirmation && <span>
+      { signinConfirmation && <span>
         <DialogTitle id="simple-dialog-title">User Profile</DialogTitle>
         <List>
           <ListItem autoFocus button onClick={() => onSubmit("ProfilePage")}>
@@ -101,9 +100,9 @@ const SimpleDialog = (props) => {
           </ListItem>
 
         </List>
-        </span>
-        }
-        { !signinConfirmation && <span>
+      </span>
+      }
+      { !signinConfirmation && <span>
         <DialogTitle id="simple-dialog-title">SETTINGS</DialogTitle>
         <List>
           <ListItem autoFocus button onClick={() => onSubmit("RegisterPage")}>
@@ -116,10 +115,10 @@ const SimpleDialog = (props) => {
           </ListItem>
 
         </List>
-        </span>
-        }
-      </Dialog>
-    );
-  };
+      </span>
+      }
+    </Dialog>
+  );
+};
 
-  export default SimpleDialog; 
+export default SimpleDialog; 
