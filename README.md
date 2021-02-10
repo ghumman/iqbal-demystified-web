@@ -2,6 +2,13 @@
 Go to web application
 ... [Iqbal Demystified Web Application](https://ghumman.github.io/iqbal-demystified-web/).
 
+# To Deploy
+```
+yarn deploy
+(or)
+npm deploy
+```
+
 # To install and start the project 
 ```
 npm install
