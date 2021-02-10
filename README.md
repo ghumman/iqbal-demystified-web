@@ -7,6 +7,7 @@ Go to web application
 yarn deploy
 (or)
 npm deploy
+(Do not forget to create new 404.html file in branch gh-pages...checkout section "Issues hosting web app on github pages")
 ```
 
 # To install and start the project 
