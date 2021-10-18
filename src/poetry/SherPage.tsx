@@ -7,6 +7,8 @@ import Divider from '@material-ui/core/Divider';
 import Header from '../header/Header';
 import PropTypes from 'prop-types';
 
+import { backendUrl } from '../backend-url.js'
+
 import $ from 'jquery';
 import YAML from 'yaml';
 
@@ -129,7 +131,7 @@ class SherPage extends React.Component<any, any> {
 
 				try {
 					$.ajax({
-						url: 'https://icanmakemyownapp.com/iqbal/v3/post-comment.php',
+						url: backendUrl + 'post-comment.php',
 						type: 'POST',
 						dataType: 'text',
 						data: { sher: this.state.sherId, discussion_type: 'general', username: this.state.username, password: this.state.password, comment_text: this.state.userMessageSher },
@@ -165,7 +167,7 @@ class SherPage extends React.Component<any, any> {
 
 				try {
 					$.ajax({
-						url: 'https://icanmakemyownapp.com/iqbal/v3/post-comment.php',
+						url: backendUrl + 'post-comment.php',
 						type: 'POST',
 						dataType: 'text',
 						data: { sher: this.state.sherId, discussion_type: 'word-meanings', username: this.state.username, password: this.state.password, comment_text: this.state.userMessageWord, word_position: this.state.mySelectedId + 1 },
@@ -204,7 +206,7 @@ class SherPage extends React.Component<any, any> {
 	async getSherGeneralDiscussion(sherName: any) {
 		try {
 			$.ajax({
-				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
+				url: backendUrl + 'get-discussion.php',
 				type: 'POST',
 				dataType: 'text',
 				data: { sher: sherName, discussion_type: 'general' },
@@ -282,7 +284,7 @@ class SherPage extends React.Component<any, any> {
 	async getSherWordDiscussion(sherName: any) {
 		try {
 			$.ajax({
-				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
+				url: backendUrl + 'get-discussion.php',
 				type: 'POST',
 				dataType: 'text',
 				data: { sher: sherName, discussion_type: 'word-meanings' },
@@ -353,7 +355,7 @@ class SherPage extends React.Component<any, any> {
 			try {
 				// var element = this;
 				$.ajax({
-					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					url: backendUrl + 'vote.php',
 					type: 'POST',
 					dataType: 'text',
 					data: { sher: this.state.sherId, discussion_type: 'word-meanings', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 1, is_cancel: 0 },
@@ -388,7 +390,7 @@ class SherPage extends React.Component<any, any> {
 			try {
 				// var element = this;
 				$.ajax({
-					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					url: backendUrl + 'vote.php',
 					type: 'POST',
 					dataType: 'text',
 					data: { sher: this.state.sherId, discussion_type: 'word-meanings', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 0 },
@@ -421,7 +423,7 @@ class SherPage extends React.Component<any, any> {
 			try {
 				// var element = this;
 				$.ajax({
-					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					url: backendUrl + 'vote.php',
 					type: 'POST',
 					dataType: 'text',
 					data: { sher: this.state.sherId, discussion_type: 'word-meanings', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 1 },
@@ -457,7 +459,7 @@ class SherPage extends React.Component<any, any> {
 			try {
 				// var element = this;
 				$.ajax({
-					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					url: backendUrl + 'vote.php',
 					type: 'POST',
 					dataType: 'text',
 					data: { sher: this.state.sherId, discussion_type: 'general', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 1, is_cancel: 0 },
@@ -489,7 +491,7 @@ class SherPage extends React.Component<any, any> {
 		if (this.state.username !== '') {
 			try {
 				$.ajax({
-					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					url: backendUrl + 'vote.php',
 					type: 'POST',
 					dataType: 'text',
 					data: { sher: this.state.sherId, discussion_type: 'general', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 0 },
@@ -522,7 +524,7 @@ class SherPage extends React.Component<any, any> {
 			try {
 				// var element = this;
 				$.ajax({
-					url: 'https://icanmakemyownapp.com/iqbal/v3/vote.php',
+					url: backendUrl + 'vote.php',
 					type: 'POST',
 					dataType: 'text',
 					data: { sher: this.state.sherId, discussion_type: 'general', comment_id: comment_general_id, username: this.state.username, password: this.state.password, is_like: 0, is_cancel: 1 },

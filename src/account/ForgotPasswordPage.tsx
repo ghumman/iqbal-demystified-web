@@ -4,6 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/Header';
 
+import { backendUrl } from '../backend-url.js'
+
 import $ from 'jquery';
 declare var window: any;
 window.$ = window.jQuery = $;
@@ -49,7 +51,7 @@ class ForgotPassword extends React.Component<any, any> {
 		if (this.state.email.trim() !== '') {
 			try {
 				$.ajax({
-					url: 'https://www.icanmakemyownapp.com/iqbal/v3/forgot-password.php',
+					url: backendUrl + 'forgot-password.php',
 					type: 'POST',
 					dataType: 'text',
 					data: { email: this.state.email },

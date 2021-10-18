@@ -3,6 +3,7 @@ import React from 'react';
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
+import { backendUrl } from '../backend-url.js'
 
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
@@ -124,8 +125,8 @@ class ProfilePage extends React.Component<any, any> {
 		try {
 
 			$.ajax({
-				url: 'https://www.icanmakemyownapp.com/iqbal/v3/leaderboard.php',
-				type: 'GET',
+				url: backendUrl + 'leaderboard.php',
+				type: 'POST',
 				dataType: 'text',
 				success: (data) => {
 

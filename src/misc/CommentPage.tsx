@@ -4,6 +4,8 @@ import StaticContentService from './StaticContentServiceYaml';
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
+import { backendUrl } from '../backend-url.js'
+
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Header from '../header/Header';
@@ -112,7 +114,7 @@ class CommentsPage extends React.Component<any, any> {
 	async getSherRecentListFromServer() {
 		try {
 			$.ajax({
-				url: 'https://icanmakemyownapp.com/iqbal/v3/feed.php?type=recent',
+				url: backendUrl + 'feed.php?type=recent',
 				type: 'GET',
 				dataType: 'text',
 				success: (data) => { // success funciton starts
@@ -165,7 +167,7 @@ class CommentsPage extends React.Component<any, any> {
 		try {
 			// var element = this;
 			$.ajax({
-				url: 'https://icanmakemyownapp.com/iqbal/v3/feed.php?type=popular',
+				url: backendUrl + 'feed.php?type=popular',
 				type: 'GET',
 				dataType: 'text',
 				success: (data) => { // success funciton starts
@@ -212,7 +214,7 @@ class CommentsPage extends React.Component<any, any> {
 	async getSherGeneralDiscussion(sherName: any) {
 		try {
 			$.ajax({
-				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
+				url: backendUrl + 'get-discussion.php',
 				type: 'POST',
 				dataType: 'text',
 				data: {
@@ -303,7 +305,7 @@ class CommentsPage extends React.Component<any, any> {
 	async getSherWordDiscussion(sherName: any) {
 		try {
 			$.ajax({
-				url: 'https://icanmakemyownapp.com/iqbal/v3/get-discussion.php',
+				url: backendUrl + 'get-discussion.php',
 				type: 'POST',
 				dataType: 'text',
 				data: {

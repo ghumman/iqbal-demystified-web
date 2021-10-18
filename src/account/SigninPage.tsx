@@ -3,6 +3,8 @@ import React from 'react';
 
 import Header from '../header/Header';
 
+import { backendUrl } from '../backend-url.js'
+
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
@@ -37,6 +39,7 @@ class Signin extends React.Component<any, any> {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+
 	login() {
 		if (this.state.username !== '' && this.state.password !== '') {
 			this.try_login(this.state.username, this.state.password);
@@ -49,7 +52,7 @@ class Signin extends React.Component<any, any> {
 	async try_login(inputUsername: any, inputPassword: any) {
 		try {
 			$.ajax({
-				url: 'https://www.icanmakemyownapp.com/iqbal/v3/login.php',
+				url: backendUrl + 'login.php',
 				type: 'POST',
 				dataType: 'text',
 				data: { username: inputUsername, password: inputPassword },
