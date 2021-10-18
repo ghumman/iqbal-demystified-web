@@ -6,6 +6,7 @@ import Header from '../header/Header';
 // for formatting
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 
+import { backendUrl } from '../backend-url.js'
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
@@ -74,10 +75,10 @@ class ChangePassword extends React.Component<any, any>  {
 				this.setState({ newPassword: this.state.newPassword1 });
 				try {
 					$.ajax({
-						url: 'https://www.icanmakemyownapp.com/iqbal/v3/change-password.php',
+						url: backendUrl + 'change-password.php',
 						type: 'POST',
 						dataType: 'text',
-						data: { username: this.state.username, old_password: this.state.currentPassword, new_password: this.state.newPassword },
+						data: { username: this.state.username, old_password: this.state.currentPassword, new_password: this.state.newPassword1 },
 						success: (data) => {	// success funciton starts
 							if (data.trim() === 'done') {
 								alert('Password Successfully Changed');
@@ -86,7 +87,7 @@ class ChangePassword extends React.Component<any, any>  {
 
 								this.props.history.push({
 									pathname: '/',
-									state: { profileUsername: this.state.username, profilePassword: this.state.newPassword, profileSigninConfirmation: this.state.signinConfirmation }
+									state: { profileUsername: this.state.username, profilePassword: this.state.newPassword1, profileSigninConfirmation: this.state.signinConfirmation }
 								});
 
 							}	// if data is equal to done ends
