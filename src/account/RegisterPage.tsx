@@ -8,6 +8,8 @@ import Header from '../header/Header';
 import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
+import { backendUrl } from '../backend-url.js'
+
 import $ from 'jquery';
 declare var window: any;
 window.$ = window.jQuery = $;
@@ -24,7 +26,7 @@ class Register extends React.Component<any, any> {
 		super(props);
 		this.state = {
 
-			signinConfirmation: '',
+			signinConfirmation: false,
 			firstName: '',
 			lastName: '',
 			username: '',
@@ -85,37 +87,43 @@ class Register extends React.Component<any, any> {
 	handleSubmit(event: any) {
 
 		if (this.state.password1.trim() === this.state.password2.trim()) {
-			this.setState({ password: this.state.password1 });
-			try {
-				$.ajax({
-					url: 'https://www.icanmakemyownapp.com/iqbal/v3/create-account.php',
-					type: 'POST',
-					dataType: 'text',
-					data: { first_name: this.state.firstName, last_name: this.state.lastName, username: this.state.username, password: this.state.password, email: this.state.email },
-					success: (data: any) => {	// success funciton starts
+			const st = this.state; 
+			if (st.firstName && st.lastName && st.username && st.email && st.password1 && st.password2) {
+				this.setState({ password: this.state.password1 });
+				try {
+					$.ajax({
+						url: backendUrl + 'create-account.php',
+						type: 'POST',
+						dataType: 'text',
+						data: { first_name: this.state.firstName, last_name: this.state.lastName, username: this.state.username, password: this.state.password1, email: this.state.email },
+						success: (data: any) => {	// success funciton starts
 
-						if (data.trim() === 'Your account has been created! Please check your email and activate your account by clicking on a link that we have sent you in the email. Don\'t forget to check in your Junk folder.') {
-							alert(data);
-							this.setState({ signinConfirmation: 'done' });
+							if (data.trim() === 'Your account has been created! Please check your email and activate your account by clicking on a link that we have sent you in the email. Don\'t forget to check in your Junk folder.') {
+								alert(data);
+								this.setState({ signinConfirmation: true });
 
-							this.props.history.push({
-								pathname: '/',
-								state: { profileUsername: this.state.username, profilePassword: this.state.password, profileSigninConfirmation: this.state.signinConfirmation }
-							});	// this.props.history.push ends
-						}	// if data.trim... ends
-						// else if account not registered
-						else {
-							alert('Unable to register your account:' + data);
-							this.setState({ errorMessage: 'Unable to register your account:' + data });
-						}
-					}	// success function ends
-				});	// ajax call ends
-			}	// try ends
-			catch (err) {
-				alert('inside catch err');
-				alert(err);
-				this.setState({ errorMessage: err });
-			}	// catch ends
+								this.props.history.push({
+									pathname: '/',
+									state: { profileUsername: this.state.username, profilePassword: this.state.password1, profileSigninConfirmation: true }
+								});	// this.props.history.push ends
+							}	// if data.trim... ends
+							// else if account not registered
+							else {
+								alert('Unable to register your account:' + data);
+								this.setState({ errorMessage: 'Unable to register your account:' + data });
+							}
+						}	// success function ends
+					});	// ajax call ends
+				}	// try ends
+				catch (err) {
+					alert('inside catch err');
+					alert(err);
+					this.setState({ errorMessage: err });
+				}	// catch ends
+			} // if fields are not empty finished
+			else {
+				this.setState({ errorMessage: 'Fields can not be empty' });
+			}
 		}	// if both passwords are same end
 		else {
 			this.setState({ errorMessage: 'Passwords are not same' });
