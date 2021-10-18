@@ -6,9 +6,12 @@ Go to web application
 ```
 yarn deploy
 (or)
-npm deploy
-(Do not forget to create new 404.html file in branch gh-pages...checkout section "Issues hosting web app on github pages")
+npm run deploy
 ```
+
+### Note
+- Do not forget to create new 404.html file in branch gh-pages...checkout section "Issues hosting web app on github pages"
+- When deploying if you're getting an error `Failed to get remote.orgin.url ...`, use this command `git remote add origin git@github.com:ghumman/iqbal-demystified-web-opensource.git`.
 
 # To install and start the project 
 ```
