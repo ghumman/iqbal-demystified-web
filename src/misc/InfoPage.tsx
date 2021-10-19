@@ -51,13 +51,13 @@ class InfoPage extends React.Component<any, any> {
 	render() {
 
 		var infoText = 'Developer:\n\nAhmed Ghumman\n\n';
-		var infoText2 = '\n\nFor suggestions and reporting bugs: admin@ghummantech.com\n\nSpecial thanks to Iqbal Demystified Android App Developers:\n\nAZEEM GHUMMAN\n\nFAIZAN KHAN\n\nاخلاص عمل مانگ نيا گان کہن سے\n\'!شاہاں چہ عجب گر بنوازند گدا را\'\n\nMay Allah give them reward for making the code open source.';
+		var infoText2 = '\nFor suggestions and reporting bugs: admin@ghummantech.com\nSpecial thanks to Iqbal Demystified Android App Developers:\n\nAZEEM GHUMMAN\nFAIZAN KHAN\n\nاخلاص عمل مانگ نيا گان کہن سے\n\'!شاہاں چہ عجب گر بنوازند گدا را\'\n\nMay Allah give them reward for making the code open source.\n\n';
 
 		var infoTextTokens = infoText.split('\n').map((item, key) => {
 			return <span key={key}>{item}<br /></span>;
 		});
 		var infoTextTokens2 = infoText2.split('\n').map((item, key) => {
-			return <span key={key}>{item}<br /></span>;
+			return <span style={{fontFamily: "Jameel", fontSize: "25px"}} key={key}>{item}<br /></span>;
 		});
 
 
@@ -77,8 +77,8 @@ class InfoPage extends React.Component<any, any> {
 					<div>
 						{infoTextTokens}
 					</div>
-					<a href="https://www.ghummantech.com/"> https://www.ghummantech.com </a>
-					<div className="sherPageText">
+					<a href="https://github.com/ghumman"> https://github.com/ghumman </a>
+					<div>
 						{infoTextTokens2}
 					</div>
 				</div>
