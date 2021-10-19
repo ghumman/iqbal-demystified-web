@@ -129,7 +129,6 @@ export default function MainPage(props) {
           indicatorColor="primary"
           textColor="primary"
           variant="fullWidth"
-          aria-label="full width tabs example"
         >
           <Tab className={classes.customFont} label="اردو" {...a11yProps(0)} />
           <Tab className={classes.customFont} label="(فارسی (۱" {...a11yProps(1)} />

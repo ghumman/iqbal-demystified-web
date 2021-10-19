@@ -9,7 +9,7 @@ yarn deploy
 npm run deploy
 ```
 
-### Note
+### Notes
 - Do not forget to create new 404.html file in branch gh-pages...checkout section "Issues hosting web app on github pages"
 - When deploying if you're getting an error `Failed to get remote.orgin.url ...`, use this command `git remote add origin git@github.com:ghumman/iqbal-demystified-web-opensource.git`.
 
@@ -90,3 +90,5 @@ Created a file 404.html inside branch `gh-pages` with following content.
   </body>
 </html>
 ```
+### More Notes
+- `Fallback font will be used while loading` is a chrome related error and it displays text in regular font for a moment before switching to `Jameel` font. No such error in Firefox browser. 
