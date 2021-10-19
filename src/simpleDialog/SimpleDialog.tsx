@@ -56,9 +56,6 @@ const SimpleDialog = (props) => {
 
   const onSubmit = (pageName: string) => {
     onClose();
-    console.log("value of props: ");
-    console.log(props);
-    console.log('inside onSubmit');
     try {
       props.history.push({
         pathname: pageName,

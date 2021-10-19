@@ -67,9 +67,6 @@ const MenuList = (props) => {
   }, [props])
 
   const onSubmit = (pageName: string) => {
-    console.log("value of props: ");
-    console.log(props);
-    console.log('inside onSubmit');
 
     if (pageName === 'Intikhab') {
       history.push({

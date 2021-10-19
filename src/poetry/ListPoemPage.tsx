@@ -1,8 +1,6 @@
 import React from 'react';
 import StaticContentService from '../misc/StaticContentServiceYaml';
 
-
-
 // eslint-disable-next-line no-unused-vars
 import PropTypes from 'prop-types';
 import Header from '../header/Header';
@@ -133,7 +131,6 @@ class ListPoemPage extends React.Component<any, any> {
 	}	// getPoemList ends
 
 	componentDidMount() {
-		console.log("inside component Did mount")
 		window.scrollTo(0, 0);
 		// retrive the data
 		try {

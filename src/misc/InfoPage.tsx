@@ -25,7 +25,6 @@ class InfoPage extends React.Component<any, any> {
 
 
 	componentDidMount() {
-		console.log("inside info page");
 		window.scrollTo(0, 0);
 		try {
 			this.setState({ signinConfirmation: this.props.location.state.profileSigninConfirmation });
