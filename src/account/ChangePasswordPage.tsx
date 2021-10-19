@@ -13,7 +13,6 @@ import $ from 'jquery';
 declare var window: any;
 window.$ = window.jQuery = $;
 
-
 class ChangePassword extends React.Component<any, any>  {
 
 	static propTypes = {
@@ -56,15 +55,6 @@ class ChangePassword extends React.Component<any, any>  {
 
 	handleChangeNewPassword2(event: any) {
 		this.setState({ newPassword2: event.target.value });
-	}
-
-	onSubmitSignin = () => {
-
-		this.props.history.push({
-			pathname: 'SigninPage',
-			state: { none: 'none' }
-		});
-
 	}
 
 	// handleSubmit
@@ -164,12 +154,6 @@ class ChangePassword extends React.Component<any, any>  {
 
 						<input type="submit" value="CHANGE PASSWORD!" />
 					</form>
-					<p onClick={() => this.onSubmitSignin()}>
-
-						Already Registered?{'\n'}
-					Login Here
-
-				</p>
 
 					<p>
 						{this.state.errorMessage}
