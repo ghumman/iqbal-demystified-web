@@ -10,8 +10,23 @@ import { backendUrl } from '../backend-url.js'
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
+import { FormControl, InputLabel, FilledInput, InputAdornment, IconButton, Button, withStyles } from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
+import clsx from 'clsx';
 declare var window: any;
 window.$ = window.jQuery = $;
+
+const styles = theme => ({
+	margin: {
+		margin: theme.spacing(1),
+	},
+	textField: {
+		width: '25ch',
+	},
+	errorMessages: {
+		color: 'red',
+	}
+});
 
 class ChangePassword extends React.Component<any, any>  {
 
@@ -32,7 +47,11 @@ class ChangePassword extends React.Component<any, any>  {
 			newPassword1: '',
 			newPassword2: '',
 			newPassword: '',
-			errorMessage: ''
+			errorMessage: '',
+			showCurrentPassword: false,
+			showNewPassword1: false,
+			showNewPassword2: false,
+
 
 		};
 
@@ -125,8 +144,40 @@ class ChangePassword extends React.Component<any, any>  {
 		}
 	}
 
+	handleClickShowCurrentPassword = () => {
+		this.setState(prevState => ({
+			showCurrentPassword: !prevState.showCurrentPassword
+		}));
+	}
+
+	handleMouseDownCurrentPassword = (event) => {
+		event.preventDefault();
+	};
+
+	handleClickShowNewPassword1 = () => {
+		this.setState(prevState => ({
+			showNewPassword1: !prevState.showNewPassword1
+		}));
+	}
+
+	handleMouseDownNewPassword1 = (event) => {
+		event.preventDefault();
+	};
+
+	handleClickShowNewPassword2 = () => {
+		this.setState(prevState => ({
+			showNewPassword2: !prevState.showNewPassword2
+		}));
+	}
+
+	handleMouseDownNewPassword2 = (event) => {
+		event.preventDefault();
+	};
+
+
 
 	render() {
+		const { classes } = this.props;	
 		return (
 			<span>
 				<Header {...this.props} />
@@ -134,29 +185,78 @@ class ChangePassword extends React.Component<any, any>  {
 					<h1>CHANGE PASSWORD</h1>
 					<form onSubmit={this.handleSubmit}>
 
-						<label>
-							Current Password:
-						<input type="text" value={this.state.currentPassword} onChange={this.handleChangeCurrentPassword} />
-						</label>
+					<FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
+							<InputLabel htmlFor="filled-adornment-password">Current Password</InputLabel>
+							<FilledInput
+								type={this.state.showCurrentPassword ? 'text' : 'password'}
+								value={this.state.currentPassword} 
+								onChange={this.handleChangeCurrentPassword}
+								endAdornment={
+									<InputAdornment position="end">
+										<IconButton
+											aria-label="toggle password visibility"
+											onClick={() => this.handleClickShowCurrentPassword()}
+											onMouseDown={this.handleMouseDownCurrentPassword}
+											edge="end"
+										>
+											{this.state.showCurrentPassword ? <Visibility /> : <VisibilityOff />}
+										</IconButton>
+									</InputAdornment>
+								}
+							/>
+						</FormControl>
 						<p></p>
-
-						<label>
-							New Password:
-						<input type="text" value={this.state.newPassword1} onChange={this.handleChangeNewPassword1} />
-						</label>
+						<FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
+							<InputLabel htmlFor="filled-adornment-password">New Password</InputLabel>
+							<FilledInput
+								type={this.state.showNewPassword1 ? 'text' : 'password'}
+								value={this.state.newPassword1} 
+								onChange={this.handleChangeNewPassword1}
+								endAdornment={
+									<InputAdornment position="end">
+										<IconButton
+											aria-label="toggle password visibility"
+											onClick={() => this.handleClickShowNewPassword1()}
+											onMouseDown={this.handleMouseDownNewPassword1}
+											edge="end"
+										>
+											{this.state.showNewPassword1 ? <Visibility /> : <VisibilityOff />}
+										</IconButton>
+									</InputAdornment>
+								}
+							/>
+						</FormControl>
 						<p></p>
-
-						<label>
-							New Password(again):
-						<input type="text" value={this.state.newPassword2} onChange={this.handleChangeNewPassword2} />
-						</label>
+						<FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
+							<InputLabel htmlFor="filled-adornment-password">New Password(again)</InputLabel>
+							<FilledInput
+								type={this.state.showNewPassword2 ? 'text' : 'password'}
+								value={this.state.newPassword2}
+								onChange={this.handleChangeNewPassword2}
+								endAdornment={
+									<InputAdornment position="end">
+										<IconButton
+											aria-label="toggle password visibility"
+											onClick={() => this.handleClickShowNewPassword2()}
+											onMouseDown={this.handleMouseDownNewPassword2}
+											edge="end"
+										>
+											{this.state.showNewPassword2 ? <Visibility /> : <VisibilityOff />}
+										</IconButton>
+									</InputAdornment>
+								}
+							/>
+						</FormControl>
 						<p></p>
-
-						<input type="submit" value="CHANGE PASSWORD!" />
+						<Button type="submit" variant="contained" color="primary">
+							CHANGE PASSWORD!
+						</Button>
 					</form>
 
 					<p>
-						{this.state.errorMessage}
+						<span className={classes.errorMessages}>
+							{this.state.errorMessage}
+						</span>
 					</p>
 				</div>
 			</span>
@@ -164,4 +264,4 @@ class ChangePassword extends React.Component<any, any>  {
 	}	// render function ends
 }	// class ends
 
-export default ChangePassword;
+export default withStyles(styles)(ChangePassword);

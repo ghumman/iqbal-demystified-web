@@ -7,9 +7,15 @@ import Header from '../header/Header';
 import { backendUrl } from '../backend-url.js'
 
 import $ from 'jquery';
+import { TextField, Button, withStyles } from '@material-ui/core';
 declare var window: any;
 window.$ = window.jQuery = $;
 
+const styles = theme => ({
+	errorMessages: {
+		color: 'red',
+	}
+});
 
 class ForgotPassword extends React.Component<any, any> {
 
@@ -21,10 +27,8 @@ class ForgotPassword extends React.Component<any, any> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
-
 			email: '',
 			errorMessage: ''
-
 		};
 
 		this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -91,30 +95,39 @@ class ForgotPassword extends React.Component<any, any> {
 	}
 
 	render() {
+		const { classes } = this.props;
 		return (
 			<span>
 				<Header {...this.props} />
 				<div className="text-center">
 					<h1>FORGOT PASSWORD</h1>
 					<form onSubmit={this.handleSubmit}>
-						<label>
-							Email:
-						<input type="text" value={this.state.email} onChange={this.handleChangeEmail} />
-						</label>
+						<TextField
+							label="Email"
+							variant="outlined"
+							value={this.state.email}
+							onChange={this.handleChangeEmail}
+							required
+						/>
 						<p></p>
-						<input type="submit" value="RESET MY PASSWORD!" />
+						<Button type="submit" variant="contained" color="primary">
+							RESET MY PASSWORD!
+						</Button>
 					</form>
-					<p onClick={() => this.onSubmitSignin()}>
-						Already Registered?{'\n'}
-					Login Here
-				</p>
 					<p>
-						{this.state.errorMessage}
+						<Button color="primary" onClick={() => this.onSubmitSignin()}>
+							Already Registered?
+							Login Here
+						</Button>
 					</p>
+					<span className={classes.errorMessages}>
+						{this.state.errorMessage}
+					</span>
+					<p></p>
 				</div>
 			</span>
 		);	// return ends
 	}	// render ends
 }	// class ends
 
-export default ForgotPassword;
+export default withStyles(styles)(ForgotPassword);

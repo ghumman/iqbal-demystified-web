@@ -20,8 +20,6 @@ import { Button, FilledInput, FormControl, IconButton, InputAdornment, InputLabe
 declare var window: any;
 window.$ = window.jQuery = $;
 
-
-
 const styles = theme => ({
 	margin: {
 		margin: theme.spacing(1),
@@ -29,6 +27,9 @@ const styles = theme => ({
 	textField: {
 		width: '25ch',
 	},
+	errorMessages: {
+		color: 'red',
+	}
 });
 
 class Register extends React.Component<any, any> {
@@ -263,7 +264,10 @@ class Register extends React.Component<any, any> {
 												Login Here
 						</Button>
 					</p>
+					<span className={classes.errorMessages}>
 					{this.state.errorMessage}
+					</span>
+					<p></p>
 				</div>
 			</span>
 		);	// return ends
