@@ -123,20 +123,22 @@ class SherPage extends React.Component<any, any> {
 
 	async send_sher_message() {
 
+		const st = this.state; 
+
 		// do not try pushing comment if message is empty
-		if (this.state.userMessageSher.trim() !== '') {
+		if (st.userMessageSher && st.userMessageSher.trim()) {
 
 			// if user is not signed in, ask user to sign in
-			if ((this.state.username.trim() !== '') && (this.state.password.trim() !== '')) {
+			if (st.username && st.password && st.username.trim() && st.password.trim()) {
 
 				try {
 					$.ajax({
 						url: backendUrl + 'post-comment.php',
 						type: 'POST',
 						dataType: 'text',
-						data: { sher: this.state.sherId, discussion_type: 'general', username: this.state.username, password: this.state.password, comment_text: this.state.userMessageSher },
+						data: { sher: st.sherId, discussion_type: 'general', username: st.username, password: st.password, comment_text: st.userMessageSher },
 						success: () => {	// success funciton starts
-							this.getSherGeneralDiscussion(this.state.sherId);
+							this.getSherGeneralDiscussion(st.sherId);
 
 
 						}	// success function ends
@@ -159,20 +161,22 @@ class SherPage extends React.Component<any, any> {
 
 	async send_word_message() {
 
+		const st = this.state; 
+
 		// do not try pushing comment if message is empty
-		if (this.state.userMessageWord.trim() !== '') {
+		if (st.userMessageWord && st.userMessageWord.trim()) {
 
 			// if user is not signed in, ask user to sign in
-			if ((this.state.username.trim() !== '') && (this.state.password.trim() !== '')) {
+			if (st.username && st.password && st.username.trim() && st.password.trim()) {
 
 				try {
 					$.ajax({
 						url: backendUrl + 'post-comment.php',
 						type: 'POST',
 						dataType: 'text',
-						data: { sher: this.state.sherId, discussion_type: 'word-meanings', username: this.state.username, password: this.state.password, comment_text: this.state.userMessageWord, word_position: this.state.mySelectedId + 1 },
+						data: { sher: st.sherId, discussion_type: 'word-meanings', username: st.username, password: st.password, comment_text: st.userMessageWord, word_position: st.mySelectedId + 1 },
 						success: () => {	// success funciton starts
-							this.getSherWordDiscussion(this.state.sherId);
+							this.getSherWordDiscussion(st.sherId);
 
 						}	// success function ends
 					});	// ajax call ends
@@ -351,7 +355,7 @@ class SherPage extends React.Component<any, any> {
 	vote_like_word(comment_general_id: any) {
 
 
-		if (this.state.username !== '') {
+		if (this.state.username) {
 			try {
 				// var element = this;
 				$.ajax({
@@ -386,7 +390,7 @@ class SherPage extends React.Component<any, any> {
 	vote_dislike_word(comment_general_id: any) {
 
 
-		if (this.state.username !== '') {
+		if (this.state.username) {
 			try {
 				// var element = this;
 				$.ajax({
@@ -419,7 +423,7 @@ class SherPage extends React.Component<any, any> {
 
 	vote_unregister_word(comment_general_id: any) {
 
-		if (this.state.username !== '') {
+		if (this.state.username) {
 			try {
 				// var element = this;
 				$.ajax({
@@ -455,7 +459,7 @@ class SherPage extends React.Component<any, any> {
 
 	vote_like(comment_general_id: any) {
 
-		if (this.state.username !== '') {
+		if (this.state.username) {
 			try {
 				// var element = this;
 				$.ajax({
@@ -488,7 +492,7 @@ class SherPage extends React.Component<any, any> {
 
 	vote_dislike(comment_general_id: any) {
 
-		if (this.state.username !== '') {
+		if (this.state.username) {
 			try {
 				$.ajax({
 					url: backendUrl + 'vote.php',
@@ -520,7 +524,7 @@ class SherPage extends React.Component<any, any> {
 
 	vote_unregister(comment_general_id: any) {
 
-		if (this.state.username !== '') {
+		if (this.state.username) {
 			try {
 				// var element = this;
 				$.ajax({
