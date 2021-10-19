@@ -10,10 +10,25 @@ import '../main_page/TopSectionMainPage/TopSectionMainPage.css';
 import PropTypes from 'prop-types';
 
 import $ from 'jquery';
+import { Button, FilledInput, FormControl, IconButton, InputAdornment, InputLabel, TextField, withStyles } from '@material-ui/core';
+import clsx from 'clsx';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 declare var window: any;
 window.$ = window.jQuery = $;
 
 // window.jQuery = $;
+
+const styles = theme => ({
+	margin: {
+		margin: theme.spacing(1),
+	},
+	textField: {
+		width: '25ch',
+	},
+	errorMessages: {
+		color: 'red',
+	}
+});
 
 class Signin extends React.Component<any, any> {
 
@@ -29,8 +44,8 @@ class Signin extends React.Component<any, any> {
 			errorMessage: '',
 			username: '',
 			password: '',
-			signinConfirmation: false
-
+			signinConfirmation: false,
+			showPassword: false,
 		};
 
 		this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -110,7 +125,18 @@ class Signin extends React.Component<any, any> {
 		window.scrollTo(0, 0);
 	}
 
+	handleClickShowPassword = () => {
+		this.setState(prevState => ({
+			showPassword: !prevState.showPassword
+		}));
+	}
+
+	handleMouseDownPassword = (event) => {
+		event.preventDefault();
+	};
+
 	render() {
+		const { classes } = this.props;
 		return (
 			<span>
 				<Header {...this.props} />
@@ -118,34 +144,60 @@ class Signin extends React.Component<any, any> {
 					<h1>Sign In</h1>
 					<form onSubmit={this.handleSubmit}>
 
-						<label>
-							Username:
-						<input type="text" value={this.state.username} onChange={this.handleChangeUsername} />
-						</label>
+						<TextField
+							label="Username"
+							variant="outlined"
+							value={this.state.username}
+							onChange={this.handleChangeUsername}
+							required
+						/>
 						<p></p>
-
-						<label>
-							Password:
-						<input type="password" value={this.state.password} onChange={this.handleChangePassword} />
-						</label>
+						<FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
+							<InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+							<FilledInput
+								type={this.state.showPassword ? 'text' : 'password'}
+								value={this.state.password}
+								onChange={this.handleChangePassword}
+								endAdornment={
+									<InputAdornment position="end">
+										<IconButton
+											aria-label="toggle password visibility"
+											onClick={() => this.handleClickShowPassword()}
+											onMouseDown={this.handleMouseDownPassword}
+											edge="end"
+										>
+											{this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+										</IconButton>
+									</InputAdornment>
+								}
+							/>
+						</FormControl>
 						<p></p>
-
-						<input type="submit" value="SIGN IN" />
+						<Button type="submit" variant="contained" color="primary">
+							SIGN IN
+						</Button>
 					</form>
 
-					<p onClick={() => this.onSubmitForgot()}>
-						I Forgot My Password!
-				</p>
+					<p>
+						<Button color="primary" onClick={() => this.onSubmitForgot()}>
+							I Forgot My Password!
+						</Button>
+					</p>
 
-					<p onClick={() => this.onSubmitRegister()}>
-						Do not have an account? {'\n'}
-					Register Here
-				</p>
+					<p>
+						<Button color="primary" onClick={() => this.onSubmitRegister()}>
+							Do not have an account? {'\n'}
+							Register Here
+						</Button>
+					</p>
+					<span className={classes.errorMessages}>
 					{this.state.errorMessage}
+					</span>
 				</div>
 			</span>
 		);
 	}
 }
 
-export default Signin;
+export default withStyles(styles)(Signin);
+

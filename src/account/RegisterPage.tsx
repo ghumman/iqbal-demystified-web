@@ -257,8 +257,8 @@ class Register extends React.Component<any, any> {
 							REGISTER
 						</Button>
 					</form>
-					<p onClick={() => this.onSubmitSignin()}>
-						<Button href="#text-buttons" onClick={() => this.onSubmitSignin()}>
+					<p>
+						<Button color="primary" onClick={() => this.onSubmitSignin()}>
 												Already Registered?
 												Login Here
 						</Button>
