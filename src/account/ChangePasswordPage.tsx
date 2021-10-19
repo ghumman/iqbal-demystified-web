@@ -70,7 +70,7 @@ class ChangePassword extends React.Component<any, any>  {
 	// handleSubmit
 	handleSubmit(event: any) {
 		event.preventDefault();
-		if (this.state.currentPassword !== '' && this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
+		if (this.state.currentPassword && this.state.newPassword1 && this.state.newPassword2) {
 			if (this.state.newPassword1.trim() === this.state.newPassword2.trim()) {
 				this.setState({ newPassword: this.state.newPassword1 });
 				try {
@@ -83,11 +83,11 @@ class ChangePassword extends React.Component<any, any>  {
 							if (data.trim() === 'done') {
 								alert('Password Successfully Changed');
 								this.setState({ errorMessage: 'Password Successfully Changed' });
-								this.setState({ signinConfirmation: data });
+								this.setState({ signinConfirmation: true });
 
 								this.props.history.push({
 									pathname: '/',
-									state: { profileUsername: this.state.username, profilePassword: this.state.newPassword1, profileSigninConfirmation: this.state.signinConfirmation }
+									state: { profileUsername: this.state.username, profilePassword: this.state.newPassword1, profileSigninConfirmation: true }
 								});
 
 							}	// if data is equal to done ends
