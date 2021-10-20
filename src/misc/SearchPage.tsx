@@ -11,6 +11,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { InputAdornment, TextField } from '@material-ui/core';
 
+import Keyboard from 'react-simple-keyboard';
+import 'react-simple-keyboard/build/css/index.css';
 
 const useStyles = (theme) => ({
 	cardBackground: {
@@ -46,7 +48,6 @@ const useStyles = (theme) => ({
 		fontSize: "30px",
 		textAlign: "center" as "center",
 	}
-
 });
 
 
@@ -139,16 +140,12 @@ class SearchPage extends React.Component<any, any> {
 
 	getPoemListSearch(listId: any) {
 
-
 		var response = StaticContentService.getPoemListSearch(listId);
-
 		this.setState({ poemList: response.poems });
-
 	}
 
 
 	getPoemSearch(poemId: any) {
-
 		var response = StaticContentService.getPoemSearch(poemId);
 		response.sher.map((el: any) => {
 			el.sherContent[0].text = el.sherContent[0].text.split('|');
@@ -166,7 +163,6 @@ class SearchPage extends React.Component<any, any> {
 			}
 			return el.sherContent;
 		});
-
 		this.setState({ sherList: response.sher });
 	}
 
@@ -184,6 +180,7 @@ class SearchPage extends React.Component<any, any> {
 		});
 	}
 
+
 	componentDidMount() {
 		window.scrollTo(0, 0);
 		// retrive the data
@@ -192,14 +189,12 @@ class SearchPage extends React.Component<any, any> {
 			this.setState({ username: this.props.location.state.profileUsername });
 			this.setState({ password: this.props.location.state.profilePassword });
 		}
-
 		catch (e) {
 			// TODO 
 		}
 	}
 
 	signMeIn = () => {
-
 		if (this.state.username === '') {
 			this.props.history.push({
 				pathname: '/RegisterPage',
@@ -208,21 +203,48 @@ class SearchPage extends React.Component<any, any> {
 		}
 	}
 
+	commonKeyboardOptions = {
+		onKeyPress: button => this.onKeyPress(button),
+		theme: "simple-keyboard hg-theme-default hg-layout-default",
+		physicalKeyboardHighlight: true,
+		syncInstanceInputs: true,
+		mergeDisplay: true,
+	};
+
+	keyboardOptions = {
+		...this.commonKeyboardOptions,
+		layout: {
+			default: [
+				"{backspace} خ ح چ ج ث ٹ ت پ ب ا آ",
+				"ض ص ش س ژ ز ڑ ر ذ ڈ د",
+				"ں ن م ل گ ک ق ف غ ع ظ ط",
+				"ے ي ی ء ھ ہ و",
+				"{space}",
+			]
+		},
+		display: {
+			"{backspace}": "backspace ⌦",
+		}
+	};
+
+	onKeyPress = button => {
+		if (button !== '{backspace}' && button !== '{space}') {
+			this.setState({ searchText: this.state.searchText + button });
+		} else if (button === '{backspace}') {
+			this.setState({ searchText: this.state.searchText.substr(0, this.state.searchText.length - 1) });
+		} else if (button === '{space}') {
+			this.setState({ searchText: this.state.searchText + ' ' });
+		}
+	};
+
 	render() {
 		const { classes } = this.props;
-		var items = this.state.bookSections.map((item: any) =>
-			<li key={item.sectionName}>{item.sectionName}</li>
-		);
-
 
 		var itemsPoemOrSher: any = [];
 		if (this.state.selectedOption === 'title') {
 			if (this.state.poemList.length !== 0) {
-
 				itemsPoemOrSher = this.state.poemList.map((item: any) =>
-
 					<div>
-
 						<Card className={classes.cardBackground}>
 							<CardContent>
 								<div className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmitPoem(item.id)}>
@@ -238,19 +260,16 @@ class SearchPage extends React.Component<any, any> {
 						</Card>
 						<div></div>
 					</div>
-
 				);
 			}
 			else {
 				itemsPoemOrSher = <p>No Results Found</p>;
 			}
-
 		}
 		else {
 			if (this.state.sherList.length !== 0) {
 				itemsPoemOrSher = this.state.sherList.map((item: any) =>
 					<div>
-
 						<Card className={classes.cardBackground}>
 							<CardContent>
 								<p className={classes.poetryPoemsList} key={item.index} onClick={() => this.onSubmitSher(item.id)}>
@@ -266,7 +285,6 @@ class SearchPage extends React.Component<any, any> {
 						</Card>
 						<div></div>
 					</div>
-
 				);
 			}
 			else {
@@ -285,73 +303,9 @@ class SearchPage extends React.Component<any, any> {
 			signinTag = <button type="button" className="btn btn-primary" onClick={() => this.signMeIn()}> {signinMessageLocal} </button>;
 		}
 
-		let keyboardTag;
-		if (this.state.inputBoxClicked === true) {
-			keyboardTag = <p>
-				<div className="btn-group" role="group">
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('Back')}>{'->'}</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('خ')}>خ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ح')}>ح</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('چ')}>چ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ج')}>ج</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ث')}>ث</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ٹ')}>ٹ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ت')}>ت</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('پ')}>پ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ب')}>ب</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ا')}>ا</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('آ')}>آ</button>
-				</div>
-				<p></p>
-				<div className="btn-group" role="group">
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ض')} >ض</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ص')}>ص</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ش')}>ش</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('س')}>س</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ژ')}>ژ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ز')}>ز</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ڑ')}>ڑ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ر')}>ر</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ذ')}>ذ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ڈ')}>ڈ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('د')}>د</button>
-				</div>
-				<p></p>
-				<div className="btn-group" role="group">
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ں')} >ں</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ن')}>ن</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('م')}>م</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ل')}>ل</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('گ')}>گ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ک')}>ک</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ق')}>ق</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ف')}>ف</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('غ')}>غ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ع')}>ع</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ظ')}>ظ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ط')}>ط</button>
-				</div>
-				<p></p>
-				<div className="btn-group" role="group">
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet(' ')} >Space</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ے')}>ے</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ي')}>ي</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ء')}>ء</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ھ')}>ھ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('ہ')}>ہ</button>
-					<button type="button" className="btn btn-primary" onClick={() => this.handleAlphabet('و')}>و</button>
-				</div>
-
-			</p>;
-		}
-		else {
-			signinMessageLocal = 'Sign In';
-			keyboardTag = <p className="text-center"></p>;
-		}
 		return (
 			<div>
 				<Header {...this.props} />
-
 				<div className="text-center">
 					<div className="tab2Text">
 						<p className={classes.poetryBookTitle}>Allama Iqbal Search Engine</p>
@@ -376,9 +330,9 @@ class SearchPage extends React.Component<any, any> {
 
 							<TextField
 								value={this.state.searchText}
-								onChange={this.handleSearchText} 
+								onChange={this.handleSearchText}
 								onClick={() => this.handleInputClicked()}
-								style={{ padding: 40, fontFamily: "Jameel",  direction: "rtl"  }}
+								style={{ padding: 40, fontFamily: "Jameel", direction: "rtl" }}
 								placeholder="متن تلاش کریں"
 								helperText="Search Text"
 								fullWidth
@@ -386,18 +340,20 @@ class SearchPage extends React.Component<any, any> {
 								variant="filled"
 								InputProps={{
 									classes: {
-									  input: classes.poetryPoemsSectionsList,
+										input: classes.poetryPoemsSectionsList,
 									},
-								  }}
-								/>
+								}}
+							/>
 							<p></p>
 							<input type="submit" value="SEARCH" />
 						</form>
 					</div>
-					<div className="sherPageText text-center">
 
-						{keyboardTag}
-					</div>
+					{this.state.inputBoxClicked &&
+						<p><p></p><Keyboard
+							{...this.keyboardOptions}
+						/><p></p></p>}
+					<p></p>
 					<p className="tab2Text">Search Results</p>
 					<div>
 
