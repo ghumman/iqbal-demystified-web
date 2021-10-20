@@ -31,7 +31,8 @@ import * as serviceWorker from './misc/serviceWorker';
 
 
 const routing = (
-	<Router basename={process.env.PUBLIC_URL}>
+	/*<Router basename={process.env.PUBLIC_URL}>*/
+	<Router basename="/iqbal-demystified-web">
 		<div>
 			<Route exact path="/" component={MainPage} />
 
