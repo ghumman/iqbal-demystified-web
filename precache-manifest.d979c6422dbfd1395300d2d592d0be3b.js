@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "faee83a7003fe7dbab387d0d0631d53a",
+    "revision": "cc06b2f198cee7231d99c583c50dffc4",
     "url": "/iqbal-demystified-web/index.html"
   },
   {
