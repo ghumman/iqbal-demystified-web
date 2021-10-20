@@ -9,6 +9,7 @@ import Header from '../header/Header';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import { InputAdornment, TextField } from '@material-ui/core';
 
 
 const useStyles = (theme) => ({
@@ -373,11 +374,22 @@ class SearchPage extends React.Component<any, any> {
 								</label>
 							</div>
 
-
-							<label>
-								Search Text:
-								<input type="text" className="sherPageText" value={this.state.searchText} onChange={this.handleSearchText} onClick={() => this.handleInputClicked()} />
-							</label>
+							<TextField
+								value={this.state.searchText}
+								onChange={this.handleSearchText} 
+								onClick={() => this.handleInputClicked()}
+								style={{ padding: 40, fontFamily: "Jameel",  direction: "rtl"  }}
+								placeholder="متن تلاش کریں"
+								helperText="Search Text"
+								fullWidth
+								margin="normal"
+								variant="filled"
+								InputProps={{
+									classes: {
+									  input: classes.poetryPoemsSectionsList,
+									},
+								  }}
+								/>
 							<p></p>
 							<input type="submit" value="SEARCH" />
 						</form>
