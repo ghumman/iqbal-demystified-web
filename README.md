@@ -20,11 +20,15 @@ npm start
 ```
 
 # To submit a PR
-```
-When naming the branch if you are working on a new feature or addition, prefix the branch name with feature otherwise if it is fixing a bug call it bug-fix. If you are working on existing issues, please include the issue name in your branch, otherwise create an issue first and then include that issue name in your branch name. Also adding a short description for that branch will be great. Following are the examples of branch names. ID-1/ID-2 in following examples are issues' names. Also ID stands for Iqbal Demystified. 
+- When naming the branch if you are working on a new feature or addition, prefix the branch name with feature otherwise if it is fixing a bug call it bug-fix. If you are working on existing issues, please include the issue name in your branch, otherwise create an issue first and then include that issue name in your branch name. Also adding a short description for that branch will be great. Following are the examples of branch names. ID-1/ID-2 in following examples are issues' names. Also ID stands for Iqbal Demystified. 
 
+```
 feature/ID-1-fix-structure-of-project
 bug-fix/ID-2-change-password-not-working
+```
+- Following is really helpful understanding how to contribute by forking, creating new branch and submitting the PR. 
+```
+https://www.dataschool.io/how-to-contribute-on-github/
 ```
 
 # ES-Lint
