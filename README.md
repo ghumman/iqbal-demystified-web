@@ -60,6 +60,7 @@ GitHub Pages doesn’t support routers that use the HTML5 `pushState` history AP
 - Student 1
 - Student 2
 - Student 3
+- Student 4
 
 ### For Grown Ups
 - Student 1
