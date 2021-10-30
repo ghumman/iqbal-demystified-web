@@ -63,7 +63,7 @@ GitHub Pages doesn’t support routers that use the HTML5 `pushState` history AP
 - Student 4
 
 ### For Grown Ups
-- Student 1
+- Azeem Ghumman
 - Student 2
 - Student 3
 - Student 4
