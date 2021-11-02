@@ -54,17 +54,3 @@ GitHub Pages doesn’t support routers that use the HTML5 `pushState` history AP
 
 ### More Notes
 - `Fallback font will be used while loading` is a chrome related error and it displays text in regular font for a moment before switching to `Jameel` font. No such error in Firefox browser. 
-
-## For Workshop Purpose
-### For Kids
-- Student 1
-- Student 2
-- Student 3
-- Student 4
-
-### For Grown Ups
-- Azeem Ghumman
-- Student 2
-- Student 3
-- 
-
